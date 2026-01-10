@@ -1,19 +1,10 @@
 import express from "express";
 import { setupVite, serveStatic, log } from "./vite";
 import multer from 'multer';
-import Tesseract from 'tesseract.js';
 import sharp from 'sharp';
 import axios from 'axios';
-import { spawn } from 'child_process';
-import { createRequire } from 'module';
-const require = createRequire(import.meta.url);
-const MLIntegration = require('./ml_integration.js');
-const analyzeRoutes = require('./routes/analyze.js');
-const dietRoutes = require('./routes/diet.js');
-const dietStreamlitRoutes = require('./routes/diet_streamlit.js');
 
 const app = express();
-const ml = new MLIntegration();
 
 // Configure multer for file uploads
 const upload = multer({ 
@@ -24,13 +15,6 @@ const upload = multer({
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: false, limit: '10mb' }));
 app.use('/uploads', express.static('uploads'));
-
-// Use analyze routes
-app.use('/api/analyze', analyzeRoutes);
-// Use diet recommendation routes
-app.use('/api/diet', dietRoutes);
-// Use diet streamlit routes
-app.use('/api/diet-streamlit', dietStreamlitRoutes);
 
 // Healing Recipes API endpoint
 app.get('/api/healing-recipes/:condition', (req, res) => {
