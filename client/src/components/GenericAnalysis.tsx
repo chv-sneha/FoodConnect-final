@@ -218,11 +218,11 @@ export default function GenericAnalysis() {
             <div>
               <h3 className="text-sm font-medium text-gray-600 mb-1">FSSAI Status</h3>
               <p className={`font-medium flex items-center ${
-                result.fssai.valid ? 'text-green-600' : 
-                result.fssai.status.includes('Imported') ? 'text-blue-600' : 'text-red-600'
+                result.fssai?.valid ? 'text-green-600' : 
+                result.fssai?.status?.includes('Imported') ? 'text-blue-600' : 'text-red-600'
               }`}>
-                {result.fssai.status.includes('Imported') ? 'Imported Product' :
-                 result.fssai.valid ? 'Verified ✅' : 'Not Found ❌'}
+                {result.fssai?.status?.includes('Imported') ? 'Imported Product' :
+                 result.fssai?.valid ? 'Verified ✅' : 'Not Found ❌'}
               </p>
             </div>
           </div>

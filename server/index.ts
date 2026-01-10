@@ -3,6 +3,8 @@ import { setupVite, serveStatic, log } from "./vite";
 import multer from 'multer';
 import sharp from 'sharp';
 import axios from 'axios';
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
 
 const app = express();
 
@@ -15,6 +17,14 @@ const upload = multer({
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: false, limit: '10mb' }));
 app.use('/uploads', express.static('uploads'));
+
+// Import and use analyze routes
+const analyzeRoutes = require('./routes/analyze.js');
+app.use('/api/analyze', analyzeRoutes);
+
+// Test route
+const testRoutes = require('./routes/test.js');
+app.use('/api/test', testRoutes);
 
 // Healing Recipes API endpoint
 app.get('/api/healing-recipes/:condition', (req, res) => {
