@@ -33,7 +33,7 @@ Thumbs.db
 # Large dataset files
 diet_streamlit/Data/dataset.csv
 client/public/recipes.csv
-*.csv
+# *.csv - commented out to allow recipe CSVs
 *.xlsx
 *.xls
 
