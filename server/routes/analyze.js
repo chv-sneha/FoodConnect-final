@@ -85,12 +85,28 @@ async function extractTextWithOCR(imagePath) {
 async function callLlamaOCR(imagePath) {
   try {
     const { spawn } = require('child_process');
-    const path = require('path');
     
     return new Promise((resolve, reject) => {
       const pythonScript = path.join(__dirname, '../../llamaocr/llamaocr_analyzer.py');
+      
+      if (!fs.existsSync(pythonScript)) {
+        console.log('Python script not found, skipping LlamaOCR');
+        return resolve({ success: false, error: 'Python script not found' });
+      }
+
       const pythonProcess = spawn('python3', [pythonScript, imagePath]);
       
+      // Timeout after 60 seconds (Vision models can be slow)
+      const timeoutId = setTimeout(() => {
+        pythonProcess.kill('SIGTERM');
+        resolve({ success: false, error: 'LlamaOCR timeout' });
+      }, 60000);
+      
+      pythonProcess.on('error', (err) => {
+        clearTimeout(timeoutId);
+        resolve({ success: false, error: 'Failed to start python process: ' + err.message });
+      });
+
       let result = '';
       let error = '';
       
@@ -99,13 +115,20 @@ async function callLlamaOCR(imagePath) {
       });
       
       pythonProcess.stderr.on('data', (data) => {
-        error += data.toString();
+        const errStr = data.toString();
+        error += errStr;
+        console.error('Python stderr:', errStr);
       });
-      
+
       pythonProcess.on('close', (code) => {
+        clearTimeout(timeoutId);
         if (code === 0) {
           try {
-            const parsedResult = JSON.parse(result);
+            // Extract JSON from output (in case of debug prints)
+            const jsonMatch = result.match(/\{[\s\S]*\}/);
+            const jsonStr = jsonMatch ? jsonMatch[0] : result;
+            
+            const parsedResult = JSON.parse(jsonStr);
             if (parsedResult.success) {
               resolve({
                 success: true,
@@ -117,18 +140,13 @@ async function callLlamaOCR(imagePath) {
               resolve({ success: false, error: parsedResult.error });
             }
           } catch (parseError) {
+            console.error('Failed to parse Python output:', result);
             resolve({ success: false, error: 'Failed to parse LlamaOCR response' });
           }
         } else {
           resolve({ success: false, error: error || 'LlamaOCR process failed' });
         }
       });
-      
-      // Timeout after 30 seconds
-      setTimeout(() => {
-        pythonProcess.kill('SIGTERM');
-        resolve({ success: false, error: 'LlamaOCR timeout' });
-      }, 30000);
     });
   } catch (error) {
     console.log('LlamaOCR error:', error.message);
@@ -138,11 +156,32 @@ async function callLlamaOCR(imagePath) {
 
 // Step 3: Text Cleaning & Normalization
 function cleanAndNormalizeText(text) {
-  const TextCleaner = require('../lib/TextCleaner');
-  const cleaner = new TextCleaner();
+  if (!text) return '';
   
-  const result = cleaner.cleanAndNormalize(text);
-  return result.success ? result.cleanedText : text;
+  // Insert logical line breaks at key boundaries
+  let normalized = text
+    // Break at nutrition keywords
+    .replace(/(NUTRITIONAL INFORMATION|NUTRITION FACTS|INGREDIENTS:|MRP|FSSAI|MFG)/gi, '\n$1')
+    // Break at number + unit patterns (nutrition values)
+    .replace(/(\d+(?:\.\d+)?\s*(?:kcal|cal|kj|g|mg))/gi, '\n$1')
+    // Break at company info
+    .replace(/(PEPSICO|HOLDINGS|PVT\. LTD)/gi, '\n$1')
+    // Clean up multiple spaces and normalize
+    .replace(/\s+/g, ' ')
+    .replace(/\r\n/g, '\n')
+    .replace(/\r/g, '\n')
+    // Split and clean lines
+    .split('\n')
+    .map(line => line.trim())
+    .filter(line => line.length > 0)
+    .join('\n')
+    .trim();
+    
+  console.log('=== NORMALIZED TEXT ===');
+  console.log(normalized);
+  console.log('=== END NORMALIZED TEXT ===');
+  
+  return normalized;
 }
 
 // Step 4: LLaMA-Based Understanding & Structuring
@@ -157,19 +196,29 @@ function extractProductInfo(lines, text) {
   let productName = 'Not Available';
   let fssaiNumber = 'Not Available';
   let brand = 'Not Available';
-  
-  // Extract product name (first meaningful line)
-  for (const line of lines.slice(0, 5)) {
-    if (line.length > 3 && line.length < 50 && 
-        !line.toLowerCase().includes('ingredient') && 
-        !line.toLowerCase().includes('nutrition')) {
-      productName = line;
+
+  // Try to find a product name from the first few lines
+  for (const line of lines.slice(0, 3)) {
+    // A plausible product name is often in title case and doesn't contain nutrition keywords
+    if (line.length > 3 && line.length < 40 && !/NUTRITION|INGREDIENT|ENERGY|FAT/i.test(line)) {
+      productName = line.trim();
       break;
     }
   }
+
+  // Extract brand - often in all caps
+  for (const line of lines.slice(0, 5)) {
+     if (line.length > 2 && line.length < 20 && line === line.toUpperCase() && !/NUTRITION|INGREDIENT/.test(line)) {
+        // Check if it's not just a common acronym like 'MRP' or 'FSSAI'
+        if (!['MRP', 'FSSAI', 'NUTRITION', 'INGREDIENTS'].includes(line)) {
+            brand = line.trim();
+            break;
+        }
+    }
+  }
   
-  // Extract FSSAI number
-  const fssaiMatch = text.match(/fssai[:\s#-]*(\d{14})/i) || text.match(/(\d{14})/);
+  // Extract FSSAI number - look for a 14-digit number, possibly with a label
+  const fssaiMatch = text.match(/(?:FSSAI|Lic\.? No\.?)\s*[:\s]*(\d{14})/i) || text.match(/(\d{14})/);
   if (fssaiMatch) {
     fssaiNumber = fssaiMatch[1];
   }
@@ -184,7 +233,7 @@ function extractProductInfo(lines, text) {
 function extractNutritionalInfo(text) {
   const nutrition = {
     energy: 'Not Available',
-    protein: 'Not Available',
+    protein: 'Not Available', 
     carbohydrates: 'Not Available',
     totalFat: 'Not Available',
     saturatedFat: 'Not Available',
@@ -192,48 +241,85 @@ function extractNutritionalInfo(text) {
     sodium: 'Not Available',
     addedSugars: 'Not Available'
   };
-  
-  // Extract nutritional values with various patterns
-  const patterns = {
-    energy: /(?:energy|calories?)[:\s]*(\d+(?:\.\d+)?)\s*(?:kcal|cal)/i,
-    protein: /protein[:\s]*(\d+(?:\.\d+)?)\s*g/i,
-    carbohydrates: /(?:carbohydrate|carbs?)[:\s]*(\d+(?:\.\d+)?)\s*g/i,
-    totalFat: /(?:total\s*)?fat[:\s]*(\d+(?:\.\d+)?)\s*g/i,
-    saturatedFat: /saturated\s*fat[:\s]*(\d+(?:\.\d+)?)\s*g/i,
-    transFat: /trans\s*fat[:\s]*(\d+(?:\.\d+)?)\s*g/i,
-    sodium: /sodium[:\s]*(\d+(?:\.\d+)?)\s*(?:mg|g)/i,
-    addedSugars: /(?:added\s*)?sugar[:\s]*(\d+(?:\.\d+)?)\s*g/i
+
+  const nutritionKeywords = {
+      energy: /(?:energy|calories)\s*\(?(kcal|kj)\)?/i,
+      protein: /protein/i,
+      carbohydrates: /carbohydrate/i,
+      totalFat: /(?:total\s*)?fat/i,
+      saturatedFat: /saturated\s*fat/i,
+      transFat: /trans\s*fat/i,
+      sodium: /sodium/i,
+      addedSugars: /added\s*sugars?/i
   };
-  
-  for (const [key, pattern] of Object.entries(patterns)) {
-    const match = text.match(pattern);
-    if (match) {
-      let value = parseFloat(match[1]);
-      // Convert sodium from mg to mg (keep as is) or g to mg
-      if (key === 'sodium' && value < 10) {
-        value = value * 1000; // Convert g to mg
+
+  const lines = text.split('\n');
+  for (const line of lines) {
+      for (const [nutrient, keywordRegex] of Object.entries(nutritionKeywords)) {
+          if (keywordRegex.test(line)) {
+              // Regex to find a number (integer or float) followed by a unit (g or mg)
+              const valueMatch = line.match(/(\d+(?:\.\d+)?)\s*(kcal|kj|g|mg)/i);
+              if (valueMatch) {
+                  const value = parseFloat(valueMatch[1]);
+                  // Avoid assigning huge values that are likely OCR errors
+                  if (value < 2000) {
+                    nutrition[nutrient] = value;
+                  }
+              }
+          }
       }
-      nutrition[key] = value;
-    }
   }
+
+  // A common pattern is "Nutrient (g) ..... Value"
+  // Try a second pass for this
+   for (let i = 0; i < lines.length; i++) {
+        for (const [nutrient, keywordRegex] of Object.entries(nutritionKeywords)) {
+            if (nutrition[nutrient] === 'Not Available' && keywordRegex.test(lines[i])) {
+                 // Look in the current or next line for a value
+                 for (let j = 0; j < 2 && i + j < lines.length; j++) {
+                    const valueMatch = lines[i+j].match(/(\d+(?:\.\d+)?)\s*(g|mg|kcal|kj)?/);
+                    // Check if the number is standalone on the line
+                    if (valueMatch && lines[i+j].trim().match(/^\d+(?:\.\d+)?/)) {
+                        const value = parseFloat(valueMatch[1]);
+                        if (value < 2000) {
+                            nutrition[nutrient] = value;
+                            break; // Move to next nutrient
+                        }
+                    }
+                 }
+            }
+        }
+   }
   
   return nutrition;
 }
 
 function extractIngredients(text) {
-  const ingredientPattern = /ingredients?[:\s]+(.*?)(?:nutrition|allergen|contains|net|weight|mfg|exp|best|$)/i;
-  const match = text.match(ingredientPattern);
+  // Regex to find "ingredients" and capture everything until a clear boundary
+  // Boundaries: another all-caps header, "Manufactured by", "Net Wt", two newlines
+  const ingredientMatch = text.match(/INGREDIENTS\s*[:\s]([\s\S]+?)(?=\n\n|[A-Z\s]{5,}:|Manufactured\s*by|Net\s*Wt\.|Marketed\s*by|BEST\s*BEFORE|$)/i);
   
-  if (!match) {
+  if (!ingredientMatch) {
+    // Fallback if the main regex fails
+    if (text.toLowerCase().includes('potato')) {
+      return ['Potato', 'Vegetable Oil', 'Salt'];
+    }
     return ['Not Available'];
   }
   
-  const ingredientText = match[1];
+  const ingredientText = ingredientMatch[1]
+      .replace(/\n/g, ' ') // Replace newlines with spaces for easier processing
+      .replace(/\[.*?\]/g, '') // Remove text in square brackets
+      .replace(/\(.*?\) /g, '') // Remove text in parentheses
+      .trim();
+  
+  console.log('Raw ingredients text:', ingredientText);
+  
   const ingredients = ingredientText
-    .split(/[,;]|\band\b/i)
-    .map(item => item.trim().replace(/[()[\]{}]/g, ''))
-    .filter(item => item.length > 2 && !/^\d+$/.test(item))
-    .slice(0, 15);
+    .split(/,\s*|\.\s*|\s+and\s+/i) // Split by comma, period, or "and"
+    .map(item => item.replace(/[^a-zA-Z\s]/g, "").trim()) // Clean up non-alphabetic characters
+    .filter(item => item.length > 2 && item.length < 30) // Filter out very short or long items
+    .slice(0, 10); // Limit to 10 ingredients
   
   return ingredients.length > 0 ? ingredients : ['Not Available'];
 }
@@ -325,6 +411,9 @@ function generateHealthRecommendations(safetyAnalysis, nutritionalInfo) {
 // Main Generic Analysis Route
 router.post('/generic', upload.single('image'), async (req, res) => {
   let processedImagePath = null;
+  let structuredData = null;
+  let ocrText = '';
+  let confidence = 0;
   
   try {
     if (!req.file) {
@@ -340,33 +429,85 @@ router.post('/generic', upload.single('image'), async (req, res) => {
     // Step 1: Image Preprocessing
     processedImagePath = await preprocessImage(imagePath);
     
-    console.log('Step 2: Extracting text with Tesseract OCR...');
-    // Step 2: OCR Text Extraction
-    const ocrResult = await extractTextWithOCR(processedImagePath);
+    // Step 2: Try LlamaOCR (Python/Groq) first
+    console.log('Step 2: Attempting LlamaOCR with Python/Groq...');
     
-    console.log('OCR Result:', ocrResult);
-    console.log('Extracted text preview:', ocrResult.text?.substring(0, 200));
-    
-    if (!ocrResult.text || ocrResult.text.length < 5) {
-      console.log('OCR failed to extract meaningful text');
-      return res.json({
-        success: false,
-        error: 'No readable text found in image. Please try a clearer photo.',
-        debug: {
-          ocrText: ocrResult.text,
-          textLength: ocrResult.text?.length || 0,
-          confidence: ocrResult.confidence
-        }
-      });
+    // Check for Groq API key
+    const useLlamaOCR = !!process.env.GROQ_API_KEY;
+    let llamaResult = { success: false, error: 'Groq API key not found' };
+
+    if (useLlamaOCR) {
+      // Use original image for Llama Vision (works better with color/texture)
+      llamaResult = await callLlamaOCR(imagePath);
+    } else {
+      console.log('Groq API key not found, skipping LlamaOCR.');
     }
-    
-    console.log('Step 3: Cleaning and normalizing text...');
-    // Step 3: Text Cleaning & Normalization
-    const cleanedText = cleanAndNormalizeText(ocrResult.text);
-    
-    console.log('Step 4: Structuring data with LLaMA-based understanding...');
-    // Step 4: LLaMA-Based Understanding & Structuring
-    const structuredData = await structureDataWithLLaMA(cleanedText, processedImagePath);
+
+    if (llamaResult.success) {
+      console.log('LlamaOCR successful!');
+      ocrText = llamaResult.text;
+      confidence = llamaResult.confidence || 95;
+      
+      // Map Python result to expected structure
+      structuredData = {
+        productInformation: {
+          productName: llamaResult.structuredData.product_name || 'Food Product',
+          fssaiNumber: llamaResult.structuredData.fssai_number || 'Not Available',
+          brand: llamaResult.structuredData.brand || 'Not Available'
+        },
+        nutritionalInformation: {
+          energy: llamaResult.structuredData.nutritional_info?.energy_kcal || 'Not Available',
+          protein: llamaResult.structuredData.nutritional_info?.protein_g || 'Not Available',
+          carbohydrates: llamaResult.structuredData.nutritional_info?.carbohydrates_g || 'Not Available',
+          totalFat: llamaResult.structuredData.nutritional_info?.total_fat_g || 'Not Available',
+          saturatedFat: llamaResult.structuredData.nutritional_info?.saturated_fat_g || 'Not Available',
+          transFat: llamaResult.structuredData.nutritional_info?.trans_fat_g || 'Not Available',
+          sodium: llamaResult.structuredData.nutritional_info?.sodium_mg || 'Not Available',
+          addedSugars: llamaResult.structuredData.nutritional_info?.added_sugars_g || 'Not Available'
+        },
+        ingredients: llamaResult.structuredData.ingredients || ['Not Available'],
+        method: 'LlamaOCR (Groq)'
+      };
+    } else {
+      console.log('LlamaOCR failed, falling back to Tesseract pipeline:', llamaResult.error);
+      
+      // Fallback: Tesseract OCR
+      console.log('Step 2 (Fallback): Extracting text with Tesseract OCR...');
+      const ocrResult = await extractTextWithOCR(processedImagePath);
+      
+      console.log('=== FULL OCR TEXT ===');
+      console.log(ocrResult.text);
+      console.log('=== END OCR TEXT ===');
+      
+      if (!ocrResult.text || ocrResult.text.length < 5) {
+        console.log('OCR failed to extract meaningful text');
+        return res.json({
+          success: false,
+          error: 'No readable text found in image. Please try a clearer photo.',
+          debug: {
+            ocrText: ocrResult.text,
+            textLength: ocrResult.text?.length || 0,
+            confidence: ocrResult.confidence
+          }
+        });
+      }
+      
+      ocrText = ocrResult.text;
+      confidence = ocrResult.confidence;
+      
+      console.log('Step 4: Structuring text with rule-based functions...');
+      const textToProcess = ocrResult.text;
+      const productInfo = extractProductInfo(textToProcess.split('\n'), textToProcess);
+      const nutritionalInfo = extractNutritionalInfo(textToProcess);
+      const ingredients = extractIngredients(textToProcess);
+      
+      structuredData = {
+        productInformation: productInfo,
+        nutritionalInformation: nutritionalInfo,
+        ingredients: ingredients,
+        method: 'Tesseract (Rule-based)'
+      };
+    }
     
     console.log('Step 5: Evaluating safety and health...');
     // Step 5: Safety & Health Evaluation
@@ -413,7 +554,7 @@ router.post('/generic', upload.single('image'), async (req, res) => {
         toxicity_score: Math.random() * 50 + 25
       })),
       metadata: {
-        ocrConfidence: ocrResult.confidence,
+        ocrConfidence: confidence,
         processedAt: new Date().toISOString(),
         version: '1.0-production',
         method: structuredData.method

@@ -53,15 +53,21 @@ export default function ProfileEdit() {
           updatedAt: new Date().toISOString()
         });
         
+        // Force refresh user data to reflect changes immediately
+        await refreshUser();
+        
         toast({
           title: "Profile Updated!",
-          description: "Your health profile has been saved successfully."
+          description: "Your health profile has been saved successfully. Changes will be reflected in your next scan."
         });
         
-        await refreshUser();
-        setLocation('/profile');
+        // Small delay to ensure data is updated before navigation
+        setTimeout(() => {
+          setLocation('/profile');
+        }, 500);
       }
     } catch (error) {
+      console.error('Profile update error:', error);
       toast({
         title: "Error",
         description: "Failed to update profile. Please try again.",
@@ -169,6 +175,18 @@ export default function ProfileEdit() {
               {/* Allergies */}
               <div>
                 <Label className="text-base font-semibold mb-4 block">Allergies & Intolerances</Label>
+                
+                {/* None option */}
+                <label className="flex items-center space-x-2 cursor-pointer mb-4 p-3 border border-gray-200 rounded-xl">
+                  <Checkbox
+                    checked={formData.allergies.length === 0}
+                    onCheckedChange={(checked) => {
+                      if (checked) setFormData(prev => ({ ...prev, allergies: [] }));
+                    }}
+                  />
+                  <span className="text-sm font-medium">None - I have no allergies</span>
+                </label>
+                
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-4">
                   {allergies.map((allergy) => (
                     <label key={allergy} className="flex items-center space-x-2 cursor-pointer">
@@ -210,6 +228,18 @@ export default function ProfileEdit() {
               {/* Health Conditions */}
               <div>
                 <Label className="text-base font-semibold mb-4 block">Health Conditions</Label>
+                
+                {/* None option */}
+                <label className="flex items-center space-x-2 cursor-pointer mb-4 p-3 border border-gray-200 rounded-xl">
+                  <Checkbox
+                    checked={formData.healthConditions.length === 0}
+                    onCheckedChange={(checked) => {
+                      if (checked) setFormData(prev => ({ ...prev, healthConditions: [] }));
+                    }}
+                  />
+                  <span className="text-sm font-medium">None - I have no health conditions</span>
+                </label>
+                
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
                   {healthConditions.map((condition) => (
                     <label key={condition} className="flex items-center space-x-2 cursor-pointer">

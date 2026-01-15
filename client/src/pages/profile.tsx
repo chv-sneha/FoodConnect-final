@@ -3,20 +3,14 @@ import { useLocation } from 'wouter';
 import { TopNavigation, BottomNavigation } from '@/components/navigation';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Separator } from '@/components/ui/separator';
 import { useAuth } from '@/context/AuthContext';
-import { useToast } from '@/hooks/use-toast';
-import { doc, updateDoc } from 'firebase/firestore';
-import { db } from '@/lib/firebase';
 import { 
   User, 
   Shield, 
   AlertTriangle, 
   Heart, 
-  Save,
   History,
   Settings,
   LogOut,
@@ -25,12 +19,8 @@ import {
 import { Link } from 'wouter';
 
 export default function Profile() {
-  const { toast } = useToast();
-  const { user, isAuthenticated, logout, refreshUser } = useAuth();
+  const { user, isAuthenticated, logout } = useAuth();
   const [, setLocation] = useLocation();
-  const [allergies, setAllergies] = useState<string[]>([]);
-  const [healthConditions, setHealthConditions] = useState<string[]>([]);
-
   // Redirect if not authenticated
   useEffect(() => {
     if (!isAuthenticated) {
@@ -38,15 +28,7 @@ export default function Profile() {
     }
   }, [isAuthenticated, setLocation]);
 
-  // Load user data
-  useEffect(() => {
-    if (user) {
-      setAllergies(user.allergies || []);
-      setHealthConditions(user.healthConditions || []);
-    }
-  }, [user]);
 
-  const [isUpdating, setIsUpdating] = useState(false);
 
   const allergyOptions = [
     'Nuts', 'Dairy', 'Gluten', 'Soy', 'Eggs', 'Fish', 'Shellfish', 'Sesame'
@@ -56,50 +38,7 @@ export default function Profile() {
     'Diabetes', 'Hypertension', 'Heart Disease', 'Celiac Disease', 'Lactose Intolerance'
   ];
 
-  const toggleAllergy = (allergy: string) => {
-    setAllergies(prev => 
-      prev.includes(allergy) 
-        ? prev.filter(a => a !== allergy)
-        : [...prev, allergy]
-    );
-  };
 
-  const toggleHealthCondition = (condition: string) => {
-    setHealthConditions(prev => 
-      prev.includes(condition) 
-        ? prev.filter(c => c !== condition)
-        : [...prev, condition]
-    );
-  };
-
-  const handleSaveProfile = async () => {
-    if (!user?.uid) return;
-    
-    setIsUpdating(true);
-    try {
-      const userRef = doc(db, 'users', user.uid);
-      await updateDoc(userRef, {
-        allergies,
-        healthConditions,
-        updatedAt: new Date().toISOString()
-      });
-      
-      await refreshUser();
-      
-      toast({
-        title: "Profile Updated",
-        description: "Your health profile has been saved successfully.",
-      });
-    } catch (error) {
-      toast({
-        title: "Update Failed",
-        description: "Failed to update profile. Please try again.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsUpdating(false);
-    }
-  };
 
   if (!isAuthenticated || !user) {
     return null; // Auth redirect will handle this
@@ -184,58 +123,109 @@ export default function Profile() {
               
               {/* Allergies Section */}
               <div>
-                <Label className="text-base font-semibold flex items-center mb-4">
+                <div className="text-base font-semibold flex items-center mb-4">
                   <AlertTriangle className="text-orange-500 mr-2" size={20} />
                   Allergies & Intolerances
-                </Label>
+                </div>
                 <div className="grid grid-cols-2 gap-3">
                   {allergyOptions.map((allergy) => (
-                    <label 
+                    <div 
                       key={allergy}
-                      className="flex items-center space-x-3 p-3 border border-gray-200 rounded-xl hover:border-primary transition-colors cursor-pointer"
+                      className={`flex items-center space-x-3 p-3 border rounded-xl transition-colors ${
+                        (user?.allergies || []).includes(allergy) 
+                          ? 'border-red-300 bg-red-50' 
+                          : 'border-gray-200'
+                      }`}
                     >
                       <Checkbox 
-                        checked={allergies.includes(allergy)}
-                        onCheckedChange={() => toggleAllergy(allergy)}
+                        checked={(user?.allergies || []).includes(allergy)}
+                        disabled
                       />
-                      <span className="text-sm font-medium">{allergy}</span>
-                    </label>
+                      <span className={`text-sm font-medium ${
+                        (user?.allergies || []).includes(allergy) ? 'text-red-700' : ''
+                      }`}>
+                        {allergy}
+                      </span>
+                    </div>
                   ))}
                 </div>
+                
+                {/* Display custom allergies */}
+                {user?.allergies && user.allergies.filter(a => !allergyOptions.includes(a)).length > 0 && (
+                  <div className="mt-4">
+                    <p className="text-sm font-medium text-gray-700 mb-2">Custom Allergies:</p>
+                    <div className="flex flex-wrap gap-2">
+                      {user.allergies.filter(a => !allergyOptions.includes(a)).map((allergy) => (
+                        <span key={allergy} className="px-3 py-1 bg-red-100 text-red-700 rounded-full text-sm font-medium">
+                          {allergy}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+                
+                {/* No allergies message */}
+                {(!user?.allergies || user.allergies.length === 0) && (
+                  <div className="mt-4 p-3 bg-green-50 border border-green-200 rounded-lg">
+                    <p className="text-green-700 font-medium">✅ No allergies</p>
+                  </div>
+                )}
               </div>
 
               <Separator />
 
               {/* Health Conditions Section */}
               <div>
-                <Label className="text-base font-semibold flex items-center mb-4">
+                <div className="text-base font-semibold flex items-center mb-4">
                   <Heart className="text-red-500 mr-2" size={20} />
                   Health Conditions
-                </Label>
+                </div>
                 <div className="space-y-3">
                   {healthConditionOptions.map((condition) => (
-                    <label 
+                    <div 
                       key={condition}
-                      className="flex items-center space-x-3 p-3 border border-gray-200 rounded-xl hover:border-primary transition-colors cursor-pointer"
+                      className={`flex items-center space-x-3 p-3 border rounded-xl transition-colors ${
+                        (user?.healthConditions || []).includes(condition) 
+                          ? 'border-orange-300 bg-orange-50' 
+                          : 'border-gray-200'
+                      }`}
                     >
                       <Checkbox 
-                        checked={healthConditions.includes(condition)}
-                        onCheckedChange={() => toggleHealthCondition(condition)}
+                        checked={(user?.healthConditions || []).includes(condition)}
+                        disabled
                       />
-                      <span className="text-sm font-medium">{condition}</span>
-                    </label>
+                      <span className={`text-sm font-medium ${
+                        (user?.healthConditions || []).includes(condition) ? 'text-orange-700' : ''
+                      }`}>
+                        {condition}
+                      </span>
+                    </div>
                   ))}
                 </div>
+                
+                {/* Display custom health conditions */}
+                {user?.healthConditions && user.healthConditions.filter(c => !healthConditionOptions.includes(c)).length > 0 && (
+                  <div className="mt-4">
+                    <p className="text-sm font-medium text-gray-700 mb-2">Custom Health Conditions:</p>
+                    <div className="flex flex-wrap gap-2">
+                      {user.healthConditions.filter(c => !healthConditionOptions.includes(c)).map((condition) => (
+                        <span key={condition} className="px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-sm font-medium">
+                          {condition}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+                
+                {/* No health conditions message */}
+                {(!user?.healthConditions || user.healthConditions.length === 0) && (
+                  <div className="mt-4 p-3 bg-green-50 border border-green-200 rounded-lg">
+                    <p className="text-green-700 font-medium">✅ No health conditions</p>
+                  </div>
+                )}
               </div>
 
-              <Button 
-                className="w-full bg-primary text-white hover:bg-green-600 py-3 text-lg"
-                onClick={handleSaveProfile}
-                disabled={isUpdating}
-              >
-                <Save className="mr-2" size={20} />
-                {isUpdating ? 'Saving...' : 'Save Profile'}
-              </Button>
+
             </CardContent>
           </Card>
 

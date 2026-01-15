@@ -3,6 +3,8 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { generatePersonalizedAlerts } from '@/lib/allergen-detector';
+import { useAuth } from '@/context/AuthContext';
 import { 
   AlertTriangle, 
   CheckCircle, 
@@ -55,9 +57,17 @@ export function EnhancedAnalysisResults({
   const [selectedLanguage, setSelectedLanguage] = useState('en');
   const [showSubstitutes, setShowSubstitutes] = useState(false);
   const [isReporting, setIsReporting] = useState(false);
+  const { user } = useAuth();
 
   // Calculate or use existing toxicity analysis
   const toxicityAnalysis = product.toxicityAnalysis || analyzeToxicity(product.ingredients);
+  
+  // Generate personalized alerts based on user profile
+  const personalizedAlerts = generatePersonalizedAlerts(
+    product.ingredients || [],
+    user?.allergies || userAllergies,
+    user?.healthConditions || userConditions
+  );
 
   const getSafetyColor = (score: string) => {
     switch (score.toLowerCase()) {
@@ -239,22 +249,65 @@ export function EnhancedAnalysisResults({
       </Card>
 
       {/* Personalized Warnings */}
-      {product.analysis.personalizedWarnings && product.analysis.personalizedWarnings.length > 0 && (
+      {personalizedAlerts.length > 0 && (
         <Card className="border-red-200 bg-red-50">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-red-700">
-              <AlertTriangle className="w-5 h-5" />
-              ⚠️ Personal Health Alerts
+              <AlertTriangle className="w-6 h-6" />
+              🚨 Personal Health Alerts ({personalizedAlerts.length})
             </CardTitle>
+            <p className="text-red-600 mt-2">
+              Critical alerts based on your health profile. Please review carefully.
+            </p>
           </CardHeader>
           <CardContent>
-            <div className="space-y-2">
-              {(product.analysis.personalizedWarnings || []).map((warning, index) => (
-                <div key={index} className="flex items-center gap-2 p-3 bg-red-100 rounded-lg">
-                  <XCircle className="w-5 h-5 text-red-600 flex-shrink-0" />
-                  <span className="text-red-800 font-medium">
-                    This product contains {warning} which you are allergic to
-                  </span>
+            <div className="space-y-3">
+              {personalizedAlerts.map((alert, index) => (
+                <div key={index} className={`flex items-start gap-3 p-4 rounded-lg border-l-4 ${
+                  alert.severity === 'high' ? 'bg-red-100 border-red-500' :
+                  alert.severity === 'medium' ? 'bg-orange-100 border-orange-500' :
+                  'bg-yellow-100 border-yellow-500'
+                }`}>
+                  <div className={`p-1 rounded-full ${
+                    alert.severity === 'high' ? 'bg-red-200' :
+                    alert.severity === 'medium' ? 'bg-orange-200' :
+                    'bg-yellow-200'
+                  }`}>
+                    {alert.type === 'allergen' ? (
+                      <XCircle className={`w-5 h-5 ${
+                        alert.severity === 'high' ? 'text-red-700' :
+                        alert.severity === 'medium' ? 'text-orange-700' :
+                        'text-yellow-700'
+                      }`} />
+                    ) : (
+                      <Heart className={`w-5 h-5 ${
+                        alert.severity === 'high' ? 'text-red-700' :
+                        alert.severity === 'medium' ? 'text-orange-700' :
+                        'text-yellow-700'
+                      }`} />
+                    )}
+                  </div>
+                  <div className="flex-1">
+                    <h5 className={`font-bold text-sm ${
+                      alert.severity === 'high' ? 'text-red-900' :
+                      alert.severity === 'medium' ? 'text-orange-900' :
+                      'text-yellow-900'
+                    }`}>
+                      {alert.title}
+                    </h5>
+                    <p className={`text-sm mt-1 ${
+                      alert.severity === 'high' ? 'text-red-800' :
+                      alert.severity === 'medium' ? 'text-orange-800' :
+                      'text-yellow-800'
+                    }`}>
+                      {alert.message}
+                    </p>
+                    {alert.severity === 'high' && (
+                      <div className="mt-2 p-2 bg-red-200 rounded text-xs font-semibold text-red-900">
+                        ⚠️ AVOID: Do not consume this product
+                      </div>
+                    )}
+                  </div>
                 </div>
               ))}
             </div>

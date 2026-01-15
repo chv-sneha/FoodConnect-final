@@ -3,6 +3,8 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { SafetyBadge } from './safety-badge';
 import { getLevelColor } from '@/lib/ingredient-analyzer';
+import { generatePersonalizedAlerts } from '@/lib/allergen-detector';
+import { useAuth } from '@/context/AuthContext';
 import { AnalysisResult, PersonalizedAlert } from '@/types/analysis';
 import { 
   Shield, 
@@ -29,7 +31,18 @@ export function AnalysisResults({
   onFindAlternatives,
   onShare 
 }: AnalysisResultsProps) {
-  const { analysis, safetyScore, productName, fssaiVerified, fssaiNumber } = result;
+  const { analysis, safetyScore, productName, fssaiVerified, fssaiNumber, ingredients } = result;
+  const { user } = useAuth();
+  
+  // Generate personalized alerts based on user profile
+  const userAlerts = generatePersonalizedAlerts(
+    ingredients || [],
+    user?.allergies || [],
+    user?.healthConditions || []
+  );
+  
+  // Combine provided alerts with user-specific alerts
+  const allAlerts = [...personalizedAlerts, ...userAlerts];
 
   return (
     <div className="max-w-4xl mx-auto space-y-8">
@@ -123,32 +136,35 @@ export function AnalysisResults({
       </Card>
 
       {/* Personalized Alerts */}
-      {personalizedAlerts.length > 0 && (
-        <Card>
+      {allAlerts.length > 0 && (
+        <Card className="border-red-200 bg-red-50">
           <CardHeader>
-            <CardTitle className="flex items-center space-x-3 text-2xl">
-              <Shield className="text-secondary" />
-              <span>Your Personal Alerts</span>
+            <CardTitle className="flex items-center space-x-3 text-2xl text-red-700">
+              <Shield className="text-red-600" />
+              <span>🚨 Personal Health Alerts</span>
             </CardTitle>
+            <p className="text-red-600 mt-2">
+              Based on your profile, we found {allAlerts.length} potential concern{allAlerts.length > 1 ? 's' : ''} with this product.
+            </p>
           </CardHeader>
           <CardContent className="space-y-4">
-            {personalizedAlerts.map((alert, index) => (
+            {allAlerts.map((alert, index) => (
               <div 
                 key={index} 
                 className={`
-                  p-6 rounded-xl border-l-4
-                  ${alert.severity === 'high' ? 'bg-red-50 border-red-500' : 
-                    alert.severity === 'medium' ? 'bg-orange-50 border-orange-500' : 
-                    'bg-yellow-50 border-yellow-500'}
+                  p-6 rounded-xl border-l-4 animate-pulse
+                  ${alert.severity === 'high' ? 'bg-red-100 border-red-500' : 
+                    alert.severity === 'medium' ? 'bg-orange-100 border-orange-500' : 
+                    'bg-yellow-100 border-yellow-500'}
                 `}
               >
                 <div className="flex items-center mb-2">
                   {alert.type === 'allergen' ? (
-                    <AlertTriangle className="text-red-500 mr-3" />
+                    <AlertTriangle className="text-red-600 mr-3" size={24} />
                   ) : (
-                    <Heart className="text-orange-500 mr-3" />
+                    <Heart className="text-orange-600 mr-3" size={24} />
                   )}
-                  <h5 className={`font-bold ${
+                  <h5 className={`font-bold text-lg ${
                     alert.severity === 'high' ? 'text-red-900' : 
                     alert.severity === 'medium' ? 'text-orange-900' : 
                     'text-yellow-900'
@@ -156,13 +172,20 @@ export function AnalysisResults({
                     {alert.title}
                   </h5>
                 </div>
-                <p className={
+                <p className={`text-base ${
                   alert.severity === 'high' ? 'text-red-800' : 
                   alert.severity === 'medium' ? 'text-orange-800' : 
                   'text-yellow-800'
-                }>
+                }`}>
                   {alert.message}
                 </p>
+                {alert.severity === 'high' && (
+                  <div className="mt-3 p-3 bg-red-200 rounded-lg">
+                    <p className="text-red-900 font-semibold text-sm">
+                      ⚠️ RECOMMENDATION: Avoid consuming this product
+                    </p>
+                  </div>
+                )}
               </div>
             ))}
           </CardContent>

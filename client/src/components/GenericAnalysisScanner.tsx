@@ -2,8 +2,10 @@ import { useState, useRef, useCallback } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Camera, Upload, Scan, Volume2, Download, Zap, Shield, Brain } from 'lucide-react';
+import { Camera, Upload, Scan, Volume2, Download, Zap, Shield, Brain, AlertTriangle } from 'lucide-react';
 import { useStore } from '@/store/useStore';
+import { useAuth } from '@/context/AuthContext';
+import { generatePersonalizedAlerts } from '@/lib/allergen-detector';
 
 interface ScannerProps {
   onAnalysisComplete: (result: any) => void;
@@ -13,9 +15,11 @@ export default function GenericAnalysisScanner({ onAnalysisComplete }: ScannerPr
   const [isScanning, setIsScanning] = useState(false);
   const [isCameraMode, setIsCameraMode] = useState(false);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
+  const [allergenAlerts, setAllergenAlerts] = useState<any[]>([]);
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const { user } = useAuth();
 
   const startCamera = async () => {
     try {
@@ -96,6 +100,16 @@ export default function GenericAnalysisScanner({ onAnalysisComplete }: ScannerPr
         const result = await response.json();
         console.log('Analysis result:', result);
         
+        // Check for allergens if user is logged in
+        if (user && result.ingredients) {
+          const alerts = generatePersonalizedAlerts(
+            result.ingredients,
+            user.allergies || [],
+            user.healthConditions || []
+          );
+          setAllergenAlerts(alerts);
+        }
+        
         // Add to recent analyses
         const { addAnalysis } = useStore.getState();
         addAnalysis(result);
@@ -127,6 +141,24 @@ export default function GenericAnalysisScanner({ onAnalysisComplete }: ScannerPr
       </CardHeader>
       
       <CardContent className="space-y-6">
+        {/* Allergen Alerts */}
+        {allergenAlerts.length > 0 && (
+          <div className="bg-red-50 border-2 border-red-200 rounded-lg p-4">
+            <div className="flex items-center gap-2 mb-3">
+              <AlertTriangle className="text-red-600" size={20} />
+              <h3 className="font-bold text-red-800">🚨 ALLERGEN ALERT</h3>
+            </div>
+            <div className="space-y-2">
+              {allergenAlerts.map((alert, index) => (
+                <div key={index} className="bg-red-100 p-3 rounded border-l-4 border-red-500">
+                  <p className="font-semibold text-red-900">{alert.title}</p>
+                  <p className="text-red-800 text-sm">{alert.message}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+        
         {!isCameraMode ? (
           <div className="space-y-4">
             {/* Enhanced Feature Cards */}
