@@ -1,0 +1,388 @@
+{
+  "diabetes": {
+    "morning": [
+      {
+        "name": "Moong Dal Cheela",
+        "ingredients": ["moong dal", "ginger", "green chilli", "onions", "coriander"],
+        "benefits": "High protein, low GI, controls blood sugar",
+        "cookTime": "15 min",
+        "calories": 180
+      },
+      {
+        "name": "Ragi Porridge",
+        "ingredients": ["ragi flour", "milk", "cardamom", "almonds"],
+        "benefits": "High fiber, calcium rich, slow energy release",
+        "cookTime": "12 min",
+        "calories": 160
+      }
+    ],
+    "afternoon": [
+      {
+        "name": "Quinoa Vegetable Bowl",
+        "ingredients": ["quinoa", "broccoli", "bell peppers", "olive oil", "lemon"],
+        "benefits": "Complete protein, low GI, nutrient dense",
+        "cookTime": "25 min",
+        "calories": 220
+      },
+      {
+        "name": "Bitter Gourd Curry",
+        "ingredients": ["bitter gourd", "onions", "turmeric", "coconut oil"],
+        "benefits": "Natural insulin, blood sugar control",
+        "cookTime": "20 min",
+        "calories": 140
+      }
+    ],
+    "evening": [
+      {
+        "name": "Methi Thepla",
+        "ingredients": ["wheat flour", "fenugreek leaves", "yogurt", "ginger"],
+        "benefits": "Blood sugar control, fiber rich",
+        "cookTime": "18 min",
+        "calories": 150
+      },
+      {
+        "name": "Roasted Chana",
+        "ingredients": ["black chickpeas", "rock salt", "chaat masala"],
+        "benefits": "Low GI snack, protein rich",
+        "cookTime": "5 min",
+        "calories": 120
+      }
+    ],
+    "night": [
+      {
+        "name": "Bottle Gourd Soup",
+        "ingredients": ["bottle gourd", "ginger", "black pepper", "mint"],
+        "benefits": "Light digestion, hydrating, low calorie",
+        "cookTime": "15 min",
+        "calories": 80
+      },
+      {
+        "name": "Cinnamon Milk",
+        "ingredients": ["warm milk", "cinnamon powder", "turmeric"],
+        "benefits": "Blood sugar regulation, better sleep",
+        "cookTime": "5 min",
+        "calories": 100
+      }
+    ]
+  },
+  "pcos": {
+    "morning": [
+      {"name": "Multi Seed and Nut Bar", "ingredients": ["pumpkin seeds", "flax seeds", "ragi", "almond", "walnut", "dates paste"], "benefits": "High protein, hormone balancing, natural energy", "cookTime": "10 min", "calories": 150},
+      {"name": "Spinach Pancake", "ingredients": ["spinach", "besan flour", "oil", "spices"], "benefits": "High protein, iron rich, PCOS friendly", "cookTime": "15 min", "calories": 155},
+      {"name": "Open Sprouts Sandwich", "ingredients": ["multigrain bread", "moong sprouts", "tomato", "onion", "capsicum", "ghee"], "benefits": "High protein, fiber rich, hormone balancing", "cookTime": "10 min", "calories": 120},
+      {"name": "Steamed Multi Flour Momos", "ingredients": ["brown rice flour", "besan", "carrot", "onion", "capsicum", "oil"], "benefits": "Low oil, steamed healthy, fiber rich", "cookTime": "15 min", "calories": 150},
+      {"name": "Vegetable Sprouts Cheela", "ingredients": ["moong sprouts", "besan", "tomato", "onion", "capsicum", "coriander"], "benefits": "High protein, vegetable rich, PCOS friendly", "cookTime": "15 min", "calories": 160},
+      {"name": "Egg Vegetable Roti", "ingredients": ["oats flour", "jowar flour", "egg white", "onion", "tomato", "bell peppers", "broccoli"], "benefits": "High protein, low oil, nutrient dense", "cookTime": "15 min", "calories": 150},
+      {"name": "Multigrain Dosa with Veg Sambar", "ingredients": ["black gram dal", "ragi", "jowar", "curd", "toor dal", "vegetables"], "benefits": "High protein, low GI, complete nutrition", "cookTime": "30 min", "calories": 250},
+      {"name": "Veg Oats Idli with Veg Sambar", "ingredients": ["urad dal", "oats", "dahi", "toor dal", "vegetables"], "benefits": "High protein, steamed healthy, fiber rich", "cookTime": "30 min", "calories": 216},
+      {"name": "Pizza Uttapam", "ingredients": ["sattu atta", "curd", "onion", "tomato", "capsicum", "parmesan cheese"], "benefits": "Protein rich, satisfying, low oil", "cookTime": "20 min", "calories": 200},
+      {"name": "Mini Oats Roti Pizza", "ingredients": ["oats flour", "jalapeños", "onion", "capsicum", "parmesan cheese"], "benefits": "High protein, fiber rich, satisfying", "cookTime": "15 min", "calories": 190},
+      {"name": "Breakfast Platter", "ingredients": ["apple", "muskmelon", "paneer", "sprouts", "spices"], "benefits": "High protein, natural sugars, hormone friendly", "cookTime": "10 min", "calories": 150},
+      {"name": "Cucumber Sprouts Pancakes", "ingredients": ["cucumber", "sprouts", "besan flour", "oil", "spices"], "benefits": "High protein, hydrating, low calorie", "cookTime": "15 min", "calories": 150},
+      {"name": "Quinoa Upma", "ingredients": ["quinoa", "tomato", "onion", "capsicum", "oil"], "benefits": "Complete protein, low GI, nutrient dense", "cookTime": "25 min", "calories": 143},
+      {"name": "Oats Methi Khakra", "ingredients": ["oats", "methi", "oil", "spices"], "benefits": "High protein, fiber rich, hormone balancing", "cookTime": "15 min", "calories": 150},
+      {"name": "Samosa", "ingredients": ["jowar flour", "bajra flour", "oat flour", "besan", "carrot", "sprouts"], "benefits": "Air fried, low oil, fiber rich", "cookTime": "20 min", "calories": 180},
+      {"name": "Paratha", "ingredients": ["khapli wheat", "jowar flour", "aloo", "onion", "sprouts"], "benefits": "Multigrain, vegetable stuffed, nutritious", "cookTime": "15 min", "calories": 170}
+    ],
+    "afternoon": [
+      {"name": "Mint Mojito", "ingredients": ["mint leaves", "water", "lemon juice", "salt", "sabja seeds"], "benefits": "Hydrating, refreshing, hormone balancing", "cookTime": "5 min", "calories": 0},
+      {"name": "Nutritious Buttermilk", "ingredients": ["curd", "water", "black salt", "black pepper", "pudina", "flax seeds"], "benefits": "Probiotic, digestive, low calorie", "cookTime": "5 min", "calories": 23},
+      {"name": "Red Lemonade", "ingredients": ["water", "lemon juice", "mint leaves", "sabja seeds", "watermelon"], "benefits": "Hydrating, antioxidant rich, low calorie", "cookTime": "5 min", "calories": 15},
+      {"name": "Cauliflower Bajra Roti", "ingredients": ["cauliflower", "bajra flour", "oil", "spices"], "benefits": "Low GI, fiber rich, hormone balancing", "cookTime": "15 min", "calories": 162},
+      {"name": "Bajra Peas Roti", "ingredients": ["peas", "bajra flour", "oil", "spices"], "benefits": "High fiber, protein rich, low GI", "cookTime": "20 min", "calories": 161},
+      {"name": "Bajra Cabbage Roti", "ingredients": ["cabbage", "bajra flour", "oil", "spices"], "benefits": "Fiber rich, low calorie, hormone friendly", "cookTime": "15 min", "calories": 162},
+      {"name": "Radish Jowar Roti", "ingredients": ["radish", "jowar flour", "oil", "spices"], "benefits": "Detoxifying, fiber rich, low GI", "cookTime": "20 min", "calories": 152},
+      {"name": "Cabbage Methi Oats Roti", "ingredients": ["cabbage", "oats flour", "methi", "oil", "spices"], "benefits": "High protein, hormone balancing, fiber rich", "cookTime": "20 min", "calories": 200},
+      {"name": "Fruit Nut Paneer Salad", "ingredients": ["mango", "paneer", "almonds", "pistachios", "raisins", "cashews"], "benefits": "High protein, healthy fats, antioxidants", "cookTime": "10 min", "calories": 120},
+      {"name": "Beans Zucchini Pepper Salad", "ingredients": ["mung beans sprouts", "zucchini", "capsicum", "spices"], "benefits": "Low calorie, high fiber, nutrient dense", "cookTime": "10 min", "calories": 45},
+      {"name": "Greek Salad", "ingredients": ["hummus", "cucumber", "onion", "capsicum", "olives"], "benefits": "Anti-inflammatory, low carb, nutrient dense", "cookTime": "10 min", "calories": 139},
+      {"name": "Coriander Kabuli Chana Salad", "ingredients": ["coriander chutney", "kabuli chana", "onion", "tomato", "spices"], "benefits": "High protein, fiber rich, hormone balancing", "cookTime": "15 min", "calories": 206},
+      {"name": "Mushroom Capsicum Salad", "ingredients": ["mushroom", "capsicum", "spices", "oil"], "benefits": "Low calorie, high nutrients, anti-inflammatory", "cookTime": "15 min", "calories": 55},
+      {"name": "Pav Bhaji", "ingredients": ["cauliflower", "onion", "tomato", "capsicum", "carrot", "peas", "sprouts"], "benefits": "Vegetable rich, fiber packed, satisfying", "cookTime": "30 min", "calories": 200}
+    ],
+    "evening": [
+      {"name": "Masala Khakra", "ingredients": ["high protein khakra", "tomato", "onion", "capsicum", "chaat masala"], "benefits": "Low oil, high protein, satisfying snack", "cookTime": "5 min", "calories": 100},
+      {"name": "Roasted Oats and Poha Mixture", "ingredients": ["oats flakes", "poha flakes", "peanuts", "oil", "salt"], "benefits": "Crunchy snack, fiber rich, energy boosting", "cookTime": "10 min", "calories": 140},
+      {"name": "Hummus Wrap", "ingredients": ["hummus", "jowar flour", "bajra flour", "besan", "tomato", "onion", "capsicum"], "benefits": "High protein, fiber rich, satisfying", "cookTime": "15 min", "calories": 150},
+      {"name": "Paneer Tikka Roll", "ingredients": ["paneer", "multigrain roti", "tomato", "onion", "capsicum", "chutney"], "benefits": "High protein, low carb, hormone friendly", "cookTime": "20 min", "calories": 150},
+      {"name": "Multi Flour Baked Cracker", "ingredients": ["besan", "bajra", "khapli wheat", "sesame seeds", "oil", "spices"], "benefits": "Baked healthy, fiber rich, crunchy snack", "cookTime": "20 min", "calories": 150},
+      {"name": "Mushroom Capsicum Sabzi", "ingredients": ["mushroom", "capsicum", "spices", "oil"], "benefits": "Low calorie, high nutrients, anti-inflammatory", "cookTime": "15 min", "calories": 55},
+      {"name": "Carrot Methi Sabzi", "ingredients": ["methi", "carrot", "spices", "oil"], "benefits": "High protein, hormone balancing, fiber rich", "cookTime": "15 min", "calories": 98},
+      {"name": "Paneer Capsicum Sabzi", "ingredients": ["paneer", "capsicum", "spices", "oil"], "benefits": "High protein, low carb, hormone friendly", "cookTime": "15 min", "calories": 71},
+      {"name": "Masala Sprouts Sabzi", "ingredients": ["sprouts", "onion", "tomato", "spices", "oil"], "benefits": "High protein, fiber rich, nutrient dense", "cookTime": "15 min", "calories": 66},
+      {"name": "Bulgur Wheat Pulao", "ingredients": ["bulgur wheat", "onion", "tomato", "spices", "oil"], "benefits": "High protein, fiber rich, filling", "cookTime": "20 min", "calories": 222},
+      {"name": "Popcorn", "ingredients": ["fresh popcorn kernel", "salt"], "benefits": "Low calorie, fiber rich, satisfying snack", "cookTime": "10 min", "calories": 110},
+      {"name": "Chole Bhature", "ingredients": ["khapli wheat flour", "oil spray", "chole"], "benefits": "Steamed, air fried, low oil", "cookTime": "20 min", "calories": 180},
+      {"name": "Tikki Chaat", "ingredients": ["sweet potato", "capsicum", "onion", "beetroot", "dahi", "pomegranate", "chutneys"], "benefits": "Air fried, probiotic, antioxidant rich", "cookTime": "25 min", "calories": 150}
+    ],
+    "night": [
+      {"name": "Nutritious Buttermilk", "ingredients": ["curd", "water", "black salt", "black pepper", "pudina", "flax seeds"], "benefits": "Probiotic, digestive, low calorie", "cookTime": "5 min", "calories": 23},
+      {"name": "Mint Mojito", "ingredients": ["mint leaves", "water", "lemon juice", "salt", "sabja seeds"], "benefits": "Hydrating, refreshing, hormone balancing", "cookTime": "5 min", "calories": 0},
+      {"name": "Red Lemonade", "ingredients": ["water", "lemon juice", "mint leaves", "sabja seeds", "watermelon"], "benefits": "Hydrating, antioxidant rich, low calorie", "cookTime": "5 min", "calories": 15}
+    ]
+  },
+  "thyroid": {
+    "morning": [
+      {
+        "name": "Coconut Chia Pudding",
+        "ingredients": ["chia seeds", "coconut milk", "vanilla", "berries"],
+        "benefits": "Healthy fats, supports thyroid function",
+        "cookTime": "5 min prep",
+        "calories": 220
+      },
+      {
+        "name": "Brazil Nut Smoothie",
+        "ingredients": ["brazil nuts", "banana", "coconut water", "spinach"],
+        "benefits": "Selenium rich, thyroid support",
+        "cookTime": "5 min",
+        "calories": 200
+      }
+    ],
+    "afternoon": [
+      {
+        "name": "Seaweed Salad",
+        "ingredients": ["nori seaweed", "cucumber", "sesame oil", "rice vinegar"],
+        "benefits": "Iodine rich, thyroid hormone production",
+        "cookTime": "10 min",
+        "calories": 80
+      },
+      {
+        "name": "Lentil Curry",
+        "ingredients": ["red lentils", "turmeric", "ginger", "coconut oil"],
+        "benefits": "Protein, anti-inflammatory",
+        "cookTime": "25 min",
+        "calories": 180
+      }
+    ],
+    "evening": [
+      {
+        "name": "Coconut Laddu",
+        "ingredients": ["fresh coconut", "jaggery", "ghee", "cardamom"],
+        "benefits": "Healthy fats, thyroid support",
+        "cookTime": "15 min",
+        "calories": 150
+      },
+      {
+        "name": "Sunflower Seeds",
+        "ingredients": ["sunflower seeds", "sea salt"],
+        "benefits": "Selenium, vitamin E",
+        "cookTime": "2 min",
+        "calories": 160
+      }
+    ],
+    "night": [
+      {
+        "name": "Ashwagandha Milk",
+        "ingredients": ["ashwagandha powder", "warm milk", "honey"],
+        "benefits": "Stress reduction, thyroid support",
+        "cookTime": "5 min",
+        "calories": 110
+      },
+      {
+        "name": "Ginger Tea",
+        "ingredients": ["fresh ginger", "lemon", "honey"],
+        "benefits": "Anti-inflammatory, metabolism boost",
+        "cookTime": "8 min",
+        "calories": 25
+      }
+    ]
+  },
+  "anemia": {
+    "morning": [
+      {
+        "name": "Iron-Rich Smoothie",
+        "ingredients": ["spinach", "beetroot", "pomegranate", "orange juice"],
+        "benefits": "High iron, vitamin C for absorption",
+        "cookTime": "5 min",
+        "calories": 150
+      },
+      {
+        "name": "Ragi Dosa",
+        "ingredients": ["ragi flour", "rice flour", "fenugreek", "curry leaves"],
+        "benefits": "Iron, calcium, protein",
+        "cookTime": "20 min",
+        "calories": 180
+      }
+    ],
+    "afternoon": [
+      {
+        "name": "Spinach Paneer Curry",
+        "ingredients": ["spinach", "paneer", "tomatoes", "ginger", "garlic"],
+        "benefits": "High iron, protein, vitamin C",
+        "cookTime": "25 min",
+        "calories": 220
+      },
+      {
+        "name": "Quinoa Salad with Beets",
+        "ingredients": ["quinoa", "beetroot", "pumpkin seeds", "lemon"],
+        "benefits": "Iron, folate, complete protein",
+        "cookTime": "15 min",
+        "calories": 200
+      }
+    ],
+    "evening": [
+      {
+        "name": "Date and Almond Balls",
+        "ingredients": ["dates", "almonds", "sesame seeds", "jaggery"],
+        "benefits": "Iron, healthy fats, natural energy",
+        "cookTime": "10 min",
+        "calories": 180
+      },
+      {
+        "name": "Pomegranate Juice",
+        "ingredients": ["fresh pomegranate", "lemon", "mint"],
+        "benefits": "Iron, antioxidants, vitamin C",
+        "cookTime": "5 min",
+        "calories": 120
+      }
+    ],
+    "night": [
+      {
+        "name": "Moringa Soup",
+        "ingredients": ["moringa leaves", "lentils", "ginger", "turmeric"],
+        "benefits": "Iron, protein, easy digestion",
+        "cookTime": "20 min",
+        "calories": 140
+      },
+      {
+        "name": "Warm Milk with Dates",
+        "ingredients": ["milk", "dates", "almonds", "cardamom"],
+        "benefits": "Iron, calcium, better sleep",
+        "cookTime": "8 min",
+        "calories": 160
+      }
+    ]
+  },
+  "weight_loss": {
+    "morning": [
+      {
+        "name": "Green Tea Smoothie",
+        "ingredients": ["green tea", "cucumber", "mint", "lemon", "ginger"],
+        "benefits": "Metabolism boost, detox, low calorie",
+        "cookTime": "5 min",
+        "calories": 40
+      },
+      {
+        "name": "Vegetable Upma",
+        "ingredients": ["semolina", "mixed vegetables", "curry leaves", "mustard seeds"],
+        "benefits": "Fiber rich, filling, low fat",
+        "cookTime": "15 min",
+        "calories": 160
+      }
+    ],
+    "afternoon": [
+      {
+        "name": "Grilled Chicken Salad",
+        "ingredients": ["chicken breast", "lettuce", "tomatoes", "cucumber", "olive oil"],
+        "benefits": "High protein, low carb, filling",
+        "cookTime": "20 min",
+        "calories": 200
+      },
+      {
+        "name": "Vegetable Soup",
+        "ingredients": ["mixed vegetables", "vegetable broth", "herbs", "black pepper"],
+        "benefits": "Low calorie, high fiber, filling",
+        "cookTime": "25 min",
+        "calories": 80
+      }
+    ],
+    "evening": [
+      {
+        "name": "Cucumber Mint Water",
+        "ingredients": ["cucumber", "mint", "lemon", "water"],
+        "benefits": "Hydrating, detox, zero calories",
+        "cookTime": "2 min",
+        "calories": 5
+      },
+      {
+        "name": "Roasted Makhana",
+        "ingredients": ["fox nuts", "rock salt", "black pepper"],
+        "benefits": "Low calorie, protein, crunchy snack",
+        "cookTime": "8 min",
+        "calories": 100
+      }
+    ],
+    "night": [
+      {
+        "name": "Herbal Tea",
+        "ingredients": ["chamomile", "peppermint", "lemon balm"],
+        "benefits": "Calming, aids digestion, zero calories",
+        "cookTime": "5 min",
+        "calories": 0
+      },
+      {
+        "name": "Vegetable Broth",
+        "ingredients": ["mixed vegetables", "ginger", "garlic", "herbs"],
+        "benefits": "Low calorie, nutrients, light dinner",
+        "cookTime": "30 min",
+        "calories": 50
+      }
+    ]
+  },
+  "heart_health": {
+    "morning": [
+      {
+        "name": "Oatmeal with Berries",
+        "ingredients": ["oats", "blueberries", "walnuts", "cinnamon"],
+        "benefits": "Heart healthy, antioxidants, fiber",
+        "cookTime": "10 min",
+        "calories": 220
+      },
+      {
+        "name": "Avocado Toast",
+        "ingredients": ["whole grain bread", "avocado", "tomatoes", "olive oil"],
+        "benefits": "Healthy fats, fiber, potassium",
+        "cookTime": "5 min",
+        "calories": 250
+      }
+    ],
+    "afternoon": [
+      {
+        "name": "Grilled Fish with Vegetables",
+        "ingredients": ["salmon", "broccoli", "sweet potato", "olive oil"],
+        "benefits": "Omega-3, antioxidants, heart protective",
+        "cookTime": "25 min",
+        "calories": 300
+      },
+      {
+        "name": "Bean Salad",
+        "ingredients": ["mixed beans", "bell peppers", "onions", "olive oil"],
+        "benefits": "Fiber, protein, heart healthy",
+        "cookTime": "10 min",
+        "calories": 180
+      }
+    ],
+    "evening": [
+      {
+        "name": "Dark Chocolate",
+        "ingredients": ["70% dark chocolate", "almonds"],
+        "benefits": "Antioxidants, heart protective",
+        "cookTime": "1 min",
+        "calories": 150
+      },
+      {
+        "name": "Green Tea",
+        "ingredients": ["green tea leaves", "lemon"],
+        "benefits": "Antioxidants, heart health",
+        "cookTime": "5 min",
+        "calories": 5
+      }
+    ],
+    "night": [
+      {
+        "name": "Garlic Soup",
+        "ingredients": ["garlic", "vegetable broth", "herbs", "olive oil"],
+        "benefits": "Heart protective, cholesterol lowering",
+        "cookTime": "20 min",
+        "calories": 90
+      },
+      {
+        "name": "Hibiscus Tea",
+        "ingredients": ["hibiscus flowers", "honey"],
+        "benefits": "Blood pressure lowering, heart health",
+        "cookTime": "8 min",
+        "calories": 20
+      }
+    ]
+  }
+}
