@@ -1,0 +1,101 @@
+recipe_id,recipe_name,source_file,best_time_of_day,meal_type,veg_nonveg,heart_healthy,energy_kcal,protein_g,carbs_g,fat_g,servings,ingredients_raw,prep_time_min,cooking_method,high_protein,low_oil,low_sugar
+1,"Hibiscus tea","Heart-Health-Recipes.pdf","morning","beverage","veg",1,5,0,1,0,1,"Hibiscus flowers: 5g, Water: 250ml, Honey: 3g","10","steep",0,1,0
+2,"Pomegranate green smoothie","Heart-Health-Recipes.pdf","morning","beverage","veg",1,140,3,28,2,1,"Pomegranate: 100g, Spinach: 50g, Apple: 80g, Water: 150ml","5","blend",0,1,1
+3,"Turmeric golden milk","Heart-Health-Recipes.pdf","evening","beverage","veg",1,120,4,12,6,1,"Almond milk: 200ml, Turmeric: 3g, Ginger: 2g, Cinnamon: 1g","10","heat",0,1,1
+4,"Walnut and berry mix","Heart-Health-Recipes.pdf","afternoon","snack","veg",1,160,4,8,14,1,"Walnuts: 20g, Blueberries: 50g, Almonds: 10g","2","mix",0,1,1
+5,"Avocado toast","Heart-Health-Recipes.pdf","morning","snack","veg",1,200,6,20,12,1,"Whole grain bread: 2 slices, Avocado: 60g, Tomato: 30g, Lemon: 1 tsp","5","toast",0,1,1
+6,"Salmon and cucumber bites","Heart-Health-Recipes.pdf","evening","snack","non_veg",1,120,12,4,6,1,"Smoked salmon: 40g, Cucumber: 100g, Cream cheese: 15g, Dill: 2g","10","assemble",1,1,1
+7,"Antioxidant smoothie","Heart-Health-Recipes.pdf","morning","beverage","veg",1,150,4,25,4,1,"Mixed berries: 100g, Greek yogurt: 80g, Flax seeds: 5g, Water: 100ml","5","blend",0,1,1
+8,"Oatmeal with berries","Heart-Health-Recipes.pdf","morning","breakfast","veg",1,180,6,32,4,1,"Oats: 50g, Blueberries: 60g, Walnuts: 10g, Cinnamon: 1g","10","boil",0,1,1
+9,"Quinoa breakfast bowl","Heart-Health-Recipes.pdf","morning","breakfast","veg",1,220,8,35,6,1,"Quinoa: 50g, Berries: 80g, Almonds: 15g, Greek yogurt: 50g","20","boil",1,1,1
+10,"Omega-3 scrambled eggs","Heart-Health-Recipes.pdf","morning","breakfast","egg",1,180,14,2,12,1,"Omega-3 eggs: 2, Spinach: 50g, Olive oil: 5g, Herbs: 3g","8","scramble",1,1,1
+11,"Mediterranean salad","Heart-Health-Recipes.pdf","afternoon","salad","veg",1,200,6,15,14,1,"Mixed greens: 100g, Olives: 20g, Feta: 30g, Olive oil: 10g, Lemon: 1","10","toss",0,0,1
+12,"Grilled salmon with asparagus","Heart-Health-Recipes.pdf","afternoon","main_course","non_veg",1,250,30,8,10,1,"Salmon: 120g, Asparagus: 150g, Olive oil: 5g, Lemon: 1","20","grill",1,1,1
+13,"Lentil and vegetable curry","Heart-Health-Recipes.pdf","evening","main_course","veg",1,190,12,28,4,1,"Red lentils: 60g, Vegetables: 150g, Coconut milk: 50ml, Spices: 5g","30","pressure",1,1,1
+14,"Baked cod with herbs","Heart-Health-Recipes.pdf","evening","main_course","non_veg",1,180,25,3,6,1,"Cod fillet: 120g, Herbs: 10g, Olive oil: 5g, Garlic: 5g","25","bake",1,1,1
+15,"Tofu and vegetable stir-fry","Heart-Health-Recipes.pdf","evening","main_course","veg",1,160,12,10,8,1,"Tofu: 80g, Vegetables: 150g, Sesame oil: 5g, Ginger: 5g","15","stir_fry",1,1,1
+16,"Brown rice with vegetables","Heart-Health-Recipes.pdf","afternoon","main_course","veg",1,200,5,38,4,1,"Brown rice: 60g, Mixed vegetables: 120g, Olive oil: 3g","35","steam",0,1,1
+17,"Roasted vegetable medley","Heart-Health-Recipes.pdf","evening","main_course","veg",1,140,4,20,6,1,"Root vegetables: 200g, Olive oil: 6g, Rosemary: 3g, Garlic: 5g","40","roast",0,1,1
+18,"Dark chocolate and nuts","Heart-Health-Recipes.pdf","evening","snack","veg",1,150,4,12,10,1,"Dark chocolate 70%: 20g, Mixed nuts: 15g","2","no_cook",0,1,0
+19,"Vegetable and bean soup","Heart-Health-Recipes.pdf","evening","soup","veg",1,120,6,18,3,1,"Mixed beans: 60g, Vegetables: 150g, Vegetable broth: 300ml, Herbs: 5g","25","simmer",1,1,1
+20,"Chia seed breakfast pudding","Heart-Health-Recipes.pdf","morning","breakfast","veg",1,160,6,15,8,1,"Chia seeds: 20g, Almond milk: 200ml, Berries: 60g, Maple syrup: 5ml","480","soak",0,1,0
+21,"Spinach and walnut pesto pasta","Heart-Health-Recipes.pdf","afternoon","main_course","veg",1,240,8,32,10,1,"Whole wheat pasta: 70g, Spinach: 50g, Walnuts: 15g, Olive oil: 5g, Garlic: 3g","20","boil",0,1,1
+22,"Berry chia smoothie bowl","Heart-Health-Recipes.pdf","morning","breakfast","veg",1,180,6,28,6,1,"Mixed berries: 100g, Chia seeds: 15g, Almond milk: 100ml, Banana: 40g","10","blend",0,1,1
+23,"Garlic lemon baked chicken","Heart-Health-Recipes.pdf","evening","main_course","non_veg",1,210,28,6,7,1,"Chicken breast: 120g, Garlic: 5g, Lemon: 1, Olive oil: 5g, Herbs: 3g","30","bake",1,1,1
+24,"Apple cinnamon oats","Heart-Health-Recipes.pdf","morning","breakfast","veg",1,170,5,30,3,1,"Oats: 50g, Apple: 70g, Cinnamon: 2g, Walnuts: 10g","10","boil",0,1,1
+25,"Mixed bean quinoa salad","Heart-Health-Recipes.pdf","afternoon","salad","veg",1,220,10,30,8,1,"Quinoa: 60g, Mixed beans: 80g, Cherry tomatoes: 50g, Olive oil: 5g, Lemon: 1","15","toss",1,1,1
+26,"Avocado egg salad","Heart-Health-Recipes.pdf","afternoon","snack","egg",1,160,10,6,10,1,"Boiled eggs: 2, Avocado: 40g, Pepper: 2g, Lemon: 1 tsp","8","mix",1,1,1
+27,"Lemon ginger detox water","Heart-Health-Recipes.pdf","morning","beverage","veg",1,5,0,1,0,1,"Lemon: 10g, Ginger: 5g, Water: 300ml","2","infuse",0,1,1
+28,"Steamed broccoli with sesame seeds","Heart-Health-Recipes.pdf","evening","snack","veg",1,70,4,6,3,1,"Broccoli: 120g, Sesame seeds: 5g, Salt: 1g","8","steam",1,1,1
+29,"Bajra khichdi","Heart-Health-Recipes.pdf","evening","main_course","veg",1,210,8,32,5,1,"Bajra: 60g, Moong dal: 40g, Vegetables: 120g, Spices: 5g","25","pressure",1,1,1
+30,"Cucumber mint yogurt bowl","Heart-Health-Recipes.pdf","afternoon","snack","veg",1,120,6,10,4,1,"Curd: 120g, Cucumber: 80g, Mint: 5g, Pepper: 1g","5","mix",0,1,1
+31,"Lentil spinach soup","Heart-Health-Recipes.pdf","evening","soup","veg",1,140,10,20,3,1,"Lentils: 60g, Spinach: 60g, Vegetable broth: 300ml, Garlic: 5g","25","simmer",1,1,1
+32,"Roasted sweet potato cubes","Heart-Health-Recipes.pdf","afternoon","snack","veg",1,150,2,28,4,1,"Sweet potato: 150g, Olive oil: 5g, Paprika: 2g","30","roast",0,1,1
+33,"Herbed lemon tilapia","Heart-Health-Recipes.pdf","evening","main_course","non_veg",1,190,26,4,6,1,"Tilapia: 130g, Lemon: 1, Herbs: 5g, Olive oil: 5g","18","bake",1,1,1
+34,"Vegetable quinoa pulao","Heart-Health-Recipes.pdf","afternoon","main_course","veg",1,230,8,38,5,1,"Quinoa: 60g, Vegetables: 150g, Spices: 5g","22","sauté",1,1,1
+35,"Greek yogurt with flax seeds","Heart-Health-Recipes.pdf","morning","snack","veg",1,130,8,10,5,1,"Greek yogurt: 100g, Flax seeds: 10g, Honey: 5g","2","mix",1,1,0
+36,"Beetroot apple salad","Heart-Health-Recipes.pdf","afternoon","salad","veg",1,110,3,18,2,1,"Beetroot: 80g, Apple: 60g, Lemon: 1 tsp, Mint: 5g","8","toss",0,1,1
+37,"Moringa detox drink","Heart-Health-Recipes.pdf","morning","beverage","veg",1,20,1,3,0,1,"Moringa powder: 3g, Lemon: 5g, Water: 250ml","2","stir",0,1,1
+38,"Chickpea veggie stir-fry","Heart-Health-Recipes.pdf","evening","main_course","veg",1,210,10,28,6,1,"Chickpeas: 80g, Vegetables: 150g, Olive oil: 5g","15","stir_fry",1,1,1
+39,"Cinnamon pear oats","Heart-Health-Recipes.pdf","morning","breakfast","veg",1,180,5,34,3,1,"Oats: 50g, Pear: 60g, Cinnamon: 2g, Almonds: 10g","10","boil",0,1,1
+40,"Steamed fish with ginger","Heart-Health-Recipes.pdf","evening","main_course","non_veg",1,160,24,2,5,1,"White fish: 120g, Ginger: 5g, Soy sauce low-salt: 5ml","15","steam",1,1,1
+41,"Tomato basil soup","Heart-Health-Recipes.pdf","evening","soup","veg",1,90,3,14,2,1,"Tomatoes: 200g, Basil: 5g, Garlic: 5g","20","simmer",0,1,1
+42,"Broccoli tofu bowl","Heart-Health-Recipes.pdf","afternoon","main_course","veg",1,190,14,16,7,1,"Tofu: 80g, Broccoli: 150g, Sesame oil: 5g","12","stir_fry",1,1,1
+43,"Apple beet smoothie","Heart-Health-Recipes.pdf","morning","beverage","veg",1,130,2,28,1,1,"Apple: 80g, Beetroot: 60g, Lemon: 5g, Water: 150ml","3","blend",0,1,1
+44,"Garlic sautéed spinach","Heart-Health-Recipes.pdf","evening","side_dish","veg",1,70,4,5,2,1,"Spinach: 120g, Garlic: 5g, Olive oil: 3g","5","sauté",1,1,1
+45,"Mixed fruit bowl","Heart-Health-Recipes.pdf","morning","snack","veg",1,110,2,26,1,1,"Apple: 50g, Banana: 40g, Berries: 40g","2","no_cook",0,1,1
+46,"Cucumber lime cooler","Heart-Health-Recipes.pdf","afternoon","beverage","veg",1,10,0,2,0,1,"Cucumber: 50g, Lime: 5g, Water: 300ml","1","blend",0,1,1
+47,"Rajma vegetable soup","Heart-Health-Recipes.pdf","evening","soup","veg",1,150,9,22,3,1,"Rajma: 60g, Vegetables: 150g, Spices: 5g","30","pressure",1,1,1
+48,"Herbed grilled paneer","Heart-Health-Recipes.pdf","evening","snack","veg",1,180,12,6,10,1,"Paneer: 80g, Herbs: 5g, Olive oil: 3g","12","grill",1,1,1
+49,"Roasted pumpkin soup","Heart-Health-Recipes.pdf","evening","soup","veg",1,130,4,22,3,1,"Pumpkin: 150g, Garlic: 5g, Olive oil: 3g","25","roast",0,1,1
+50,"Sprout salad bowl","Heart-Health-Recipes.pdf","afternoon","salad","veg",1,140,10,20,3,1,"Mixed sprouts: 120g, Tomato: 40g, Lemon: 1","5","toss",1,1,1
+51,"Ginger carrot soup","Heart-Health-Recipes.pdf","evening","soup","veg",1,90,2,16,2,1,"Carrots: 150g, Ginger: 5g, Garlic: 5g","20","simmer",0,1,1
+52,"Jowar vegetable upma","Heart-Health-Recipes.pdf","morning","breakfast","veg",1,180,6,32,4,1,"Jowar rava: 60g, Vegetables: 120g","12","sauté",0,1,1
+53,"Mint lemon rice","Heart-Health-Recipes.pdf","afternoon","main_course","veg",1,200,4,34,5,1,"Rice: 60g, Mint: 10g, Lemon: 10g","15","stir_fry",0,1,1
+54,"Chicken veggie soup","Heart-Health-Recipes.pdf","evening","soup","non_veg",1,160,20,10,4,1,"Chicken: 80g, Vegetables: 150g, Spices: 5g","20","boil",1,1,1
+55,"Balsamic veggie bowl","Heart-Health-Recipes.pdf","afternoon","salad","veg",1,150,5,20,5,1,"Zucchini: 100g, Bell pepper: 80g, Balsamic: 5ml","15","roast",0,1,1
+56,"Steamed moong dal idli","Heart-Health-Recipes.pdf","morning","breakfast","veg",1,140,6,28,2,1,"Moong dal batter: 100g, Spices: 5g","12","steam",0,1,1
+57,"Masala vegetable oats","Heart-Health-Recipes.pdf","morning","breakfast","veg",1,160,6,28,4,1,"Oats: 50g, Vegetables: 120g","10","boil",0,1,1
+58,"Lemon garlic asparagus","Heart-Health-Recipes.pdf","evening","side_dish","veg",1,60,3,4,2,1,"Asparagus: 120g, Garlic: 5g, Lemon: 5g","6","sauté",1,1,1
+59,"Tofu scramble bowl","Heart-Health-Recipes.pdf","morning","breakfast","veg",1,180,14,8,10,1,"Tofu: 100g, Turmeric: 2g, Vegetables: 100g","10","scramble",1,1,1
+60,"Beetroot quinoa khichdi","Heart-Health-Recipes.pdf","evening","main_course","veg",1,210,9,32,5,1,"Quinoa: 60g, Beetroot: 60g, Lentils: 40g","20","pressure",1,1,1
+61,"Orange carrot smoothie","Heart-Health-Recipes.pdf","morning","beverage","veg",1,120,2,26,1,1,"Orange: 100g, Carrot: 80g, Ginger: 3g","3","blend",0,1,1
+62,"Mixed vegetable millet bowl","Heart-Health-Recipes.pdf","afternoon","main_course","veg",1,200,6,34,4,1,"Millet: 60g, Vegetables: 150g","22","boil",0,1,1
+63,"Grilled chicken salad","Heart-Health-Recipes.pdf","afternoon","salad","non_veg",1,210,26,10,5,1,"Chicken: 100g, Greens: 80g, Olive oil: 5g","18","grill",1,1,1
+64,"Roasted beet hummus","Heart-Health-Recipes.pdf","afternoon","snack","veg",1,120,5,12,6,1,"Beetroot: 60g, Chickpeas: 80g, Olive oil: 5g","20","blend",1,1,1
+65,"Spinach corn soup","Heart-Health-Recipes.pdf","evening","soup","veg",1,110,4,18,3,1,"Spinach: 80g, Corn: 40g, Garlic: 5g","12","simmer",0,1,1
+66,"Poha with vegetables","Heart-Health-Recipes.pdf","morning","breakfast","veg",1,180,5,30,4,1,"Poha: 60g, Vegetables: 100g","10","sauté",0,1,1
+67,"Berry detox water","Heart-Health-Recipes.pdf","morning","beverage","veg",1,5,0,1,0,1,"Berries: 20g, Water: 300ml, Mint: 5g","1","infuse",0,1,1
+68,"Sweet corn salad","Heart-Health-Recipes.pdf","afternoon","salad","veg",1,150,4,24,3,1,"Corn: 100g, Capsicum: 40g, Lemon: 5g","5","toss",0,1,1
+69,"Sesame carrot stir-fry","Heart-Health-Recipes.pdf","evening","side_dish","veg",1,80,2,10,3,1,"Carrots: 120g, Sesame seeds: 5g","6","stir_fry",1,1,1
+70,"Ragi vegetable porridge","Heart-Health-Recipes.pdf","morning","breakfast","veg",1,170,6,28,3,1,"Ragi flour: 40g, Vegetables: 100g","12","boil",0,1,1
+71,"Zucchini stir-fry","Heart-Health-Recipes.pdf","evening","side_dish","veg",1,60,2,8,2,1,"Zucchini: 150g, Garlic: 5g, Pepper: 2g","8","stir_fry",0,1,1
+72,"Mixed berry yogurt parfait","Heart-Health-Recipes.pdf","morning","breakfast","veg",1,150,6,20,3,1,"Greek yogurt: 80g, Berries: 80g","5","layer",0,1,1
+73,"Lemon herb chicken bites","Heart-Health-Recipes.pdf","evening","snack","non_veg",1,170,24,3,5,1,"Chicken: 100g, Lemon: 10g, Herbs: 5g","10","grill",1,1,1
+74,"Sprouted moong chaat","Heart-Health-Recipes.pdf","afternoon","snack","veg",1,130,9,20,3,1,"Sprouts: 100g, Onion: 20g, Lemon: 5g","4","mix",1,1,1
+75,"Cauliflower soup","Heart-Health-Recipes.pdf","evening","soup","veg",1,100,3,14,3,1,"Cauliflower: 150g, Garlic: 5g, Olive oil: 3g","18","simmer",0,1,1
+76,"Banana almond smoothie","Heart-Health-Recipes.pdf","morning","beverage","veg",1,180,5,32,5,1,"Banana: 100g, Almonds: 10g, Milk: 150ml","3","blend",0,1,0
+77,"Quinoa spinach cutlets","Heart-Health-Recipes.pdf","evening","snack","veg",1,150,6,22,4,1,"Quinoa: 60g, Spinach: 60g, Spices: 5g","20","pan_fry",1,1,1
+78,"Baked egg muffins","Heart-Health-Recipes.pdf","morning","breakfast","egg",1,150,12,4,8,1,"Eggs: 2, Spinach: 40g, Capsicum: 40g","15","bake",1,1,1
+79,"Carrot beet salad","Heart-Health-Recipes.pdf","afternoon","salad","veg",1,110,3,18,2,1,"Carrot: 60g, Beet: 60g, Lemon: 5g","5","toss",0,1,1
+80,"Mint vegetable quinoa","Heart-Health-Recipes.pdf","evening","main_course","veg",1,210,8,34,5,1,"Quinoa: 60g, Vegetables: 150g, Mint: 10g","20","boil",1,1,1
+81,"Baingan garlic stir-fry","Heart-Health-Recipes.pdf","evening","side_dish","veg",1,90,2,8,4,1,"Brinjal: 150g, Garlic: 5g","10","stir_fry",0,1,1
+82,"Guava mint smoothie","Heart-Health-Recipes.pdf","morning","beverage","veg",1,130,3,28,1,1,"Guava: 120g, Mint: 5g, Water: 150ml","3","blend",0,1,1
+83,"Cabbage carrot poriyal","Heart-Health-Recipes.pdf","afternoon","side_dish","veg",1,100,3,12,3,1,"Cabbage: 100g, Carrot: 50g, Coconut: 10g","12","sauté",0,1,1
+84,"Lentil spinach cutlets","Heart-Health-Recipes.pdf","evening","snack","veg",1,150,10,20,4,1,"Lentils: 80g, Spinach: 50g","20","pan_fry",1,1,1
+85,"Ragi dosa with chutney","Heart-Health-Recipes.pdf","morning","breakfast","veg",1,180,5,28,4,1,"Ragi batter: 100g, Chutney: 40g","8","griddle",0,1,1
+86,"Chickpea cucumber salad","Heart-Health-Recipes.pdf","afternoon","salad","veg",1,160,8,20,4,1,"Chickpeas: 80g, Cucumber: 100g","5","toss",1,1,1
+87,"Carrot ginger detox juice","Heart-Health-Recipes.pdf","morning","beverage","veg",1,90,1,20,0,1,"Carrot: 120g, Ginger: 5g","2","juice",0,1,1
+88,"Spinach egg scramble","Heart-Health-Recipes.pdf","morning","breakfast","egg",1,170,12,5,10,1,"Eggs: 2, Spinach: 50g","6","scramble",1,1,1
+89,"Tomato cucumber raita","Heart-Health-Recipes.pdf","afternoon","snack","veg",1,90,4,8,4,1,"Curd: 100g, Tomato: 40g, Cucumber: 40g","2","mix",0,1,1
+90,"Barley vegetable soup","Heart-Health-Recipes.pdf","evening","soup","veg",1,140,6,22,3,1,"Barley: 50g, Vegetables: 150g","25","simmer",1,1,1
+91,"Pumpkin carrot mash","Heart-Health-Recipes.pdf","evening","side_dish","veg",1,100,2,20,1,1,"Pumpkin: 80g, Carrot: 60g","15","boil",0,1,1
+92,"Grilled tofu steaks","Heart-Health-Recipes.pdf","evening","main_course","veg",1,180,14,8,8,1,"Tofu: 120g, Herbs: 5g","12","grill",1,1,1
+93,"Fruits & nuts overnight oats","Heart-Health-Recipes.pdf","morning","breakfast","veg",1,200,6,30,7,1,"Oats: 50g, Milk: 120ml, Nuts: 10g, Fruits: 60g","480","soak",0,1,0
+94,"Spinach moong dal soup","Heart-Health-Recipes.pdf","evening","soup","veg",1,130,8,16,2,1,"Moong dal: 60g, Spinach: 60g","20","simmer",1,1,1
+95,"Vegetable barley khichdi","Heart-Health-Recipes.pdf","evening","main_course","veg",1,210,8,34,5,1,"Barley: 60g, Vegetables: 120g","22","pressure",1,1,1
+96,"Beetroot raita","Heart-Health-Recipes.pdf","afternoon","snack","veg",1,100,4,10,3,1,"Curd: 100g, Beetroot grated: 60g","3","mix",0,1,1
+97,"Roti with lauki sabzi","Heart-Health-Recipes.pdf","afternoon","main_course","veg",1,220,6,35,5,1,"Wheat flour: 60g, Bottle gourd: 120g","20","sauté",0,1,1
+98,"Carrot coconut smoothie","Heart-Health-Recipes.pdf","morning","beverage","veg",1,160,3,22,7,1,"Carrot: 80g, Coconut milk: 100ml","3","blend",0,1,0
+99,"Vegetable dal dhokla","Heart-Health-Recipes.pdf","evening","snack","veg",1,160,8,22,4,1,"Dal batter: 100g, Vegetables: 80g","15","steam",1,1,1
+100,"Baked sweet potato chips","Heart-Health-Recipes.pdf","evening","snack","veg",1,120,2,26,2,1,"Sweet potato: 120g, Olive oil: 3g","25","bake",0,1,1

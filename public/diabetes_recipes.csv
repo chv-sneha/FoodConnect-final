@@ -1,0 +1,101 @@
+recipe_id,recipe_name,source_file,best_time_of_day,meal_type,veg_nonveg,diabetes_friendly,energy_kcal,protein_g,carbs_g,fat_g,servings,ingredients_raw,prep_time_min,cooking_method,high_protein,low_oil,low_sugar
+1,"Bitter gourd juice","Diabetes-Recipes.pdf","morning","beverage","veg",1,25,1,5,0,1,"Bitter gourd: 100g, Water: 200ml, Lemon juice: 1 tsp, Salt: pinch","10","blend",0,1,1
+2,"Methi water","Diabetes-Recipes.pdf","morning","beverage","veg",1,10,0,2,0,1,"Fenugreek seeds: 1 tsp, Water: 250ml","480","soak",0,1,1
+3,"Green tea with cinnamon","Diabetes-Recipes.pdf","afternoon","beverage","veg",1,5,0,1,0,1,"Green tea: 1 bag, Cinnamon stick: 1, Water: 200ml","5","boil",0,1,1
+4,"Diabetic khakra","Diabetes-Recipes.pdf","evening","snack","veg",1,80,3,12,2,1,"Whole wheat flour: 30g, Methi leaves: 10g, Oil: 1g, Spices: as needed","15","tawa",0,1,1
+5,"Roasted chana","Diabetes-Recipes.pdf","evening","snack","veg",1,120,6,18,3,1,"Black chana: 30g, Salt: 1 tsp, Turmeric: pinch","20","roast",1,1,1
+6,"Cucumber sandwich","Diabetes-Recipes.pdf","evening","snack","veg",1,90,4,15,1,1,"Brown bread: 2 slices, Cucumber: 50g, Mint chutney: 1 tsp","5","no_cook",0,1,1
+7,"Almond milk","Diabetes-Recipes.pdf","morning","beverage","veg",1,60,3,2,5,1,"Almonds: 10, Water: 200ml, Cinnamon: pinch","480","soak_blend",1,1,1
+8,"Vegetable daliya","Diabetes-Recipes.pdf","morning","breakfast","veg",1,180,8,30,4,1,"Daliya: 40g, Mixed vegetables: 100g, Oil: 2g, Spices: as needed","25","pressure",1,1,1
+9,"Oats upma","Diabetes-Recipes.pdf","morning","breakfast","veg",1,160,6,25,4,1,"Oats: 40g, Vegetables: 80g, Oil: 2g, Mustard seeds: 1 tsp","15","saute",0,1,1
+10,"Moong dal cheela","Diabetes-Recipes.pdf","morning","breakfast","veg",1,140,10,18,3,1,"Moong dal: 50g, Ginger: 5g, Green chili: 1, Oil: 2g","120","soak_tawa",1,1,1
+11,"Quinoa salad","Diabetes-Recipes.pdf","afternoon","salad","veg",1,170,6,28,4,1,"Quinoa: 40g, Cucumber: 50g, Tomato: 50g, Lemon: 1 tsp","20","boil",0,1,1
+12,"Spinach dal","Diabetes-Recipes.pdf","afternoon","main_course","veg",1,150,12,20,3,1,"Toor dal: 40g, Spinach: 100g, Oil: 2g, Turmeric: 1 tsp","30","pressure",1,1,1
+13,"Cauliflower curry","Diabetes-Recipes.pdf","evening","main_course","veg",1,100,4,12,4,1,"Cauliflower: 150g, Onion: 30g, Oil: 3g, Spices: as needed","20","saute",0,1,1
+14,"Grilled fish","Diabetes-Recipes.pdf","evening","main_course","non_veg",1,180,25,0,8,1,"Fish fillet: 100g, Lemon: 1, Herbs: 5g, Oil: 2g","15","grill",1,1,1
+15,"Egg white omelet","Diabetes-Recipes.pdf","morning","breakfast","egg",1,80,12,2,2,1,"Egg whites: 3, Vegetables: 50g, Oil: 1g, Pepper: pinch","10","tawa",1,1,1
+16,"Brown rice pulao","Diabetes-Recipes.pdf","afternoon","main_course","veg",1,200,5,40,3,1,"Brown rice: 50g, Vegetables: 100g, Oil: 2g, Whole spices: 5g","35","pressure",0,1,1
+17,"Bottle gourd curry","Diabetes-Recipes.pdf","evening","main_course","veg",1,70,2,10,3,1,"Bottle gourd: 150g, Onion: 20g, Oil: 2g, Spices: as needed","20","saute",0,1,1
+18,"Diabetic laddu","Diabetes-Recipes.pdf","evening","snack","veg",1,100,4,12,5,1,"Almond flour: 20g, Dates: 15g, Coconut: 5g, Cardamom: pinch","15","mix",0,1,0
+19,"Vegetable soup","Diabetes-Recipes.pdf","evening","soup","veg",1,60,3,8,2,1,"Mixed vegetables: 150g, Water: 300ml, Herbs: 5g, Oil: 1g","25","boil",0,1,1
+20,"Steamed idli","Diabetes-Recipes.pdf","morning","breakfast","veg",1,120,4,22,1,1,"Idli batter: 60g, Water: as needed, Oil: 1g","15","steam",0,1,1
+21,"Ragi porridge","Diabetes-Recipes.pdf","morning","breakfast","veg",1,150,4,28,2,1,"Ragi flour: 30g, Water: 200ml, Jaggery substitute: 1 tsp","10","boil",0,1,1
+22,"Sprouts salad","Diabetes-Recipes.pdf","afternoon","salad","veg",1,120,8,18,2,1,"Mixed sprouts: 50g, Tomato: 30g, Onion: 20g, Lemon: 1 tsp","10","mix",1,1,1
+23,"Lemon coriander soup","Diabetes-Recipes.pdf","evening","soup","veg",1,50,2,6,1,1,"Coriander: 20g, Lemon: 1 tsp, Vegetables: 80g, Water: 300ml","15","boil",0,1,1
+24,"Tofu stir fry","Diabetes-Recipes.pdf","afternoon","main_course","veg",1,160,12,10,6,1,"Tofu: 100g, Bell peppers: 50g, Oil: 2g, Spices: as needed","15","saute",1,1,1
+25,"Masala oats","Diabetes-Recipes.pdf","morning","breakfast","veg",1,140,6,22,3,1,"Oats: 40g, Vegetables: 50g, Oil: 2g, Spices: as needed","10","saute",0,1,1
+26,"Cabbage poriyal","Diabetes-Recipes.pdf","afternoon","side_dish","veg",1,80,3,10,3,1,"Cabbage: 150g, Coconut: 10g, Oil: 2g","12","saute",0,1,1
+27,"Tomato rasam","Diabetes-Recipes.pdf","afternoon","soup","veg",1,60,2,8,1,1,"Tomato: 80g, Tamarind: small piece, Spices: as needed","20","boil",0,1,1
+28,"Grilled paneer","Diabetes-Recipes.pdf","evening","snack","veg",1,160,15,6,7,1,"Paneer: 80g, Lemon: 1 tsp, Spices: as needed","12","grill",1,1,1
+29,"Lentil soup","Diabetes-Recipes.pdf","afternoon","soup","veg",1,130,10,18,2,1,"Red lentils: 40g, Onion: 20g, Spices: as needed","25","boil",1,1,1
+30,"Vegetable khichdi","Diabetes-Recipes.pdf","afternoon","main_course","veg",1,180,6,30,3,1,"Moong dal: 30g, Rice: 20g, Vegetables: 70g","30","pressure",0,1,1
+31,"Cucumber raita","Diabetes-Recipes.pdf","evening","side_dish","veg",1,50,3,5,2,1,"Curd: 80g, Cucumber: 40g, Salt: pinch","5","mix",0,1,1
+32,"Sautéed mushrooms","Diabetes-Recipes.pdf","evening","snack","veg",1,90,6,5,4,1,"Mushrooms: 100g, Garlic: 5g, Oil: 1g","10","saute",1,1,1
+33,"Besan chilla","Diabetes-Recipes.pdf","morning","breakfast","veg",1,130,8,16,3,1,"Besan: 40g, Onion: 20g, Oil: 2g","10","tawa",1,1,1
+34,"Moong sprouts chaat","Diabetes-Recipes.pdf","evening","snack","veg",1,100,7,15,2,1,"Moong sprouts: 50g, Lemon: 1 tsp, Onion: 20g","8","mix",1,1,1
+35,"Pumpkin soup","Diabetes-Recipes.pdf","evening","soup","veg",1,70,2,10,2,1,"Pumpkin: 150g, Water: 300ml, Pepper: pinch","20","boil",0,1,1
+36,"Steamed dhokla","Diabetes-Recipes.pdf","evening","snack","veg",1,130,6,20,3,1,"Gram flour: 40g, Curd: 20g, Spices: as needed","15","steam",0,1,1
+37,"Beetroot salad","Diabetes-Recipes.pdf","afternoon","salad","veg",1,110,3,16,2,1,"Beetroot: 100g, Lemon: 1 tsp, Pepper: pinch","10","boil",0,1,1
+38,"Chicken soup","Diabetes-Recipes.pdf","evening","soup","non_veg",1,140,18,4,5,1,"Chicken: 80g, Water: 300ml, Garlic: 5g","25","boil",1,1,1
+39,"Egg salad","Diabetes-Recipes.pdf","afternoon","salad","egg",1,120,10,5,6,1,"Egg: 1, Cucumber: 50g, Pepper: pinch","12","mix",1,1,1
+40,"Vegetable poha","Diabetes-Recipes.pdf","morning","breakfast","veg",1,160,4,28,3,1,"Poha: 40g, Vegetables: 60g, Oil: 2g","10","saute",0,1,1
+41,"Mint tea","Diabetes-Recipes.pdf","morning","beverage","veg",1,5,0,1,0,1,"Mint leaves: 10g, Water: 200ml","5","boil",0,1,1
+42,"Carrot soup","Diabetes-Recipes.pdf","afternoon","soup","veg",1,70,2,12,2,1,"Carrot: 120g, Water: 250ml","20","boil",0,1,1
+43,"Quinoa upma","Diabetes-Recipes.pdf","morning","breakfast","veg",1,160,6,25,3,1,"Quinoa: 40g, Vegetables: 70g, Oil: 2g","18","saute",1,1,1
+44,"Sambar","Diabetes-Recipes.pdf","afternoon","main_course","veg",1,120,6,18,3,1,"Toor dal: 30g, Vegetables: 100g, Spices: as needed","30","boil",1,1,1
+45,"Clear veggie broth","Diabetes-Recipes.pdf","evening","soup","veg",1,40,1,6,1,1,"Mixed vegetables: 100g, Water: 300ml","15","boil",0,1,1
+46,"Paneer bhurji","Diabetes-Recipes.pdf","afternoon","main_course","veg",1,170,12,10,7,1,"Paneer: 80g, Onion: 20g, Spices: as needed","15","saute",1,1,1
+47,"Spinach soup","Diabetes-Recipes.pdf","evening","soup","veg",1,60,4,8,1,1,"Spinach: 100g, Garlic: 5g, Water: 300ml","15","boil",1,1,1
+48,"Chicken salad","Diabetes-Recipes.pdf","afternoon","salad","non_veg",1,150,20,5,4,1,"Chicken: 80g, Vegetables: 60g, Lemon: 1 tsp","15","mix",1,1,1
+49,"Veg stew","Diabetes-Recipes.pdf","evening","main_course","veg",1,130,3,12,4,1,"Vegetables: 150g, Coconut milk: 20ml","20","boil",0,1,1
+50,"Rava idli","Diabetes-Recipes.pdf","morning","breakfast","veg",1,130,4,22,3,1,"Rava: 40g, Curd: 20g, Spices: as needed","15","steam",0,1,1
+51,"Coriander chutney","Diabetes-Recipes.pdf","evening","side_dish","veg",1,40,1,5,1,1,"Coriander: 30g, Lemon: 1 tsp","5","blend",0,1,1
+52,"Mushroom soup","Diabetes-Recipes.pdf","evening","soup","veg",1,80,4,10,2,1,"Mushrooms: 100g, Garlic: 5g, Water: 300ml","18","boil",1,1,1
+53,"Stuffed capsicum","Diabetes-Recipes.pdf","evening","main_course","veg",1,150,4,15,5,1,"Capsicum: 2, Mixed veggies: 80g","25","bake",0,1,1
+54,"Oats chilla","Diabetes-Recipes.pdf","morning","breakfast","veg",1,140,7,20,3,1,"Oats: 30g, Besan: 20g, Vegetables: 40g","10","tawa",1,1,1
+55,"Methi paratha","Diabetes-Recipes.pdf","morning","breakfast","veg",1,150,5,22,4,1,"Wheat flour: 40g, Methi: 20g, Oil: 2g","15","tawa",0,1,1
+56,"Tomato omelet","Diabetes-Recipes.pdf","morning","breakfast","egg",1,110,9,8,4,1,"Egg: 1, Tomato: 30g, Onion: 20g","10","tawa",1,1,1
+57,"Carrot poriyal","Diabetes-Recipes.pdf","afternoon","side_dish","veg",1,80,2,12,3,1,"Carrot: 150g, Coconut: 10g","12","saute",0,1,1
+58,"Chickpea salad","Diabetes-Recipes.pdf","afternoon","salad","veg",1,140,8,18,3,1,"Chickpeas: 50g, Tomato: 40g, Lemon: 1 tsp","12","mix",1,1,1
+59,"Sweet potato soup","Diabetes-Recipes.pdf","evening","soup","veg",1,90,2,16,1,1,"Sweet potato: 100g, Water: 300ml","20","boil",0,1,1
+60,"Curd rice (diabetic)","Diabetes-Recipes.pdf","afternoon","main_course","veg",1,140,5,22,3,1,"Brown rice: 40g, Curd: 80g","8","mix",0,1,1
+61,"Zucchini stir fry","Diabetes-Recipes.pdf","evening","side_dish","veg",1,70,2,8,3,1,"Zucchini: 150g, Oil: 1g","10","saute",0,1,1
+62,"Broccoli soup","Diabetes-Recipes.pdf","evening","soup","veg",1,70,3,10,1,1,"Broccoli: 100g, Garlic: 5g","18","boil",1,1,1
+63,"Egg bhurji","Diabetes-Recipes.pdf","afternoon","main_course","egg",1,140,12,6,6,1,"Eggs: 2, Onion: 20g","12","saute",1,1,1
+64,"Ragi dosa","Diabetes-Recipes.pdf","morning","breakfast","veg",1,150,4,26,3,1,"Ragi flour: 40g, Water: as needed","10","tawa",0,1,1
+65,"Vegetable uttapam","Diabetes-Recipes.pdf","morning","breakfast","veg",1,150,4,24,3,1,"Batter: 60g, Vegetables: 50g","12","tawa",0,1,1
+66,"Spinach omelet","Diabetes-Recipes.pdf","morning","breakfast","egg",1,120,12,4,5,1,"Eggs: 2, Spinach: 30g","10","tawa",1,1,1
+67,"Lentil salad","Diabetes-Recipes.pdf","afternoon","salad","veg",1,130,9,18,2,1,"Cooked lentils: 60g, Lemon: 1 tsp","10","mix",1,1,1
+68,"Veg quinoa bowl","Diabetes-Recipes.pdf","afternoon","main_course","veg",1,170,6,28,4,1,"Quinoa: 40g, Veggies: 80g","20","boil",1,1,1
+69,"Clear chicken broth","Diabetes-Recipes.pdf","evening","soup","non_veg",1,120,15,4,3,1,"Chicken: 80g, Water: 300ml","20","boil",1,1,1
+70,"Coconut chutney (light)","Diabetes-Recipes.pdf","morning","side_dish","veg",1,60,1,4,4,1,"Coconut: 20g, Green chili:1","5","blend",0,1,1
+71,"Ridge gourd curry","Diabetes-Recipes.pdf","afternoon","main_course","veg",1,90,2,14,3,1,"Ridge gourd: 150g, Oil: 2g","15","saute",0,1,1
+72,"Vegetable wrap","Diabetes-Recipes.pdf","evening","snack","veg",1,160,4,20,5,1,"Whole wheat wrap: 1, Veggies: 80g","10","wrap",0,1,1
+73,"Green smoothie","Diabetes-Recipes.pdf","morning","beverage","veg",1,90,4,15,2,1,"Spinach: 30g, Cucumber: 50g, Almonds: 5","5","blend",1,1,1
+74,"Chia seed pudding","Diabetes-Recipes.pdf","morning","breakfast","veg",1,120,5,12,6,1,"Chia seeds: 20g, Almond milk: 100ml","240","soak",1,1,1
+75,"Moringa soup","Diabetes-Recipes.pdf","evening","soup","veg",1,60,3,8,2,1,"Moringa leaves: 30g, Water: 300ml","15","boil",1,1,1
+76,"Stuffed cucumber boats","Diabetes-Recipes.pdf","evening","snack","veg",1,80,3,10,2,1,"Cucumber: 1, Sprouts: 40g","10","no_cook",0,1,1
+77,"Steamed sweet corn","Diabetes-Recipes.pdf","evening","snack","veg",1,90,3,18,1,1,"Sweet corn: 80g, Pepper: pinch","10","steam",0,1,1
+78,"Wheat dosa","Diabetes-Recipes.pdf","morning","breakfast","veg",1,130,4,24,3,1,"Wheat flour: 40g, Water: as needed","10","tawa",0,1,1
+79,"Masala boiled eggs","Diabetes-Recipes.pdf","evening","snack","egg",1,110,12,2,4,1,"Eggs: 2, Spices: pinch","10","boil",1,1,1
+80,"Lemon ginger tea","Diabetes-Recipes.pdf","morning","beverage","veg",1,5,0,1,0,1,"Ginger: 5g, Lemon: 1 tsp","5","boil",0,1,1
+81,"Green gram dal","Diabetes-Recipes.pdf","afternoon","main_course","veg",1,140,10,20,3,1,"Green gram: 40g, Spices: as needed","25","pressure",1,1,1
+82,"Veg stir fry bowl","Diabetes-Recipes.pdf","evening","main_course","veg",1,130,4,16,4,1,"Vegetables: 150g, Oil: 2g","10","saute",0,1,1
+83,"Pumpkin poriyal","Diabetes-Recipes.pdf","afternoon","side_dish","veg",1,80,2,12,3,1,"Pumpkin: 150g, Coconut: 10g","12","saute",0,1,1
+84,"Mixed dal cheela","Diabetes-Recipes.pdf","morning","breakfast","veg",1,140,10,18,3,1,"Mixed dals: 50g, Ginger: 5g","120","soak_tawa",1,1,1
+85,"Brown bread toast","Diabetes-Recipes.pdf","morning","breakfast","veg",1,90,4,15,1,1,"Brown bread: 2 slices, Mint chutney: 1 tsp","5","toast",0,1,1
+86,"Capsicum omelet","Diabetes-Recipes.pdf","morning","breakfast","egg",1,120,12,4,5,1,"Eggs: 2, Capsicum: 30g","10","tawa",1,1,1
+87,"Cabbage soup","Diabetes-Recipes.pdf","evening","soup","veg",1,50,2,8,1,1,"Cabbage: 100g, Water: 300ml","15","boil",0,1,1
+88,"Cucumber detox water","Diabetes-Recipes.pdf","morning","beverage","veg",1,5,0,1,0,1,"Cucumber: 10g, Water: 250ml","240","infuse",0,1,1
+89,"Egg curry","Diabetes-Recipes.pdf","afternoon","main_course","egg",1,150,12,8,6,1,"Eggs: 2, Onion: 30g, Spices: as needed","20","boil_saute",1,1,1
+90,"Grilled chicken","Diabetes-Recipes.pdf","evening","main_course","non_veg",1,180,26,0,8,1,"Chicken breast: 100g, Lemon: 1 tsp","12","grill",1,1,1
+91,"Vegetable cutlet (baked)","Diabetes-Recipes.pdf","evening","snack","veg",1,140,4,20,3,1,"Veggies: 100g, Oats: 20g","20","bake",0,1,1
+92,"Curry leaves tea","Diabetes-Recipes.pdf","morning","beverage","veg",1,5,0,1,0,1,"Curry leaves: 10g, Water: 200ml","5","boil",0,1,1
+93,"Lauki soup","Diabetes-Recipes.pdf","evening","soup","veg",1,60,2,10,1,1,"Bottle gourd: 150g, Water: 300ml","18","boil",0,1,1
+94,"Veg quinoa pulao","Diabetes-Recipes.pdf","afternoon","main_course","veg",1,170,6,28,4,1,"Quinoa: 40g, Veg: 80g","25","boil",1,1,1
+95,"Oats smoothie","Diabetes-Recipes.pdf","morning","beverage","veg",1,100,5,16,3,1,"Oats: 20g, Curds: 80ml","5","blend",1,1,1
+96,"Steamed fish","Diabetes-Recipes.pdf","evening","main_course","non_veg",1,150,22,0,5,1,"Fish: 100g, Lemon: 1 tsp","15","steam",1,1,1
+97,"Tofu curry","Diabetes-Recipes.pdf","evening","main_course","veg",1,160,12,10,5,1,"Tofu: 80g, Tomato: 40g","20","saute",1,1,1
+98,"Green gram chaat","Diabetes-Recipes.pdf","evening","snack","veg",1,100,7,15,2,1,"Cooked green gram: 50g, Onion: 20g","10","mix",1,1,1
+99,"Tomato cucumber salad","Diabetes-Recipes.pdf","afternoon","salad","veg",1,80,2,10,1,1,"Tomato: 60g, Cucumber: 60g","5","mix",0,1,1
+100,"Barley porridge","Diabetes-Recipes.pdf","morning","breakfast","veg",1,150,4,28,2,1,"Barley: 40g, Water: 200ml","15","boil",0,1,1

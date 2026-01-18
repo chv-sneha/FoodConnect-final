@@ -1,0 +1,101 @@
+recipe_id,recipe_name,source_file,best_time_of_day,meal_type,veg_nonveg,weight_loss_friendly,energy_kcal,protein_g,carbs_g,fat_g,servings,ingredients_raw,prep_time_min,cooking_method,high_protein,low_oil,low_sugar
+1,"Green detox water","Weight-Loss-Recipes.pdf","morning","beverage","veg",1,10,0,2,0,1,"Cucumber: 50g, Mint: 10g, Lemon: 1, Water: 500ml","10","infuse",0,1,1
+2,"Apple cider vinegar drink","Weight-Loss-Recipes.pdf","morning","beverage","veg",1,15,0,3,0,1,"Apple cider vinegar: 15ml, Water: 250ml, Honey: 5g, Cinnamon: pinch","5","mix",0,1,0
+3,"Green tea with ginger","Weight-Loss-Recipes.pdf","afternoon","beverage","veg",1,5,0,1,0,1,"Green tea: 1 bag, Ginger: 5g, Water: 200ml","5","steep",0,1,1
+4,"Cucumber hummus","Weight-Loss-Recipes.pdf","evening","snack","veg",1,80,4,8,4,1,"Chickpeas: 40g, Cucumber: 100g, Lemon: 1 tsp, Tahini: 5g","10","blend",0,1,1
+5,"Roasted chickpeas","Weight-Loss-Recipes.pdf","evening","snack","veg",1,100,5,15,2,1,"Chickpeas: 40g, Spices: 3g, Oil spray: 1g","25","roast",1,1,1
+6,"Vegetable sticks with yogurt dip","Weight-Loss-Recipes.pdf","afternoon","snack","veg",1,60,4,8,2,1,"Carrot: 50g, Cucumber: 50g, Greek yogurt: 50g, Herbs: 3g","5","no_cook",0,1,1
+7,"Protein smoothie","Weight-Loss-Recipes.pdf","morning","beverage","veg",1,120,15,8,2,1,"Protein powder: 20g, Spinach: 30g, Berries: 50g, Water: 200ml","5","blend",1,1,1
+8,"Vegetable oats","Weight-Loss-Recipes.pdf","morning","breakfast","veg",1,140,6,22,3,1,"Oats: 40g, Mixed vegetables: 100g, Water: 300ml, Spices: 3g","15","boil",0,1,1
+9,"Egg white vegetable omelet","Weight-Loss-Recipes.pdf","morning","breakfast","egg",1,90,12,4,2,1,"Egg whites: 4, Vegetables: 80g, Oil spray: 1g, Herbs: 3g","10","tawa",1,1,1
+10,"Quinoa vegetable bowl","Weight-Loss-Recipes.pdf","morning","breakfast","veg",1,160,6,28,3,1,"Quinoa: 40g, Vegetables: 120g, Lemon: 1 tsp, Herbs: 5g","20","boil",0,1,1
+11,"Kale and apple salad","Weight-Loss-Recipes.pdf","afternoon","salad","veg",1,90,3,15,3,1,"Kale: 100g, Apple: 80g, Walnuts: 5g, Lemon: 1 tsp","10","no_cook",0,1,1
+12,"Grilled chicken salad","Weight-Loss-Recipes.pdf","afternoon","salad","non_veg",1,180,25,8,6,1,"Chicken breast: 80g, Mixed greens: 150g, Olive oil: 5g","15","grill",1,1,1
+13,"Zucchini noodles with pesto","Weight-Loss-Recipes.pdf","evening","main_course","veg",1,120,4,8,8,1,"Zucchini: 200g, Basil pesto: 15g, Cherry tomatoes: 50g","15","spiralize",0,1,1
+14,"Grilled fish with vegetables","Weight-Loss-Recipes.pdf","evening","main_course","non_veg",1,200,28,8,6,1,"White fish: 100g, Vegetables: 150g, Lemon: 1, Herbs: 5g","20","grill",1,1,1
+15,"Cauliflower rice stir-fry","Weight-Loss-Recipes.pdf","evening","main_course","veg",1,100,4,12,4,1,"Cauliflower: 200g, Vegetables: 100g, Oil: 3g, Soy sauce: 5ml","15","stir_fry",0,1,1
+16,"Shirataki noodle soup","Weight-Loss-Recipes.pdf","afternoon","main_course","veg",1,60,2,8,2,1,"Shirataki noodles: 100g, Vegetables: 150g, Broth: 300ml","15","boil",0,1,1
+17,"Stuffed bell peppers","Weight-Loss-Recipes.pdf","evening","main_course","veg",1,140,8,18,4,1,"Bell peppers: 2, Quinoa: 30g, Vegetables: 80g, Cheese: 10g","35","bake",1,1,1
+18,"Chia seed pudding","Weight-Loss-Recipes.pdf","evening","snack","veg",1,110,4,8,6,1,"Chia seeds: 15g, Almond milk: 150ml, Stevia: 1g, Vanilla: drop","480","soak",0,1,1
+19,"Vegetable clear soup","Weight-Loss-Recipes.pdf","evening","soup","veg",1,40,2,6,1,1,"Mixed vegetables: 150g, Water: 400ml, Herbs: 5g, Pepper: pinch","20","boil",0,1,1
+20,"Cabbage rolls","Weight-Loss-Recipes.pdf","afternoon","main_course","veg",1,120,6,15,4,1,"Cabbage leaves: 4, Quinoa: 30g, Vegetables: 100g, Tomato sauce: 30g","40","steam",0,1,1
+21,"Spinach and feta wrap","Weight-Loss-Recipes.pdf","morning","breakfast","veg",1,130,6,20,4,1,"Whole wheat wrap: 1, Spinach: 50g, Feta cheese: 20g, Herbs: 3g","10","roll",1,1,1
+22,"Berry quinoa parfait","Weight-Loss-Recipes.pdf","morning","breakfast","veg",1,140,5,25,3,1,"Quinoa: 40g, Mixed berries: 50g, Greek yogurt: 50g, Honey: 5g","10","layer",0,1,1
+23,"Avocado toast","Weight-Loss-Recipes.pdf","morning","breakfast","veg",1,150,4,18,7,1,"Whole wheat bread: 1 slice, Avocado: 50g, Lemon: 1 tsp, Pepper: pinch","5","toast",0,1,1
+24,"Tomato cucumber salad","Weight-Loss-Recipes.pdf","afternoon","salad","veg",1,80,3,12,3,1,"Tomato: 100g, Cucumber: 100g, Olive oil: 5g, Lemon: 1 tsp","5","mix",0,1,1
+25,"Grilled turkey breast","Weight-Loss-Recipes.pdf","evening","main_course","non_veg",1,190,28,0,6,1,"Turkey breast: 100g, Herbs: 5g, Lemon: 1","20","grill",1,1,1
+26,"Sweet potato fries","Weight-Loss-Recipes.pdf","evening","snack","veg",1,120,2,22,3,1,"Sweet potato: 100g, Olive oil: 5g, Paprika: 2g","25","bake",0,1,1
+27,"Mango chia smoothie","Weight-Loss-Recipes.pdf","morning","beverage","veg",1,110,3,20,2,1,"Mango: 100g, Chia seeds: 10g, Almond milk: 150ml","5","blend",0,1,1
+28,"Zucchini and carrot fritters","Weight-Loss-Recipes.pdf","evening","snack","veg",1,130,4,15,5,1,"Zucchini: 100g, Carrot: 50g, Egg: 1, Spices: 3g","20","pan_fry",1,1,1
+29,"Lentil soup","Weight-Loss-Recipes.pdf","afternoon","soup","veg",1,100,6,18,2,1,"Lentils: 50g, Vegetables: 100g, Broth: 300ml, Spices: 3g","25","boil",1,1,1
+30,"Tofu stir-fry","Weight-Loss-Recipes.pdf","evening","main_course","veg",1,140,12,10,6,1,"Tofu: 100g, Mixed vegetables: 100g, Soy sauce: 5ml, Olive oil: 3g","15","stir_fry",1,1,1
+31,"Cabbage carrot slaw","Weight-Loss-Recipes.pdf","afternoon","salad","veg",1,70,3,10,2,1,"Cabbage: 100g, Carrot: 50g, Yogurt: 30g, Lemon: 1 tsp","10","mix",0,1,1
+32,"Baked salmon with herbs","Weight-Loss-Recipes.pdf","evening","main_course","non_veg",1,210,25,0,8,1,"Salmon: 100g, Herbs: 5g, Lemon: 1","20","bake",1,1,1
+33,"Almond butter smoothie","Weight-Loss-Recipes.pdf","morning","beverage","veg",1,130,5,15,6,1,"Almond butter: 15g, Banana: 50g, Almond milk: 150ml","5","blend",1,1,1
+34,"Greek salad","Weight-Loss-Recipes.pdf","afternoon","salad","veg",1,100,4,8,5,1,"Cucumber: 50g, Tomato: 50g, Feta: 20g, Olive oil: 5g, Olives: 10g","10","mix",0,1,1
+35,"Chicken and veggie stir-fry","Weight-Loss-Recipes.pdf","evening","main_course","non_veg",1,180,22,8,5,1,"Chicken breast: 80g, Mixed vegetables: 100g, Soy sauce: 5ml, Olive oil: 3g","15","stir_fry",1,1,1
+36,"Pumpkin soup","Weight-Loss-Recipes.pdf","afternoon","soup","veg",1,90,3,15,2,1,"Pumpkin: 150g, Onion: 30g, Broth: 200ml, Spices: 2g","20","boil",0,1,1
+37,"Egg salad lettuce wraps","Weight-Loss-Recipes.pdf","morning","breakfast","egg",1,120,10,4,6,1,"Eggs: 2, Lettuce: 50g, Greek yogurt: 20g, Herbs: 2g","10","assemble",1,1,1
+38,"Broccoli and tofu salad","Weight-Loss-Recipes.pdf","afternoon","salad","veg",1,100,8,10,4,1,"Broccoli: 100g, Tofu: 50g, Olive oil: 5g, Lemon: 1 tsp","10","mix",1,1,1
+39,"Mushroom omelet","Weight-Loss-Recipes.pdf","morning","breakfast","egg",1,110,10,3,5,1,"Eggs: 2, Mushrooms: 80g, Herbs: 2g, Oil spray: 1g","10","tawa",1,1,1
+40,"Quinoa and black bean salad","Weight-Loss-Recipes.pdf","afternoon","salad","veg",1,150,6,28,4,1,"Quinoa: 50g, Black beans: 50g, Tomato: 50g, Lemon: 1 tsp","15","mix",1,1,1
+41,"Cauliflower and chickpea curry","Weight-Loss-Recipes.pdf","evening","main_course","veg",1,130,6,18,4,1,"Cauliflower: 150g, Chickpeas: 50g, Tomato puree: 30g, Spices: 5g","25","stew",1,1,1
+42,"Shrimp salad","Weight-Loss-Recipes.pdf","afternoon","salad","non_veg",1,160,20,5,6,1,"Shrimp: 80g, Mixed greens: 100g, Olive oil: 5g, Lemon: 1 tsp","15","mix",1,1,1
+43,"Spinach and mushroom stir-fry","Weight-Loss-Recipes.pdf","evening","main_course","veg",1,120,6,12,4,1,"Spinach: 100g, Mushrooms: 80g, Olive oil: 3g, Garlic: 2g","10","stir_fry",1,1,1
+44,"Carrot and lentil soup","Weight-Loss-Recipes.pdf","afternoon","soup","veg",1,100,5,18,2,1,"Carrot: 100g, Lentils: 50g, Broth: 200ml, Spices: 3g","25","boil",1,1,1
+45,"Turkey lettuce wrap","Weight-Loss-Recipes.pdf","evening","main_course","non_veg",1,140,18,5,4,1,"Turkey slices: 80g, Lettuce: 50g, Mustard: 5g, Herbs: 2g","10","assemble",1,1,1
+46,"Berry smoothie bowl","Weight-Loss-Recipes.pdf","morning","breakfast","veg",1,150,4,25,5,1,"Mixed berries: 100g, Greek yogurt: 50g, Granola: 20g, Chia seeds: 5g","5","blend",0,1,1
+47,"Grilled paneer skewers","Weight-Loss-Recipes.pdf","evening","main_course","veg",1,160,12,5,8,1,"Paneer: 100g, Bell peppers: 50g, Olive oil: 5g, Herbs: 2g","20","grill",1,1,1
+48,"Cabbage and carrot stir-fry","Weight-Loss-Recipes.pdf","evening","main_course","veg",1,110,4,15,4,1,"Cabbage: 100g, Carrot: 50g, Soy sauce: 5ml, Olive oil: 3g","15","stir_fry",0,1,1
+49,"Chicken lettuce salad","Weight-Loss-Recipes.pdf","afternoon","salad","non_veg",1,180,22,6,5,1,"Chicken breast: 80g, Lettuce: 100g, Olive oil: 5g, Lemon: 1 tsp","15","mix",1,1,1
+50,"Vegetable frittata","Weight-Loss-Recipes.pdf","morning","breakfast","egg",1,130,10,6,5,1,"Eggs: 2, Mixed vegetables: 80g, Herbs: 2g, Oil spray: 1g","15","bake",1,1,1
+51,"Avocado and chickpea salad","Weight-Loss-Recipes.pdf","afternoon","salad","veg",1,120,6,15,5,1,"Avocado: 50g, Chickpeas: 50g, Lemon: 1 tsp, Olive oil: 5g","10","mix",1,1,1
+52,"Grilled shrimp skewers","Weight-Loss-Recipes.pdf","evening","main_course","non_veg",1,200,25,2,6,1,"Shrimp: 100g, Bell peppers: 50g, Olive oil: 5g, Herbs: 2g","15","grill",1,1,1
+53,"Spinach and ricotta stuffed mushrooms","Weight-Loss-Recipes.pdf","evening","snack","veg",1,140,8,10,6,1,"Mushrooms: 100g, Spinach: 50g, Ricotta: 30g, Olive oil: 3g","20","bake",1,1,1
+54,"Quinoa and vegetable soup","Weight-Loss-Recipes.pdf","afternoon","soup","veg",1,110,5,20,2,1,"Quinoa: 40g, Mixed vegetables: 100g, Broth: 300ml, Spices: 3g","25","boil",1,1,1
+55,"Grilled chicken with asparagus","Weight-Loss-Recipes.pdf","evening","main_course","non_veg",1,190,26,4,5,1,"Chicken breast: 100g, Asparagus: 100g, Olive oil: 5g, Lemon: 1","20","grill",1,1,1
+56,"Sweet potato and black bean salad","Weight-Loss-Recipes.pdf","afternoon","salad","veg",1,150,6,28,4,1,"Sweet potato: 100g, Black beans: 50g, Olive oil: 5g, Herbs: 2g","15","mix",1,1,1
+57,"Berry overnight oats","Weight-Loss-Recipes.pdf","morning","breakfast","veg",1,140,5,25,3,1,"Oats: 40g, Mixed berries: 50g, Almond milk: 150ml, Chia seeds: 5g","480","soak",0,1,1
+58,"Zucchini and corn fritters","Weight-Loss-Recipes.pdf","evening","snack","veg",1,130,4,15,5,1,"Zucchini: 100g, Corn: 50g, Egg: 1, Spices: 2g","20","pan_fry",1,1,1
+59,"Tomato basil soup","Weight-Loss-Recipes.pdf","afternoon","soup","veg",1,80,3,14,2,1,"Tomatoes: 150g, Basil: 5g, Broth: 200ml, Olive oil: 3g","20","boil",0,1,1
+60,"Eggplant and chickpea stew","Weight-Loss-Recipes.pdf","evening","main_course","veg",1,140,6,20,5,1,"Eggplant: 100g, Chickpeas: 50g, Tomato puree: 30g, Spices: 5g","30","stew",1,1,1
+61,"Grilled turkey burger","Weight-Loss-Recipes.pdf","evening","main_course","non_veg",1,180,20,6,5,1,"Turkey patty: 100g, Lettuce: 50g, Tomato: 30g, Olive oil: 3g","15","grill",1,1,1
+62,"Kale smoothie","Weight-Loss-Recipes.pdf","morning","beverage","veg",1,110,3,18,2,1,"Kale: 50g, Banana: 50g, Almond milk: 150ml","5","blend",0,1,1
+63,"Grilled fish tacos","Weight-Loss-Recipes.pdf","evening","main_course","non_veg",1,210,24,10,6,1,"White fish: 100g, Tortilla: 1, Cabbage: 50g, Olive oil: 5g","20","grill",1,1,1
+64,"Spinach and apple salad","Weight-Loss-Recipes.pdf","afternoon","salad","veg",1,90,3,15,3,1,"Spinach: 80g, Apple: 50g, Walnuts: 5g, Lemon: 1 tsp","10","mix",0,1,1
+65,"Chickpea and cucumber wraps","Weight-Loss-Recipes.pdf","morning","breakfast","veg",1,140,6,22,5,1,"Whole wheat wrap: 1, Chickpeas: 50g, Cucumber: 50g, Herbs: 2g","10","roll",1,1,1
+66,"Grilled chicken with zucchini","Weight-Loss-Recipes.pdf","evening","main_course","non_veg",1,180,25,5,5,1,"Chicken breast: 100g, Zucchini: 100g, Olive oil: 5g, Herbs: 2g","20","grill",1,1,1
+67,"Avocado berry smoothie","Weight-Loss-Recipes.pdf","morning","beverage","veg",1,120,4,20,4,1,"Avocado: 50g, Mixed berries: 50g, Almond milk: 150ml","5","blend",0,1,1
+68,"Cauliflower and tofu stir-fry","Weight-Loss-Recipes.pdf","evening","main_course","veg",1,130,10,12,5,1,"Cauliflower: 100g, Tofu: 100g, Soy sauce: 5ml, Olive oil: 3g","15","stir_fry",1,1,1
+69,"Egg and spinach muffins","Weight-Loss-Recipes.pdf","morning","breakfast","egg",1,120,10,4,6,1,"Eggs: 2, Spinach: 50g, Herbs: 2g, Oil spray: 1g","20","bake",1,1,1
+70,"Mango and cucumber salad","Weight-Loss-Recipes.pdf","afternoon","salad","veg",1,90,3,15,3,1,"Mango: 80g, Cucumber: 80g, Lemon: 1 tsp, Mint: 5g","10","mix",0,1,1
+71,"Grilled salmon with broccoli","Weight-Loss-Recipes.pdf","evening","main_course","non_veg",1,210,25,6,7,1,"Salmon: 100g, Broccoli: 100g, Olive oil: 5g, Lemon: 1","20","grill",1,1,1
+72,"Chia berry pudding","Weight-Loss-Recipes.pdf","morning","breakfast","veg",1,120,4,18,6,1,"Chia seeds: 15g, Mixed berries: 50g, Almond milk: 150ml","480","soak",0,1,1
+73,"Vegetable stir-fry noodles","Weight-Loss-Recipes.pdf","evening","main_course","veg",1,140,6,22,4,1,"Whole wheat noodles: 50g, Mixed vegetables: 100g, Soy sauce: 5ml, Olive oil: 3g","15","stir_fry",1,1,1
+74,"Chicken and bell pepper salad","Weight-Loss-Recipes.pdf","afternoon","salad","non_veg",1,180,22,8,5,1,"Chicken breast: 100g, Bell peppers: 50g, Olive oil: 5g, Lemon: 1 tsp","15","mix",1,1,1
+75,"Spinach and feta omelet","Weight-Loss-Recipes.pdf","morning","breakfast","egg",1,130,10,4,6,1,"Eggs: 2, Spinach: 50g, Feta: 20g, Oil spray: 1g","10","tawa",1,1,1
+76,"Roasted vegetable quinoa","Weight-Loss-Recipes.pdf","evening","main_course","veg",1,140,6,22,5,1,"Quinoa: 50g, Mixed roasted vegetables: 100g, Olive oil: 5g","20","bake",1,1,1
+77,"Cucumber mint smoothie","Weight-Loss-Recipes.pdf","morning","beverage","veg",1,90,2,15,2,1,"Cucumber: 100g, Mint: 5g, Almond milk: 150ml, Honey: 5g","5","blend",0,1,1
+78,"Grilled turkey with asparagus","Weight-Loss-Recipes.pdf","evening","main_course","non_veg",1,190,25,4,5,1,"Turkey breast: 100g, Asparagus: 100g, Olive oil: 5g, Lemon: 1","20","grill",1,1,1
+79,"Avocado egg salad","Weight-Loss-Recipes.pdf","morning","breakfast","egg",1,130,10,5,6,1,"Eggs: 2, Avocado: 50g, Lemon: 1 tsp, Herbs: 2g","10","mix",1,1,1
+80,"Lentil and spinach curry","Weight-Loss-Recipes.pdf","evening","main_course","veg",1,140,8,18,4,1,"Lentils: 50g, Spinach: 100g, Tomato puree: 30g, Spices: 5g","25","stew",1,1,1
+81,"Berry and yogurt parfait","Weight-Loss-Recipes.pdf","morning","breakfast","veg",1,140,5,25,3,1,"Mixed berries: 50g, Greek yogurt: 50g, Granola: 20g, Chia seeds: 5g","10","layer",0,1,1
+82,"Grilled chicken skewers","Weight-Loss-Recipes.pdf","evening","main_course","non_veg",1,180,25,6,5,1,"Chicken breast: 100g, Bell peppers: 50g, Olive oil: 5g, Herbs: 2g","15","grill",1,1,1
+83,"Spinach and lentil soup","Weight-Loss-Recipes.pdf","afternoon","soup","veg",1,110,6,18,3,1,"Spinach: 50g, Lentils: 50g, Broth: 200ml, Spices: 3g","25","boil",1,1,1
+84,"Mango coconut smoothie","Weight-Loss-Recipes.pdf","morning","beverage","veg",1,120,3,18,4,1,"Mango: 100g, Coconut milk: 150ml, Chia seeds: 5g","5","blend",0,1,1
+85,"Quinoa and roasted vegetable salad","Weight-Loss-Recipes.pdf","afternoon","salad","veg",1,150,6,25,5,1,"Quinoa: 50g, Roasted vegetables: 100g, Olive oil: 5g, Lemon: 1 tsp","15","mix",1,1,1
+86,"Grilled fish with spinach","Weight-Loss-Recipes.pdf","evening","main_course","non_veg",1,200,25,5,6,1,"White fish: 100g, Spinach: 100g, Olive oil: 5g, Lemon: 1","20","grill",1,1,1
+87,"Avocado chickpea toast","Weight-Loss-Recipes.pdf","morning","breakfast","veg",1,140,6,20,5,1,"Whole wheat bread: 1 slice, Avocado: 50g, Chickpeas: 50g, Lemon: 1 tsp","10","toast",1,1,1
+88,"Tofu and broccoli stir-fry","Weight-Loss-Recipes.pdf","evening","main_course","veg",1,130,10,12,5,1,"Tofu: 100g, Broccoli: 100g, Soy sauce: 5ml, Olive oil: 3g","15","stir_fry",1,1,1
+89,"Egg and veggie wrap","Weight-Loss-Recipes.pdf","morning","breakfast","egg",1,130,10,15,5,1,"Whole wheat wrap: 1, Eggs: 2, Spinach: 50g, Bell peppers: 30g","10","roll",1,1,1
+90,"Cucumber tomato salad","Weight-Loss-Recipes.pdf","afternoon","salad","veg",1,80,3,12,3,1,"Cucumber: 100g, Tomato: 100g, Lemon: 1 tsp, Olive oil: 3g","5","mix",0,1,1
+91,"Grilled shrimp with vegetables","Weight-Loss-Recipes.pdf","evening","main_course","non_veg",1,210,25,8,6,1,"Shrimp: 100g, Mixed vegetables: 100g, Olive oil: 5g, Herbs: 2g","20","grill",1,1,1
+92,"Spinach and feta salad","Weight-Loss-Recipes.pdf","afternoon","salad","veg",1,100,4,12,5,1,"Spinach: 100g, Feta: 20g, Olive oil: 5g, Lemon: 1 tsp","10","mix",0,1,1
+93,"Vegetable and egg stir-fry","Weight-Loss-Recipes.pdf","evening","main_course","egg",1,140,10,15,5,1,"Eggs: 2, Mixed vegetables: 100g, Olive oil: 3g, Spices: 2g","15","stir_fry",1,1,1
+94,"Berry banana smoothie","Weight-Loss-Recipes.pdf","morning","beverage","veg",1,120,3,20,3,1,"Banana: 50g, Mixed berries: 50g, Almond milk: 150ml","5","blend",0,1,1
+95,"Grilled chicken with sweet potato","Weight-Loss-Recipes.pdf","evening","main_course","non_veg",1,190,25,10,5,1,"Chicken breast: 100g, Sweet potato: 100g, Olive oil: 5g, Herbs: 2g","20","grill",1,1,1
+96,"Avocado kale salad","Weight-Loss-Recipes.pdf","afternoon","salad","veg",1,120,4,15,5,1,"Kale: 100g, Avocado: 50g, Olive oil: 5g, Lemon: 1 tsp","10","mix",0,1,1
+97,"Quinoa and vegetable patties","Weight-Loss-Recipes.pdf","evening","snack","veg",1,140,6,22,5,1,"Quinoa: 50g, Mixed vegetables: 100g, Egg: 1, Spices: 2g","20","pan_fry",1,1,1
+98,"Egg white veggie scramble","Weight-Loss-Recipes.pdf","morning","breakfast","egg",1,110,12,4,2,1,"Egg whites: 3, Mixed vegetables: 80g, Oil spray: 1g, Herbs: 2g","10","tawa",1,1,1
+99,"Roasted vegetable soup","Weight-Loss-Recipes.pdf","afternoon","soup","veg",1,90,3,15,3,1,"Mixed vegetables: 150g, Broth: 300ml, Olive oil: 3g, Herbs: 2g","25","roast",0,1,1
+100,"Grilled salmon salad","Weight-Loss-Recipes.pdf","evening","salad","non_veg",1,200,25,8,6,1,"Salmon: 100g, Mixed greens: 100g, Olive oil: 5g, Lemon: 1 tsp","15","grill",1,1,1

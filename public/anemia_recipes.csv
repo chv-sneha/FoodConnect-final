@@ -1,0 +1,101 @@
+recipe_id,recipe_name,source_file,best_time_of_day,meal_type,veg_nonveg,anemia_friendly,energy_kcal,protein_g,carbs_g,fat_g,servings,ingredients_raw,prep_time_min,cooking_method,high_protein,low_oil,low_sugar
+1,"Iron-rich smoothie","Anemia-Recipes.pdf","morning","beverage","veg",1,180,6,25,5,1,"Spinach: 50g, Dates: 20g, Almond milk: 200ml, Banana: 50g","5","blend",0,1,0
+2,"Beetroot juice","Anemia-Recipes.pdf","morning","beverage","veg",1,70,2,16,0,1,"Beetroot: 150g, Carrot: 50g, Ginger: 5g, Lemon: 1 tsp","10","juice",0,1,1
+3,"Pomegranate juice","Anemia-Recipes.pdf","afternoon","beverage","veg",1,120,2,28,0,1,"Pomegranate: 200g, Mint: 5g, Black salt: pinch","10","juice",0,1,1
+4,"Iron-rich trail mix","Anemia-Recipes.pdf","evening","snack","veg",1,160,6,12,10,1,"Almonds: 10g, Raisins: 15g, Pumpkin seeds: 10g, Dark chocolate: 5g","5","mix",0,1,0
+5,"Sesame seed laddu","Anemia-Recipes.pdf","evening","snack","veg",1,140,5,8,10,1,"Sesame seeds: 20g, Jaggery: 15g, Ghee: 3g, Cardamom: pinch","15","roast_mix",0,0,0
+6,"Liver pate sandwich","Anemia-Recipes.pdf","afternoon","snack","non_veg",1,220,18,15,10,1,"Chicken liver: 60g, Whole grain bread: 2 slices, Herbs: 5g","20","saute",1,1,1
+7,"Spinach and date smoothie","Anemia-Recipes.pdf","morning","beverage","veg",1,160,4,22,6,1,"Spinach: 60g, Dates: 25g, Cashews: 10g, Water: 200ml","5","blend",0,1,0
+8,"Quinoa spinach porridge","Anemia-Recipes.pdf","morning","breakfast","veg",1,200,8,32,5,1,"Quinoa: 40g, Spinach: 80g, Milk: 150ml, Almonds: 8g","25","boil",1,1,1
+9,"Ragi dosa","Anemia-Recipes.pdf","morning","breakfast","veg",1,180,6,30,4,1,"Ragi flour: 50g, Urad dal: 15g, Fenugreek: 2g, Oil: 3g","480","ferment_tawa",0,1,1
+10,"Egg yolk curry","Anemia-Recipes.pdf","morning","breakfast","egg",1,200,14,5,14,1,"Eggs: 2, Spinach: 100g, Onion: 30g, Oil: 5g, Spices: 5g","15","curry",1,0,1
+11,"Lentil and spinach salad","Anemia-Recipes.pdf","afternoon","salad","veg",1,190,12,25,4,1,"Black lentils: 60g, Spinach: 100g, Tomato: 50g, Lemon: 1 tsp","30","boil",1,1,1
+12,"Mutton curry","Anemia-Recipes.pdf","afternoon","main_course","non_veg",1,280,25,8,18,1,"Mutton: 100g, Onion: 50g, Spices: 10g, Oil: 8g","60","pressure",1,0,1
+13,"Palak paneer","Anemia-Recipes.pdf","evening","main_course","veg",1,180,12,8,12,1,"Spinach: 150g, Paneer: 60g, Onion: 30g, Oil: 5g","20","saute",1,1,1
+14,"Fish curry with drumsticks","Anemia-Recipes.pdf","evening","main_course","non_veg",1,220,22,10,12,1,"Fish: 100g, Drumsticks: 80g, Coconut: 20g, Oil: 5g","25","curry",1,1,1
+15,"Tofu scramble with spinach","Anemia-Recipes.pdf","morning","breakfast","veg",1,160,12,6,10,1,"Tofu: 80g, Spinach: 100g, Turmeric: 1g, Oil: 4g","10","scramble",1,1,1
+16,"Jaggery rice","Anemia-Recipes.pdf","afternoon","main_course","veg",1,240,4,48,4,1,"Rice: 60g, Jaggery: 20g, Ghee: 4g, Cardamom: 2g","25","boil",0,0,0
+17,"Beetroot and carrot curry","Anemia-Recipes.pdf","evening","main_course","veg",1,120,3,20,4,1,"Beetroot: 100g, Carrot: 100g, Oil: 4g, Spices: 5g","25","saute",0,1,1
+18,"Dark chocolate mousse","Anemia-Recipes.pdf","evening","snack","veg",1,180,4,18,12,1,"Dark chocolate: 30g, Avocado: 50g, Dates: 15g, Cocoa: 5g","15","blend",0,1,0
+19,"Bone marrow soup","Anemia-Recipes.pdf","evening","soup","non_veg",1,150,12,5,10,1,"Bone marrow: 50g, Vegetables: 100g, Herbs: 5g, Water: 300ml","45","boil",1,1,1
+20,"Amaranth porridge","Anemia-Recipes.pdf","morning","breakfast","veg",1,190,7,30,5,1,"Amaranth: 40g, Milk: 150ml, Jaggery: 15g, Nuts: 10g","20","boil",1,1,0
+21,"Spinach poha","Anemia-Recipes.pdf","morning","breakfast","veg",1,210,7,32,6,1,"Poha: 60g, Spinach: 80g, Peanuts: 10g, Lemon: 1 tsp","15","saute",1,1,1
+22,"Mint spinach buttermilk","Anemia-Recipes.pdf","afternoon","beverage","veg",1,90,5,10,2,1,"Buttermilk: 200ml, Spinach: 40g, Mint: 10g, Cumin: 1g","5","blend",0,1,1
+23,"Rajma salad","Anemia-Recipes.pdf","afternoon","salad","veg",1,220,12,34,4,1,"Rajma: 80g, Onion: 30g, Spinach: 50g, Lemon: 1 tsp","20","boil",1,1,1
+24,"Bottle gourd soup","Anemia-Recipes.pdf","evening","soup","veg",1,120,4,15,3,1,"Lauki: 150g, Spinach: 40g, Garlic: 5g","25","boil",0,1,1
+25,"Carrot beet poriyal","Anemia-Recipes.pdf","afternoon","side_dish","veg",1,160,4,22,8,1,"Carrot: 80g, Beetroot: 80g, Coconut: 10g","15","saute",0,1,1
+26,"Paneer spinach wrap","Anemia-Recipes.pdf","evening","snack","veg",1,240,14,28,8,1,"Paneer: 60g, Spinach: 80g, Wheat roti: 1","20","saute_wrap",1,1,1
+27,"Drumstick leaves dal","Anemia-Recipes.pdf","afternoon","main_course","veg",1,190,10,25,4,1,"Moong dal: 60g, Drumstick leaves: 50g, Garlic: 5g","25","boil",1,1,1
+28,"Peanut jaggery chikki","Anemia-Recipes.pdf","evening","snack","veg",1,150,6,20,6,1,"Peanuts: 30g, Jaggery: 20g","10","heat_mix",1,0,0
+29,"Spinach egg omelette","Anemia-Recipes.pdf","morning","breakfast","egg",1,180,14,4,12,1,"Eggs: 2, Spinach: 50g","10","tawa",1,1,1
+30,"Soya chunks pulao","Anemia-Recipes.pdf","afternoon","main_course","veg",1,260,18,32,6,1,"Soya chunks: 40g, Rice: 50g, Spinach: 40g","20","pressure",1,1,1
+31,"Amla ginger shot","Anemia-Recipes.pdf","morning","beverage","veg",1,50,1,10,0,1,"Amla: 2 pcs, Ginger: 3g, Honey: 1 tsp","5","blend",0,1,0
+32,"Beetroot raita","Anemia-Recipes.pdf","afternoon","side_dish","veg",1,100,5,12,3,1,"Curd: 150ml, Beetroot: 60g, Cumin: 1g","10","mix",0,1,1
+33,"Sesame spinach rice","Anemia-Recipes.pdf","afternoon","main_course","veg",1,230,7,35,7,1,"Rice: 60g, Spinach: 80g, Sesame: 10g","20","saute",0,1,1
+34,"Lentil vegetable soup","Anemia-Recipes.pdf","evening","soup","veg",1,150,10,20,2,1,"Lentils: 40g, Veggies: 100g","30","boil",1,1,1
+35,"Spinach paratha","Anemia-Recipes.pdf","morning","breakfast","veg",1,210,8,30,6,1,"Wheat flour: 60g, Spinach: 80g","20","tawa",0,1,1
+36,"Ragi malt","Anemia-Recipes.pdf","morning","beverage","veg",1,170,6,28,3,1,"Ragi flour: 30g, Milk: 150ml, Jaggery: 10g","10","boil",0,1,0
+37,"Chicken spinach stir fry","Anemia-Recipes.pdf","evening","main_course","non_veg",1,260,25,6,14,1,"Chicken: 100g, Spinach: 80g","15","saute",1,1,1
+38,"Beetroot cutlet","Anemia-Recipes.pdf","evening","snack","veg",1,140,4,20,5,1,"Beetroot: 80g, Potato: 40g, Oats: 10g","20","tawa",0,1,1
+39,"Quinoa beet khichdi","Anemia-Recipes.pdf","afternoon","main_course","veg",1,230,9,32,6,1,"Quinoa: 40g, Beetroot: 50g, Moong dal: 30g","30","boil",1,1,1
+40,"Pumpkin seed smoothie","Anemia-Recipes.pdf","morning","beverage","veg",1,200,8,25,8,1,"Pumpkin seeds: 15g, Banana: 80g, Milk: 150ml","5","blend",1,1,0
+41,Spinach Garlic Poha,Anemia-Recipes.pdf,Morning,Breakfast,Veg,Yes,260,7.5,48,4.2,1,"Spinach, poha, garlic, mustard seeds, lemon",15,Stovetop stir-fry,No,Yes,Yes
+42,Beetroot Moong Dal Dosa,Anemia-Recipes.pdf,Morning,Breakfast,Veg,Yes,310,11,46,6,2,"Moong dal, beetroot, ginger, pepper, oil",20,Griddle cooking,Yes,Yes,Yes
+43,Iron Boost Smoothie+,Anemia-Recipes.pdf,Morning,Beverage,Veg,Yes,220,5,42,2,1,"Beetroot, banana, dates, chia seeds",10,Blending,No,Yes,Yes
+44,Sun-Dried Tomato Upma,Anemia-Recipes.pdf,Morning,Breakfast,Veg,Yes,280,6,52,6,1,"Semolina, sun-dried tomatoes, curry leaves",18,Stovetop,No,Yes,Yes
+45,Fenugreek Herbal Kadha,Anemia-Recipes.pdf,Morning,Beverage,Veg,Yes,40,1,6,0.5,1,"Fenugreek seeds, tulsi, ginger, jaggery",12,Boiling,No,Yes,No
+46,Spinach Rajma Curry Bowl,Anemia-Recipes.pdf,Afternoon,Lunch,Veg,Yes,380,16,48,10,1,"Rajma, spinach, garlic, onion, spices",25,Stovetop simmering,Yes,No,Yes
+47,Drumstick Leaf Lentil Curry,Anemia-Recipes.pdf,Afternoon,Lunch,Veg,Yes,350,15,45,7,1,"Dal, drumstick leaves, cumin, garlic",22,Pressure cooking,Yes,Yes,Yes
+48,Iron-Rich Vegetable Khichdi,Anemia-Recipes.pdf,Afternoon,Lunch,Veg,Yes,330,12,50,6,1,"Rice, moong dal, spinach, peas, carrots",20,Pressure cooking,Yes,Yes,Yes
+49,Black Chickpea Curry Bowl,Anemia-Recipes.pdf,Afternoon,Lunch,Veg,Yes,360,17,44,7,1,"Kala chana, onion, tomato, coriander",30,Stovetop simmering,Yes,No,Yes
+50,Beet-Carrot Vegetable Rice,Anemia-Recipes.pdf,Afternoon,Lunch,Veg,Yes,290,6.5,50,4.5,1,"Rice, beetroot, carrot, mint, peas",18,Stovetop,No,Yes,Yes
+51,Methi Paratha Iron Meal,Anemia-Recipes.pdf,Afternoon,Lunch,Veg,Yes,320,10,48,7,1,"Wheat flour, methi leaves, garlic",25,Griddle cooking,No,Yes,Yes
+52,Spinach Corn Millet Bowl,Anemia-Recipes.pdf,Afternoon,Lunch,Veg,Yes,340,9,52,5,1,"Millets, spinach, sweet corn, pepper",22,Stovetop,No,Yes,Yes
+53,Beetroot Coconut Curry,Anemia-Recipes.pdf,Afternoon,Lunch,Veg,Yes,300,7,42,9,1,"Beetroot, coconut milk, curry leaves",28,Simmering,No,No,Yes
+54,Masala Oats with Greens,Anemia-Recipes.pdf,Evening,Snack,Veg,Yes,210,8,36,4,1,"Oats, spinach, tomato, pepper",10,Stovetop,Yes,Yes,Yes
+55,Chickpea & Spinach Stir Fry,Anemia-Recipes.pdf,Evening,Snack,Veg,Yes,260,12,34,5,1,"Chickpeas, spinach, garlic, cumin",15,Stir-fry,Yes,Yes,Yes
+56,Beetroot Hummus Dip,Anemia-Recipes.pdf,Evening,Snack,Veg,Yes,180,6,22,7,1,"Beetroot, chickpeas, tahini, lemon",12,Blending,No,Yes,Yes
+57,Pomegranate Sprout Bhel,Anemia-Recipes.pdf,Evening,Snack,Veg,Yes,170,8,30,2,1,"Moong sprouts, pomegranate, onions",10,No-cook mixing,Yes,Yes,Yes
+58,Flaxseed Iron Ladoo,Anemia-Recipes.pdf,Evening,Snack,Veg,Yes,150,4,18,7,1,"Flaxseed powder, dates, peanut butter",12,Rolling,No,Yes,Yes
+59,Ragi Cutlet Iron Bites,Anemia-Recipes.pdf,Night,Dinner,Veg,Yes,240,7,34,7,1,"Ragi flour, potato, spinach, spices",20,Shallow frying,No,No,Yes
+60,Garlic Spinach Rice Bowl,Anemia-Recipes.pdf,Night,Dinner,Veg,Yes,310,7,50,5,1,"Rice, spinach, garlic, chilli flakes",18,Stovetop,No,Yes,Yes
+61,Beetroot Lentil Soup+,Anemia-Recipes.pdf,Night,Dinner,Veg,Yes,240,11,32,4,1,"Beetroot, masoor dal, garlic, pepper",20,Boiling,Yes,Yes,Yes
+62,Cabbage Spinach Sabzi,Anemia-Recipes.pdf,Night,Dinner,Veg,Yes,190,4,18,6,1,"Cabbage, spinach, mustard seeds",14,Stir-fry,No,Yes,Yes
+63,Iron-Rich Vegetable Stew,Anemia-Recipes.pdf,Night,Dinner,Veg,Yes,260,8,30,8,1,"Carrot, beans, spinach, coconut milk",25,Simmering,No,No,Yes
+64,Drumstick Sambar Iron Mix,Anemia-Recipes.pdf,Night,Dinner,Veg,Yes,300,12,40,6,1,"Dal, drumstick, tamarind, spices",28,Pressure cooking,Yes,Yes,Yes
+65,Spinach Paneer Lite Curry,Anemia-Recipes.pdf,Night,Dinner,Veg,Yes,320,14,22,16,1,"Paneer, spinach, ginger, garlic",20,Simmering,Yes,No,Yes
+66,Ragi Vegetable Rotis,Anemia-Recipes.pdf,Night,Dinner,Veg,Yes,210,6,34,4,1,"Ragi flour, spinach, coriander",22,Griddle cooking,No,Yes,Yes
+67,Palak Millet Pongal,Anemia-Recipes.pdf,Night,Dinner,Veg,Yes,300,10,44,7,1,"Millets, moong dal, spinach, ginger",25,Pressure cooking,Yes,Yes,Yes
+68,Tomato Spinach Rasam,Anemia-Recipes.pdf,Night,Dinner,Veg,Yes,140,3,16,3,1,"Tomato, spinach, pepper, garlic",15,Simmering,No,Yes,Yes
+69,Lauki-Methi Curry,Anemia-Recipes.pdf,Night,Dinner,Veg,Yes,230,5,18,10,1,"Bottle gourd, methi leaves, garlic",20,Simmering,No,No,Yes
+70,Masala Vegetable Quinoa,Anemia-Recipes.pdf,Night,Dinner,Veg,Yes,330,12,44,7,1,"Quinoa, spinach, peas, capsicum",18,Stir-fry,Yes,Yes,Yes
+71,Carrot Beet Masala Rice,Anemia-Recipes.pdf,Night,Dinner,Veg,Yes,300,6,50,4,1,"Rice, beetroot, carrots, spices",20,Stovetop,No,Yes,Yes
+72,Iron Boost Lentil Stew,Anemia-Recipes.pdf,Night,Dinner,Veg,Yes,260,11,30,6,1,"Masoor dal, spinach, garlic, parsley",25,Simmering,Yes,Yes,Yes
+73,Beetroot Paneer Stir Fry,Anemia-Recipes.pdf,Night,Dinner,Veg,Yes,280,14,18,12,1,"Paneer, beetroot, pepper, garlic",18,Stir-fry,Yes,No,Yes
+74,Spinach Lemon Rice,Anemia-Recipes.pdf,Night,Dinner,Veg,Yes,260,5,48,4,1,"Rice, spinach, lemon, mustard seeds",16,Stovetop,No,Yes,Yes
+75,Moong Dal Spinach Curry,Anemia-Recipes.pdf,Night,Dinner,Veg,Yes,280,14,34,4,1,"Moong dal, spinach, ginger, garlic",20,Pressure cooking,Yes,Yes,Yes
+76,Beet Masala Roti Wrap,Anemia-Recipes.pdf,Night,Dinner,Veg,Yes,220,6,30,5,1,"Wheat flour, beetroot purée, coriander",20,Griddle cooking,No,Yes,Yes
+77,Iron Greens Coconut Curry,Anemia-Recipes.pdf,Night,Dinner,Veg,Yes,300,7,26,14,1,"Spinach, drumstick leaves, coconut",25,Simmering,No,No,Yes
+78,Chickpea Millet Salad Bowl,Anemia-Recipes.pdf,Night,Dinner,Veg,Yes,290,11,42,6,1,"Millets, chickpeas, spinach, lemon",15,No-cook mixing,Yes,Yes,Yes
+79,Spinach Mango Smoothie+,Anemia-Recipes.pdf,Night,Beverage,Veg,Yes,190,4,42,1,1,"Spinach, mango, banana, flaxseed",8,Blending,No,Yes,Yes
+80,Iron Boost Sweet Potato Mash,Anemia-Recipes.pdf,Night,Dinner,Veg,Yes,240,4,44,3,1,"Sweet potato, spinach, pepper",18,Boiling+mashing,No,Yes,Yes
+81,Beetroot Lentil Khichdi,Anemia-Recipes.pdf,Night,Dinner,Veg,Yes,310,12,46,6,1,"Rice, dal, beetroot, garlic",22,Pressure cooking,Yes,Yes,Yes
+82,Spinach Sprout Curry,Anemia-Recipes.pdf,Night,Dinner,Veg,Yes,260,10,30,4,1,"Moong sprouts, spinach, turmeric",15,Simmering,Yes,Yes,Yes
+83,Iron-Rich Mixed Dal Soup,Anemia-Recipes.pdf,Night,Dinner,Veg,Yes,230,14,28,3,1,"Toor dal, masoor dal, spinach",20,Boiling,Yes,Yes,Yes
+84,Carrot Beet Halwa Lite,Anemia-Recipes.pdf,Night,Dinner,Veg,Yes,210,4,40,4,1,"Carrot, beetroot, jaggery, milk",25,Slow cook,No,No,Yes
+85,Spinach Garlic Noodles,Anemia-Recipes.pdf,Night,Dinner,Veg,Yes,300,7,48,6,1,"Whole wheat noodles, spinach, garlic",18,Stir-fry,No,Yes,Yes
+86,Mint Spinach Quinoa Bowl,Anemia-Recipes.pdf,Night,Dinner,Veg,Yes,280,10,40,5,1,"Quinoa, spinach, mint, peas",20,Stovetop,Yes,Yes,Yes
+87,Beetroot Yogurt Dip+,Anemia-Recipes.pdf,Night,Snack,Veg,Yes,120,4,14,4,1,"Beetroot, curd, cumin",10,Blending,No,Yes,Yes
+88,Drumstick Leaf Soup,Anemia-Recipes.pdf,Night,Beverage,Veg,Yes,110,5,12,3,1,"Drumstick leaves, garlic, pepper",15,Boiling,Yes,Yes,Yes
+89,Iron-Rich Idli Upma,Anemia-Recipes.pdf,Night,Snack,Veg,Yes,250,7,38,7,1,"Idli, spinach, mustard seeds",12,Stir-fry,No,Yes,Yes
+90,Ragi Spinach Porridge,Anemia-Recipes.pdf,Night,Dinner,Veg,Yes,230,6,36,4,1,"Ragi flour, spinach, jaggery",15,Boiling,No,Yes,Yes
+91,Beetroot Peas Stir Fry,Anemia-Recipes.pdf,Night,Dinner,Veg,Yes,210,6,24,6,1,"Beetroot, peas, garlic, cumin",14,Stir-fry,No,Yes,Yes
+92,Masala Red Rice Bowl,Anemia-Recipes.pdf,Night,Dinner,Veg,Yes,320,6,52,4,1,"Red rice, spices, spinach",22,Stovetop,No,Yes,Yes
+93,Spinach Lentil Tikki,Anemia-Recipes.pdf,Night,Snack,Veg,Yes,200,8,24,6,1,"Dal, spinach, ginger",18,Shallow fry,Yes,No,Yes
+94,Iron Smoothie Booster,Anemia-Recipes.pdf,Night,Beverage,Veg,Yes,210,5,40,2,1,"Beetroot, banana, oats, chia",8,Blending,No,Yes,Yes
+95,Cumin Spinach Curry,Anemia-Recipes.pdf,Night,Dinner,Veg,Yes,240,6,22,10,1,"Spinach, cumin, garlic",16,Simmering,No,No,Yes
+96,Beetroot Lentil Pasta,Anemia-Recipes.pdf,Night,Dinner,Veg,Yes,330,12,50,6,1,"Whole wheat pasta, beetroot purée, garlic",20,Boiling+stir,Yes,Yes,Yes
+97,Spinach Carrot Thoran,Anemia-Recipes.pdf,Night,Dinner,Veg,Yes,200,4,24,8,1,"Spinach, carrot, coconut",14,Stir-fry,No,No,Yes
+98,Iron-Rich Sprouts Kadhi,Anemia-Recipes.pdf,Night,Dinner,Veg,Yes,260,9,28,7,1,"Sprouts, curd, turmeric, garlic",18,Simmering,Yes,Yes,Yes
+99,Beetroot Lemon Soup+,Anemia-Recipes.pdf,Night,Beverage,Veg,Yes,140,3,20,2,1,"Beetroot, lemon, pepper, garlic",12,Boiling,No,Yes,Yes
+100,Spinach Millet Dosa,Anemia-Recipes.pdf,Night,Dinner,Veg,Yes,300,10,46,5,1,"Millets, spinach, ginger",20,Griddle cooking,Yes,Yes,Yes
