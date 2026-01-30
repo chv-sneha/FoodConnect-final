@@ -43,7 +43,7 @@ export default function Generic() {
             {/* Customize Button - Top Right */}
             {localStorage.getItem('lastScannedFood') && (
               <Button 
-                onClick={() => window.location.href = '/customized'}
+                onClick={() => window.location.href = '/customized?from=generic'}
                 className="flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-primary to-secondary text-white rounded-lg hover:opacity-90 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
               >
                 <UserCheck className="w-5 h-5" />

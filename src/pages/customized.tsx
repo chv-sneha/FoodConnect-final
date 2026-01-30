@@ -26,11 +26,12 @@ interface PersonData {
 
 export default function Customized() {
   // Check if we should show personalized risk analysis
+  const urlParams = new URLSearchParams(window.location.search);
+  const fromGeneric = urlParams.get('from') === 'generic';
   const storedData = localStorage.getItem('lastScannedFood');
-  const [showRiskAnalysis, setShowRiskAnalysis] = useState(!!storedData);
   
-  // If we have scanned data, show risk analysis first
-  if (showRiskAnalysis && storedData) {
+  // If we came from generic page and have stored data, show risk analysis
+  if (fromGeneric && storedData) {
     return <PersonalizedRiskAnalysis />;
   }
   
