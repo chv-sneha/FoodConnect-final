@@ -32,20 +32,6 @@ cache/
 # OCR model files
 OCR/east/frozen_east_text_detection.pb
 
-# Large CSV datasets
-public/archive/PP_recipes.csv
-public/archive/RAW_interactions.csv
-public/archive/RAW_recipes.csv
-public/archive/interactions_train.csv
-public/archive/PP_users.csv
-
-# Archive directory (contains large datasets)
-public/archive/
-
-# Any CSV files larger than 10MB
-*.csv
-!public/custom_recipes_dataset.csv
-
 # Machine learning models and pickle files
 *.pb
 *.pkl
