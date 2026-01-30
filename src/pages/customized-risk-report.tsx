@@ -35,6 +35,12 @@ const CircularProgress = ({ score, size = 120 }: { score: number; size?: number 
     return '#EF4444'; // Red
   };
 
+  const getTextColor = () => {
+    if (score >= 80) return '#065F46'; // Dark green for better contrast
+    if (score >= 60) return '#92400E'; // Dark yellow/orange for better contrast
+    return '#FFFFFF'; // White text on red background for visibility
+  };
+
   return (
     <div className="relative" style={{ width: size, height: size }}>
       <svg width={size} height={size} className="transform -rotate-90">
@@ -61,10 +67,10 @@ const CircularProgress = ({ score, size = 120 }: { score: number; size?: number 
       </svg>
       <div className="absolute inset-0 flex items-center justify-center">
         <div className="text-center">
-          <div className="text-2xl font-bold" style={{ color: getColor() }}>
+          <div className="text-2xl font-bold" style={{ color: getTextColor() }}>
             {score}
           </div>
-          <div className="text-xs text-gray-500 font-medium">SAFETY</div>
+          <div className="text-xs font-medium" style={{ color: getTextColor(), opacity: 0.8 }}>SAFETY</div>
         </div>
       </div>
     </div>
