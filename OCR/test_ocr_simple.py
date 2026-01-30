@@ -249,7 +249,7 @@ def parse_with_validation(raw_text):
             if not piece:
                 continue
             # Remove trailing sentences after a period or long run-on text
-            piece = piece.split('.')[0].strip()
+            piece = piece.split('.')[:1][0].strip()
             # Also truncate at excessive whitespace sequences
             piece = re.split(r'\s{2,}', piece)[0].strip()
             if 2 < len(piece) < 60:
@@ -338,7 +338,7 @@ def parse_with_validation(raw_text):
 app = Flask(__name__)
 CORS(app)
 
-@app.route('/api/generic/analyze', methods=['POST'])
+@app.route('/api/ocr/analyze', methods=['POST'])
 def analyze():
     if 'image' not in request.files:
         return jsonify({'error': 'No image provided'}), 400
@@ -543,5 +543,5 @@ def generate_recommendations(result):
 
 
 if __name__ == '__main__':
-    print('Starting OCR API on http://localhost:5002')
-    app.run(debug=True, host='0.0.0.0', port=5002)
+    print('Starting OCR API on http://localhost:5000')
+    app.run(debug=True, host='0.0.0.0', port=5000)
