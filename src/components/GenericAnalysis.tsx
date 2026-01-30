@@ -160,10 +160,6 @@ export default function GenericAnalysis() {
     }
   };
 
-  const handleCustomizeAnalysis = () => {
-    setLocation('/customized');
-  };
-
   const getRiskColor = (score: number) => {
     if (score >= 80) return 'text-green-600';
     if (score >= 60) return 'text-yellow-600';
@@ -463,6 +459,36 @@ export default function GenericAnalysis() {
               })}
             </div>
           </div>
+
+
+
+          {/* Customized Risk Report Button - Only show after successful analysis */}
+          {result && (
+            <div className="bg-gradient-to-r from-blue-50 to-green-50 rounded-lg shadow-md p-6 text-center">
+              <div className="flex items-center justify-center mb-4">
+                <UserCheck className="w-8 h-8 text-blue-600 mr-3" />
+                <h2 className="text-xl font-bold text-gray-900">Get Personalized Analysis</h2>
+              </div>
+              <p className="text-gray-600 mb-4">
+                Get a detailed risk assessment based on your health profile, allergies, and dietary restrictions
+              </p>
+              <button
+                onClick={() => {
+                  // Check if analysis data exists before navigating
+                  const storedData = localStorage.getItem('lastScannedFood');
+                  if (!storedData) {
+                    alert('Please complete the food analysis first before viewing the customized risk report.');
+                    return;
+                  }
+                  setLocation('/customized-risk-report');
+                }}
+                className="px-6 py-3 bg-gradient-to-r from-green-600 to-blue-600 text-white rounded-lg hover:from-green-700 hover:to-blue-700 font-medium flex items-center space-x-2 mx-auto"
+              >
+                <UserCheck className="w-5 h-5" />
+                <span>View Customized Risk Report</span>
+              </button>
+            </div>
+          )}
 
 
         </div>

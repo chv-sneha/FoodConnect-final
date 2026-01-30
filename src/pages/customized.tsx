@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { BottomNavigation } from '@/components/navigation';
 import { ModernNavbar } from '@/components/ModernNavbar';
-import PersonalizedRiskAnalysis from '@/components/PersonalizedRiskAnalysis';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -26,15 +25,7 @@ interface PersonData {
 }
 
 export default function Customized() {
-  // Check if we should show personalized risk analysis
-  const urlParams = new URLSearchParams(window.location.search);
-  const fromGeneric = urlParams.get('from') === 'generic';
-  const storedData = localStorage.getItem('lastScannedFood');
-  
-  // If we came from generic page and have stored data, show risk analysis
-  if (fromGeneric && storedData) {
-    return <PersonalizedRiskAnalysis />;
-  }
+  // Removed personalized risk analysis redirect
   
   const [activeTab, setActiveTab] = useState('automatic');
   const [formData, setFormData] = useState<PersonData>({
