@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ArrowLeft, AlertTriangle, Shield, Heart, Brain, CheckCircle, XCircle, AlertCircle } from 'lucide-react';
+import { ArrowLeft, AlertTriangle, Shield, Heart, Brain, CheckCircle, XCircle, AlertCircle, ShoppingCart, RotateCcw, BarChart3, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -7,6 +7,7 @@ import { useLocation } from 'wouter';
 import { getGeminiResponse } from '@/lib/geminiService';
 import { ModernNavbar } from '@/components/ModernNavbar';
 import { BottomNavigation } from '@/components/navigation';
+import DetailedAnalysisModal from './DetailedAnalysisModal';
 
 interface HealthProfile {
   allergies: string[];
@@ -33,6 +34,7 @@ export default function PersonalizedRiskAnalysis() {
   const [riskAnalysis, setRiskAnalysis] = useState<PersonalizedRisk[]>([]);
   const [loading, setLoading] = useState(true);
   const [aiRecommendations, setAiRecommendations] = useState<string>('');
+  const [showDetailedModal, setShowDetailedModal] = useState(false);
 
   useEffect(() => {
     // Load scanned food data from localStorage
@@ -165,22 +167,64 @@ export default function PersonalizedRiskAnalysis() {
     }
   };
 
-  const getRiskIcon = (level: string) => {
-    switch (level) {
-      case 'danger': return <XCircle className="w-6 h-6 text-red-600" />;
-      case 'warning': return <AlertTriangle className="w-6 h-6 text-orange-600" />;
-      case 'safe': return <CheckCircle className="w-6 h-6 text-green-600" />;
-      default: return <AlertCircle className="w-6 h-6 text-gray-600" />;
-    }
+  const getOverallRiskLevel = () => {
+    if (riskAnalysis.some(r => r.level === 'danger')) return 'danger';
+    if (riskAnalysis.some(r => r.level === 'warning')) return 'warning';
+    return 'safe';
   };
 
-  const getRiskBg = (level: string) => {
-    switch (level) {
-      case 'danger': return 'bg-red-50 border-red-200';
-      case 'warning': return 'bg-orange-50 border-orange-200';
-      case 'safe': return 'bg-green-50 border-green-200';
-      default: return 'bg-gray-50 border-gray-200';
-    }
+  const getSafetyScore = () => {
+    const dangerCount = riskAnalysis.filter(r => r.level === 'danger').length;
+    const warningCount = riskAnalysis.filter(r => r.level === 'warning').length;
+    
+    if (dangerCount > 0) return Math.max(10, 40 - (dangerCount * 20));
+    if (warningCount > 0) return Math.max(50, 80 - (warningCount * 10));
+    return 95;
+  };
+
+  const CircularProgress = ({ score }: { score: number }) => {
+    const radius = 45;
+    const circumference = 2 * Math.PI * radius;
+    const strokeDasharray = circumference;
+    const strokeDashoffset = circumference - (score / 100) * circumference;
+    
+    const getColor = () => {
+      if (score >= 80) return '#10B981'; // green
+      if (score >= 60) return '#F59E0B'; // orange
+      return '#EF4444'; // red
+    };
+
+    return (
+      <div className="relative w-24 h-24">
+        <svg className="w-24 h-24 transform -rotate-90" viewBox="0 0 100 100">
+          <circle
+            cx="50"
+            cy="50"
+            r={radius}
+            stroke="#E5E7EB"
+            strokeWidth="8"
+            fill="none"
+          />
+          <circle
+            cx="50"
+            cy="50"
+            r={radius}
+            stroke={getColor()}
+            strokeWidth="8"
+            fill="none"
+            strokeDasharray={strokeDasharray}
+            strokeDashoffset={strokeDashoffset}
+            strokeLinecap="round"
+            className="transition-all duration-1000 ease-out"
+          />
+        </svg>
+        <div className="absolute inset-0 flex items-center justify-center">
+          <span className="text-lg font-bold" style={{ color: getColor() }}>
+            {score}
+          </span>
+        </div>
+      </div>
+    );
   };
 
   if (loading) {
@@ -217,165 +261,337 @@ export default function PersonalizedRiskAnalysis() {
     );
   }
 
+  const overallRisk = getOverallRiskLevel();
+  const safetyScore = getSafetyScore();
+  const criticalRisks = riskAnalysis.filter(r => r.level === 'danger');
+  const warningRisks = riskAnalysis.filter(r => r.level === 'warning');
+  const safeItems = riskAnalysis.filter(r => r.level === 'safe');
+
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white">
       <ModernNavbar />
       
-      <div className="pt-32 pb-20 px-6">
-        <div className="max-w-4xl mx-auto space-y-6">
-          {/* Header with Back Button */}
-          <div className="flex items-center justify-between mb-8">
-            <Button 
-              variant="ghost" 
-              onClick={() => setLocation('/generic')} 
-              className="flex items-center gap-2 text-gray-600 hover:text-gray-900"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              Back to Generic Analysis
-            </Button>
-            <div className="text-right">
-              <h1 className="text-3xl font-bold text-gray-900">Personalized Risk Report</h1>
-              <p className="text-sm text-gray-600">Based on your health profile</p>
-            </div>
-          </div>
+      <div className="pt-20 pb-12">
+        {/* Back Button */}
+        <div className="px-4 mb-4">
+          <Button 
+            variant="ghost" 
+            onClick={() => setLocation('/generic')} 
+            className="flex items-center gap-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-xl px-4 py-2"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Back to Analysis
+          </Button>
+        </div>
 
-        {/* Scanned Product Info */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Brain className="w-5 h-5 text-blue-600" />
-              Scanned Product Analysis
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="flex gap-4">
+        {/* Hero Risk Banner */}
+        <div className="px-4 mb-6">
+          {overallRisk === 'danger' ? (
+            <div className="bg-gradient-to-r from-red-500 to-red-600 text-white rounded-2xl p-8 shadow-2xl border border-red-400">
+              <div className="flex items-center justify-center mb-4">
+                <div className="bg-white/20 rounded-full p-4 mr-4">
+                  <AlertTriangle className="w-12 h-12" />
+                </div>
+                <div className="text-center">
+                  <h1 className="text-4xl font-bold mb-2">⚠ DO NOT CONSUME</h1>
+                  <p className="text-xl opacity-90">
+                    Contains: {criticalRisks.map(r => r.message.match(/contains (\w+)/i)?.[1] || 'allergen').join(', ')}
+                  </p>
+                </div>
+              </div>
+              <p className="text-center text-lg opacity-90 max-w-2xl mx-auto">
+                This product contains ingredients that may trigger severe allergic reactions based on your health profile.
+              </p>
+            </div>
+          ) : overallRisk === 'warning' ? (
+            <div className="bg-gradient-to-r from-orange-400 to-orange-500 text-white rounded-2xl p-8 shadow-2xl border border-orange-300">
+              <div className="flex items-center justify-center mb-4">
+                <div className="bg-white/20 rounded-full p-4 mr-4">
+                  <AlertCircle className="w-12 h-12" />
+                </div>
+                <div className="text-center">
+                  <h1 className="text-4xl font-bold mb-2">⚠ CONSUME WITH CAUTION</h1>
+                  <p className="text-xl opacity-90">Health condition conflicts detected</p>
+                </div>
+              </div>
+              <p className="text-center text-lg opacity-90 max-w-2xl mx-auto">
+                This product may impact your health conditions. Review recommendations below.
+              </p>
+            </div>
+          ) : (
+            <div className="bg-gradient-to-r from-primary to-secondary text-white rounded-2xl p-6 shadow-2xl border border-primary/20">
+              <div className="flex items-center justify-center mb-3">
+                <div className="bg-white/20 rounded-full p-3 mr-3">
+                  <CheckCircle className="w-8 h-8" />
+                </div>
+                <div className="text-center">
+                  <h1 className="text-2xl font-bold mb-1">✓ Compatible With Your Health Profile</h1>
+                  <p className="text-sm opacity-90">Safe to consume based on your profile</p>
+                </div>
+              </div>
+              <p className="text-center text-sm opacity-90 max-w-xl mx-auto">
+                No allergens or health condition conflicts detected. Enjoy as part of a balanced diet.
+              </p>
+            </div>
+          )}
+        </div>
+
+        <div className="max-w-5xl mx-auto px-4">
+          {/* Premium Product Summary */}
+          <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-6 mb-6">
+            <div className="flex items-center gap-6">
               {scannedData.imageUrl && (
-                <img 
-                  src={scannedData.imageUrl} 
-                  alt="Scanned product" 
-                  className="w-24 h-24 object-cover rounded-lg"
-                />
+                <div className="flex-shrink-0">
+                  <img 
+                    src={scannedData.imageUrl} 
+                    alt="Scanned product" 
+                    className="w-32 h-40 object-contain rounded-xl border border-gray-200 bg-gray-50 p-4 shadow-sm"
+                  />
+                </div>
               )}
               <div className="flex-1">
-                <h3 className="font-semibold text-lg">{scannedData.productName || 'Food Product'}</h3>
-                <p className="text-sm text-gray-600">
-                  Scanned on {new Date(scannedData.scannedAt).toLocaleDateString()}
-                </p>
-                <div className="flex gap-2 mt-2">
-                  <Badge variant="outline">
-                    {scannedData.ingredientAnalysis?.length || 0} ingredients
-                  </Badge>
-                  <Badge variant="outline">
-                    Safety Score: {scannedData.nutrition?.healthScore || 'N/A'}
-                  </Badge>
-                </div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Health Profile */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Heart className="w-5 h-5 text-red-600" />
-              Your Health Profile
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid md:grid-cols-3 gap-4">
-              <div>
-                <h4 className="font-medium text-red-600 mb-2">Allergies</h4>
-                <div className="space-y-1">
-                  {healthProfile.allergies.map((allergy, index) => (
-                    <Badge key={index} variant="destructive" className="mr-1">
-                      {allergy}
-                    </Badge>
-                  ))}
-                </div>
-              </div>
-              <div>
-                <h4 className="font-medium text-orange-600 mb-2">Health Conditions</h4>
-                <div className="space-y-1">
-                  {healthProfile.healthConditions.map((condition, index) => (
-                    <Badge key={index} variant="secondary" className="mr-1">
-                      {condition}
-                    </Badge>
-                  ))}
-                </div>
-              </div>
-              <div>
-                <h4 className="font-medium text-blue-600 mb-2">Dietary Restrictions</h4>
-                <div className="space-y-1">
-                  {healthProfile.dietaryRestrictions.map((restriction, index) => (
-                    <Badge key={index} variant="outline" className="mr-1">
-                      {restriction}
-                    </Badge>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Risk Analysis Results */}
-        <div className="space-y-4">
-          <h2 className="text-xl font-bold text-gray-900 flex items-center gap-2">
-            <Shield className="w-5 h-5" />
-            Risk Analysis Results
-          </h2>
-          
-          {riskAnalysis.map((risk, index) => (
-            <Card key={index} className={`border-2 ${getRiskBg(risk.level)}`}>
-              <CardContent className="p-6">
-                <div className="flex items-start gap-4">
-                  {getRiskIcon(risk.level)}
-                  <div className="flex-1">
-                    <h3 className="font-bold text-lg mb-2">{risk.title}</h3>
-                    <p className="text-gray-700 mb-3">{risk.message}</p>
-                    <div className="bg-white/50 p-3 rounded-lg">
-                      <p className="text-sm font-medium">Recommendation:</p>
-                      <p className="text-sm text-gray-700">{risk.recommendation}</p>
+                <h2 className="text-2xl font-bold text-gray-900 mb-2">
+                  {scannedData.productName || 'Food Product'}
+                </h2>
+                <div className="grid grid-cols-2 gap-4 mb-3">
+                  <div className="flex items-center gap-3">
+                    <span className="text-sm font-medium text-gray-600">Safety Score</span>
+                    <CircularProgress score={safetyScore} />
+                  </div>
+                  <div>
+                    <span className="text-sm font-medium text-gray-600 mb-2 block">Flagged Ingredients</span>
+                    <div className="flex flex-wrap gap-1">
+                      {criticalRisks.length > 0 ? (
+                        criticalRisks.map((risk, index) => {
+                          const allergen = risk.message.match(/contains (\w+)/i)?.[1];
+                          return allergen ? (
+                            <Badge key={index} className="bg-red-100 text-red-800 border-red-200 px-2 py-1 text-xs">
+                              {allergen}
+                            </Badge>
+                          ) : null;
+                        })
+                      ) : (
+                        <Badge className="bg-green-100 text-green-800 border-green-200 px-2 py-1 text-xs">
+                          None detected
+                        </Badge>
+                      )}
                     </div>
                   </div>
                 </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-
-        {/* AI Personalized Recommendations */}
-        {aiRecommendations && (
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Brain className="w-5 h-5 text-purple-600" />
-                AI Personalized Recommendations
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="prose prose-sm max-w-none">
-                <div className="whitespace-pre-wrap text-gray-700">
-                  {aiRecommendations}
+                <div className="flex gap-2">
+                  <Badge className="bg-blue-50 text-blue-700 border-blue-200 px-2 py-1 text-xs">
+                    {scannedData.ingredientAnalysis?.length || 0} ingredients
+                  </Badge>
+                  <Badge className="bg-purple-50 text-purple-700 border-purple-200 px-2 py-1 text-xs">
+                    {new Date(scannedData.scannedAt).toLocaleDateString()}
+                  </Badge>
                 </div>
               </div>
-            </CardContent>
-          </Card>
-        )}
+            </div>
+          </div>
 
-        {/* Action Buttons */}
-        <div className="flex gap-4 justify-center pt-6">
-          <Button onClick={() => setLocation('/generic')} variant="outline" className="px-6 py-3">
-            Scan Another Product
-          </Button>
-          <Button onClick={() => setLocation('/healing-recipes')} className="bg-green-600 hover:bg-green-700 px-6 py-3">
-            Find Safe Alternatives
-          </Button>
+          {/* Risk Breakdown - Large Vertical Cards */}
+          <div className="space-y-4 mb-6">
+            <h2 className="text-xl font-bold text-gray-900 mb-4">Risk Breakdown</h2>
+            
+            {/* Allergy Analysis */}
+            <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+              <div className="bg-gradient-to-r from-primary/5 to-secondary/5 px-6 py-4 border-b border-gray-100">
+                <div className="flex items-center gap-3">
+                  <div className="bg-primary/10 rounded-full p-2">
+                    <span className="text-xl">🧬</span>
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-lg font-bold text-gray-900">Allergy Analysis</h3>
+                    <p className="text-sm text-gray-600">Checking against your known allergies</p>
+                  </div>
+                  <div>
+                    {criticalRisks.length > 0 ? (
+                      <Badge className="bg-red-500 text-white px-3 py-1 text-sm font-semibold">
+                        CRITICAL
+                      </Badge>
+                    ) : (
+                      <Badge className="bg-primary text-white px-3 py-1 text-sm font-semibold">
+                        SAFE
+                      </Badge>
+                    )}
+                  </div>
+                </div>
+              </div>
+              <div className="p-6">
+                {criticalRisks.length > 0 ? (
+                  <div className="space-y-4">
+                    {criticalRisks.map((risk, index) => (
+                      <div key={index} className="bg-red-50 border border-red-200 rounded-xl p-4">
+                        <div className="flex items-start gap-3">
+                          <XCircle className="w-5 h-5 text-red-600 mt-1 flex-shrink-0" />
+                          <div>
+                            <h4 className="font-bold text-base text-red-900 mb-1">{risk.title}</h4>
+                            <p className="text-red-800 mb-2 text-sm">{risk.message}</p>
+                            <p className="text-xs text-red-700 bg-red-100 rounded-lg p-2">
+                              <strong>Action Required:</strong> {risk.recommendation}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="text-center py-4">
+                    <CheckCircle className="w-8 h-8 text-primary mx-auto mb-2" />
+                    <h4 className="text-lg font-semibold text-primary mb-1">No Allergens Detected</h4>
+                    <p className="text-gray-700 text-sm">This product is safe based on your allergy profile.</p>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Health Condition Impact */}
+            <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+              <div className="bg-gradient-to-r from-secondary/5 to-primary/5 px-6 py-4 border-b border-gray-100">
+                <div className="flex items-center gap-3">
+                  <div className="bg-secondary/10 rounded-full p-2">
+                    <span className="text-xl">❤️</span>
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-lg font-bold text-gray-900">Health Condition Impact</h3>
+                    <p className="text-sm text-gray-600">Impact on diabetes, cholesterol, and other conditions</p>
+                  </div>
+                  <div>
+                    {warningRisks.length > 0 ? (
+                      <Badge className="bg-orange-500 text-white px-3 py-1 text-sm font-semibold">
+                        WARNING
+                      </Badge>
+                    ) : (
+                      <Badge className="bg-primary text-white px-3 py-1 text-sm font-semibold">
+                        SAFE
+                      </Badge>
+                    )}
+                  </div>
+                </div>
+              </div>
+              <div className="p-8">
+                {warningRisks.length > 0 ? (
+                  <div className="space-y-4">
+                    {warningRisks.map((risk, index) => (
+                      <div key={index} className="bg-orange-50 border border-orange-200 rounded-xl p-6">
+                        <div className="flex items-start gap-4">
+                          <AlertTriangle className="w-6 h-6 text-orange-600 mt-1 flex-shrink-0" />
+                          <div>
+                            <h4 className="font-bold text-lg text-orange-900 mb-2">{risk.title}</h4>
+                            <p className="text-orange-800 mb-3">{risk.message}</p>
+                            <p className="text-sm text-orange-700 bg-orange-100 rounded-lg p-3">
+                              <strong>Recommendation:</strong> {risk.recommendation}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="text-center py-6">
+                    <CheckCircle className="w-12 h-12 text-green-600 mx-auto mb-4" />
+                    <h4 className="text-xl font-semibold text-green-900 mb-2">No Health Conflicts</h4>
+                    <p className="text-green-700">This product aligns well with your health conditions.</p>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Dietary Restriction Compatibility */}
+            <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+              <div className="bg-gradient-to-r from-primary/5 to-secondary/5 px-6 py-4 border-b border-gray-100">
+                <div className="flex items-center gap-3">
+                  <div className="bg-primary/10 rounded-full p-2">
+                    <span className="text-xl">🥗</span>
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-lg font-bold text-gray-900">Dietary Restriction Compatibility</h3>
+                    <p className="text-sm text-gray-600">Alignment with your dietary preferences</p>
+                  </div>
+                  <div>
+                    <Badge className="bg-secondary text-white px-3 py-1 text-sm font-semibold">
+                      COMPATIBLE
+                    </Badge>
+                  </div>
+                </div>
+              </div>
+              <div className="p-8">
+                <div className="text-center py-6">
+                  <CheckCircle className="w-12 h-12 text-blue-600 mx-auto mb-4" />
+                  <h4 className="text-xl font-semibold text-blue-900 mb-2">Dietary Goals Supported</h4>
+                  <p className="text-blue-700">This product fits within your dietary restrictions.</p>
+                  <div className="flex flex-wrap gap-2 justify-center mt-4">
+                    {healthProfile.dietaryRestrictions.map((restriction, index) => (
+                      <Badge key={index} className="bg-blue-100 text-blue-800 border-blue-200 px-3 py-1">
+                        {restriction}
+                      </Badge>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* AI Health Advisor Insight */}
+          {aiRecommendations && (
+            <div className="bg-gradient-to-br from-primary/5 to-secondary/5 rounded-2xl shadow-xl border border-primary/20 overflow-hidden mb-6">
+              <div className="bg-gradient-to-r from-primary to-secondary text-white px-6 py-4">
+                <div className="flex items-center gap-3">
+                  <div className="bg-white/20 rounded-full p-2">
+                    <Sparkles className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold">AI Health Advisor Insight</h3>
+                    <p className="opacity-90 text-sm">Personalized recommendations based on your profile</p>
+                  </div>
+                </div>
+              </div>
+              <div className="p-6">
+                <div className="text-gray-700 text-sm leading-relaxed">
+                  <div className="whitespace-pre-wrap">{aiRecommendations}</div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Strong Call-to-Action Buttons */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-6">
+            <Button 
+              onClick={() => setLocation('/generic')} 
+              className="bg-gradient-to-r from-primary to-secondary hover:opacity-90 text-white px-6 py-3 rounded-xl text-sm font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 flex items-center gap-2"
+            >
+              <RotateCcw className="w-4 h-4" />
+              Scan Another
+            </Button>
+            <Button 
+              onClick={() => setLocation('/healing-recipes')} 
+              className="bg-gradient-to-r from-secondary to-primary hover:opacity-90 text-white px-6 py-3 rounded-xl text-sm font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 flex items-center gap-2"
+            >
+              <ShoppingCart className="w-4 h-4" />
+              Safer Options
+            </Button>
+            <Button 
+              onClick={() => setShowDetailedModal(true)} 
+              variant="outline"
+              className="border-2 border-gray-300 hover:border-gray-400 text-gray-700 hover:text-gray-900 px-6 py-3 rounded-xl text-sm font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 flex items-center gap-2"
+            >
+              <BarChart3 className="w-4 h-4" />
+              Details
+            </Button>
+          </div>
         </div>
       </div>
+      
+      <DetailedAnalysisModal 
+        isOpen={showDetailedModal}
+        onClose={() => setShowDetailedModal(false)}
+        scannedData={scannedData}
+        healthProfile={healthProfile}
+        riskAnalysis={riskAnalysis}
+      />
+      
+      <BottomNavigation />
     </div>
-    
-    <BottomNavigation />
-  </div>
   );
 }
