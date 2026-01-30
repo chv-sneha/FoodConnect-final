@@ -129,7 +129,7 @@ export default function GenericAnalysis() {
       const formData = new FormData();
       formData.append('image', selectedFile);
 
-      const response = await fetch('http://localhost:5000/api/ocr/analyze', {
+      const response = await fetch('http://localhost:5002/api/generic/analyze', {
         method: 'POST',
         body: formData,
       });
