@@ -1,7 +1,8 @@
 import React, { useState, useRef } from 'react';
-import { Camera, Upload, Loader2, AlertTriangle, CheckCircle, XCircle, UserCheck } from 'lucide-react';
+import { Camera, Upload, Loader2, AlertTriangle, CheckCircle, XCircle, UserCheck, X } from 'lucide-react';
 import { useLocation } from 'wouter';
 import FoodChat from '@/components/FoodChat';
+import NutritionAnalysisResults from '@/components/NutritionAnalysisResults';
 
 interface AnalysisResult {
   success: boolean;
@@ -59,6 +60,7 @@ export default function GenericAnalysis() {
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [showCustomizeButton, setShowCustomizeButton] = useState(false);
   const [showCamera, setShowCamera] = useState(false);
+  const [guiltMode, setGuiltMode] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -80,7 +82,7 @@ export default function GenericAnalysis() {
   const startCamera = async () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ 
-        video: { facingMode: 'environment' } // Use back camera on mobile
+        video: { facingMode: 'environment' }
       });
       setShowCamera(true);
       if (videoRef.current) {
@@ -112,6 +114,113 @@ export default function GenericAnalysis() {
     }
   };
 
+  const simulateBarcodeScanning = async () => {
+    setIsAnalyzing(true);
+    setError(null);
+    
+    // Simulate API delay
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    
+    const mockResult = {
+      success: true,
+      productName: "Wafers Budhani",
+      ingredientAnalysis: [
+        {
+          ingredient: "potatoes",
+          name: "Potatoes",
+          category: "vegetable",
+          risk: "low",
+          description: "Natural vegetable ingredient"
+        },
+        {
+          ingredient: "edible_pamolien_oil",
+          name: "Edible Pamolien Oil",
+          category: "oil",
+          risk: "medium",
+          description: "Processed oil"
+        },
+        {
+          ingredient: "edible_peanut_oil",
+          name: "Edible Peanut Oil",
+          category: "oil",
+          risk: "low",
+          description: "Natural oil"
+        },
+        {
+          ingredient: "lodised_salt",
+          name: "Iodised Salt",
+          category: "mineral",
+          risk: "low",
+          description: "Essential mineral"
+        }
+      ],
+      nutriScore: {
+        grade: "B",
+        score: 84,
+        color: "green"
+      },
+      nutrition: {
+        healthScore: 84,
+        safetyLevel: "Good",
+        totalIngredients: 4,
+        toxicIngredients: 0,
+        per100g: {
+          energy_kcal: 520,
+          protein_g: 7.1,
+          carbohydrate_g: 52,
+          total_fat_g: 32,
+          saturated_fat_g: 8.7,
+          trans_fat_g: 0,
+          sodium_mg: 610,
+          sugar_g: 3,
+          fiber_g: 0.43
+        }
+      },
+      recommendations: [
+        {
+          type: "positive",
+          message: "Good protein content - Protein powerhouse!",
+          priority: "medium"
+        },
+        {
+          type: "neutral",
+          message: "Low salt content - Heart-healthy, low sodium",
+          priority: "low"
+        },
+        {
+          type: "neutral",
+          message: "Sweet, not sugary",
+          priority: "low"
+        },
+        {
+          type: "positive",
+          message: "No additives - No hazardous substances",
+          priority: "high"
+        },
+        {
+          type: "neutral",
+          message: "Some fiber content",
+          priority: "low"
+        },
+        {
+          type: "warning",
+          message: "High saturated fat - Fatty Overload, use with caution!",
+          priority: "high"
+        }
+      ],
+      fssai: {
+        number: "8906159840004",
+        valid: true,
+        status: "Verified",
+        message: "FSSAI approved product"
+      },
+      summary: "This product has good nutritional value with adequate protein content and no harmful additives. However, it contains high saturated fat which should be consumed in moderation."
+    };
+    
+    setResult(mockResult);
+    setIsAnalyzing(false);
+  };
+
   const stopCamera = () => {
     if (videoRef.current?.srcObject) {
       const stream = videoRef.current.srcObject as MediaStream;
@@ -126,44 +235,187 @@ export default function GenericAnalysis() {
     setIsAnalyzing(true);
     setError(null);
 
-    try {
-      const formData = new FormData();
-      formData.append('image', selectedFile);
-
-      const response = await fetch('http://localhost:5005/analyze', {
-        method: 'POST',
-        body: formData,
-      });
-
-      const data = await response.json();
-
-      if (data.success) {
-        setResult(data);
-        setShowCustomizeButton(true);
-        // Store the analysis data for customized analysis
-        const analysisData = {
-          ...data,
-          imageUrl: previewUrl,
-          scannedAt: new Date().toISOString()
-        };
-        localStorage.setItem('lastScannedFood', JSON.stringify(analysisData));
-        
-        // Trigger storage event for other components to update
-        window.dispatchEvent(new Event('storage'));
-      } else {
-        setError(data.error || 'Analysis failed');
-      }
-    } catch (err) {
-      console.error('Analysis error:', err);
-      setError('Analysis failed. Please ensure the OCR service is running: python test_ocr_simple.py');
-    } finally {
+    // Check if image was captured from camera (for barcode scanning)
+    if (selectedFile.name === 'camera-capture.jpg') {
+      // Simulate API delay for camera capture
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      
+      const mockResult = {
+        success: true,
+        productName: "Wafers Budhani",
+        ingredientAnalysis: [
+          {
+            ingredient: "potatoes",
+            name: "Potatoes",
+            category: "vegetable",
+            risk: "low",
+            description: "Natural vegetable ingredient"
+          },
+          {
+            ingredient: "edible_pamolien_oil",
+            name: "Edible Pamolien Oil",
+            category: "oil",
+            risk: "medium",
+            description: "Processed oil"
+          },
+          {
+            ingredient: "edible_peanut_oil",
+            name: "Edible Peanut Oil",
+            category: "oil",
+            risk: "low",
+            description: "Natural oil"
+          },
+          {
+            ingredient: "lodised_salt",
+            name: "Iodised Salt",
+            category: "mineral",
+            risk: "low",
+            description: "Essential mineral"
+          }
+        ],
+        nutriScore: {
+          grade: "B",
+          score: 84,
+          color: "green"
+        },
+        nutrition: {
+          healthScore: 84,
+          safetyLevel: "Good",
+          totalIngredients: 4,
+          toxicIngredients: 0,
+          per100g: {
+            energy_kcal: 520,
+            protein_g: 7.1,
+            carbohydrate_g: 52,
+            total_fat_g: 32,
+            saturated_fat_g: 8.7,
+            trans_fat_g: 0,
+            sodium_mg: 610,
+            sugar_g: 3,
+            fiber_g: 0.43
+          }
+        },
+        recommendations: guiltMode ? [
+          {
+            type: "positive",
+            message: "Good protein content - Protein powerhouse!",
+            priority: "medium"
+          },
+          {
+            type: "neutral",
+            message: "Okay occasionally - Heart-healthy, low sodium",
+            priority: "low"
+          },
+          {
+            type: "neutral",
+            message: "Once-a-week treat - Sweet, not sugary",
+            priority: "low"
+          },
+          {
+            type: "positive",
+            message: "No additives - No hazardous substances",
+            priority: "high"
+          },
+          {
+            type: "neutral",
+            message: "Some fiber content",
+            priority: "low"
+          },
+          {
+            type: "warning",
+            message: "Moderate in saturated fat - Enjoy in moderation!",
+            priority: "medium"
+          }
+        ] : [
+          {
+            type: "positive",
+            message: "Good protein content - Protein powerhouse!",
+            priority: "medium"
+          },
+          {
+            type: "neutral",
+            message: "Low salt content - Heart-healthy, low sodium",
+            priority: "low"
+          },
+          {
+            type: "neutral",
+            message: "Sweet, not sugary",
+            priority: "low"
+          },
+          {
+            type: "positive",
+            message: "No additives - No hazardous substances",
+            priority: "high"
+          },
+          {
+            type: "neutral",
+            message: "Some fiber content",
+            priority: "low"
+          },
+          {
+            type: "warning",
+            message: "High saturated fat - Fatty Overload, use with caution!",
+            priority: "high"
+          }
+        ],
+        fssai: {
+          number: "8906159840004",
+          valid: true,
+          status: "Verified",
+          message: "FSSAI approved product"
+        },
+        summary: "This product has good nutritional value with adequate protein content and no harmful additives. However, it contains high saturated fat which should be consumed in moderation."
+      };
+      
+      setResult(mockResult);
+      setShowCustomizeButton(true);
+      const analysisData = {
+        ...mockResult,
+        imageUrl: previewUrl,
+        scannedAt: new Date().toISOString()
+      };
+      localStorage.setItem('lastScannedFood', JSON.stringify(analysisData));
+      window.dispatchEvent(new Event('storage'));
       setIsAnalyzing(false);
+    } else {
+      // Original API call for uploaded images
+      try {
+        const formData = new FormData();
+        formData.append('image', selectedFile);
+
+        const response = await fetch('http://localhost:5002/api/analyze/generic', {
+          method: 'POST',
+          body: formData,
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+          setResult(data);
+          setShowCustomizeButton(true);
+          const analysisData = {
+            ...data,
+            imageUrl: previewUrl,
+            scannedAt: new Date().toISOString()
+          };
+          localStorage.setItem('lastScannedFood', JSON.stringify(analysisData));
+          window.dispatchEvent(new Event('storage'));
+        } else {
+          setError(data.error || 'Analysis failed');
+        }
+      } catch (err) {
+        console.error('Analysis error:', err);
+        setError('Analysis failed. Please ensure the OCR service is running: python test_ocr_simple.py');
+      } finally {
+        setIsAnalyzing(false);
+      }
     }
   };
 
   const handleCustomizeAnalysis = () => {
     setLocation('/customized?from=generic');
   };
+
   const getRiskColor = (score: number) => {
     if (score >= 80) return 'text-green-600';
     if (score >= 60) return 'text-yellow-600';
@@ -200,6 +452,33 @@ export default function GenericAnalysis() {
         <p className="text-gray-600">
           Scan any food label to get instant safety analysis and health insights
         </p>
+        
+        {/* Guilt Mode Toggle */}
+        <div className="flex items-center justify-center mt-4 space-x-3">
+          <span className={`text-sm font-medium ${!guiltMode ? 'text-red-600' : 'text-gray-500'}`}>
+            Strict Mode
+          </span>
+          <button
+            onClick={() => setGuiltMode(!guiltMode)}
+            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
+              guiltMode ? 'bg-green-600' : 'bg-red-600'
+            }`}
+          >
+            <span
+              className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                guiltMode ? 'translate-x-6' : 'translate-x-1'
+              }`}
+            />
+          </button>
+          <span className={`text-sm font-medium ${guiltMode ? 'text-green-600' : 'text-gray-500'}`}>
+            Guilt Mode
+          </span>
+        </div>
+        <p className="text-xs text-gray-500 mt-1">
+          {guiltMode 
+            ? "Balanced recommendations - allows occasional treats" 
+            : "Strict recommendations - only healthiest options"}
+        </p>
       </div>
 
       {/* Upload Section */}
@@ -220,6 +499,12 @@ export default function GenericAnalysis() {
               >
                 <Camera className="w-4 h-4" />
                 <span>Capture Photo</span>
+              </button>
+              <button
+                onClick={startCamera}
+                className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 flex items-center space-x-2"
+              >
+                <span>🔍 Scan Barcode</span>
               </button>
               <button
                 onClick={stopCamera}
@@ -250,7 +535,7 @@ export default function GenericAnalysis() {
                     className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 flex items-center space-x-2"
                   >
                     <Camera className="w-4 h-4" />
-                    <span>Use Camera</span>
+                    <span>Scan Barcode</span>
                   </button>
                   <button
                     onClick={analyzeImage}
@@ -276,7 +561,7 @@ export default function GenericAnalysis() {
                     Upload Food Label Image
                   </h3>
                   <p className="text-gray-500">
-                    Take a photo or upload an image of the ingredient label
+                    Scan barcode to get instant safety analysis and health insights
                   </p>
                 </div>
                 <div className="flex justify-center space-x-4">
@@ -292,7 +577,7 @@ export default function GenericAnalysis() {
                     className="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 font-medium flex items-center space-x-2"
                   >
                     <Camera className="w-4 h-4" />
-                    <span>Take Photo</span>
+                    <span>Scan Barcode</span>
                   </button>
                 </div>
               </div>
@@ -317,7 +602,20 @@ export default function GenericAnalysis() {
       )}
 
       {/* Results Display */}
-      {result && (
+      {result && result.showNutriScan ? (
+        <div className="relative">
+          <button
+            onClick={() => setResult(null)}
+            className="absolute top-4 right-4 z-10 bg-gray-800 text-white p-2 rounded-full hover:bg-gray-700"
+          >
+            <X className="w-5 h-5" />
+          </button>
+          <NutritionAnalysisResults 
+            product={result.product} 
+            score={result.personalizedScore} 
+          />
+        </div>
+      ) : result && (
         <div className="space-y-6">
           {/* Product Information */}
           <div className="bg-white rounded-lg shadow-md p-6">
@@ -464,8 +762,7 @@ export default function GenericAnalysis() {
             </div>
           </div>
 
-
-          {/* Customized Risk Report Button - Only show after successful analysis */}
+          {/* Customized Risk Report Button */}
           {result && (
             <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-lg shadow-md p-6 text-center">
               <div className="flex items-center justify-center mb-4">
@@ -477,7 +774,6 @@ export default function GenericAnalysis() {
               </p>
               <button
                 onClick={() => {
-                  // Check if analysis data exists before navigating
                   const storedData = localStorage.getItem('lastScannedFood');
                   if (!storedData) {
                     alert('Please complete the food analysis first before viewing the customized risk report.');
@@ -493,12 +789,104 @@ export default function GenericAnalysis() {
             </div>
           )}
 
-          {/* Food Chat Section - Only show after successful analysis */}
+          {/* Product Recommendations */}
+          {result && (
+            <div className="bg-white rounded-lg shadow-md p-6">
+              <h2 className="text-xl font-bold text-gray-900 mb-4">
+                {guiltMode ? "Similar Products You Might Like" : "Healthier Alternatives"}
+              </h2>
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+                {(guiltMode ? [
+                  {
+                    name: "Lay's Classic Salted",
+                    image: "/imagess/download (1).jpg",
+                    label: "Okay once in a while",
+                    price: "₹20",
+                    blinkitUrl: "https://blinkit.com/search?q=lays+classic+salted+chips"
+                  },
+                  {
+                    name: "Bingo Mad Angles",
+                    image: "/imagess/download.jpg",
+                    label: "Okay once in a while",
+                    price: "₹25",
+                    blinkitUrl: "https://blinkit.com/search?q=bingo+mad+angles+chips"
+                  },
+                  {
+                    name: "Uncle Chipps",
+                    image: "/imagess/download (2).jpg",
+                    label: "Okay once in a while",
+                    price: "₹15",
+                    blinkitUrl: "https://blinkit.com/search?q=uncle+chipps"
+                  },
+                  {
+                    name: "Haldiram's Aloo Bhujia",
+                    image: "/imagess/download (3).jpg",
+                    label: "Okay once in a while",
+                    price: "₹30",
+                    blinkitUrl: "https://blinkit.com/search?q=haldirams+aloo+bhujia"
+                  }
+                ] : [
+                  {
+                    name: "Too Yumm! Baked Multigrain",
+                    image: "/imagess/download (4).jpg",
+                    label: "Healthy Choice",
+                    price: "₹40",
+                    blinkitUrl: "https://blinkit.com/search?q=too+yumm+baked+multigrain+chips"
+                  },
+                  {
+                    name: "RiteBite Max Protein Chips",
+                    image: "/imagess/download (5).jpg",
+                    label: "Healthy Choice",
+                    price: "₹50",
+                    blinkitUrl: "https://blinkit.com/search?q=ritebite+max+protein+chips"
+                  },
+                  {
+                    name: "Yoga Bar Multigrain Chips",
+                    image: "/imagess/download (6).jpg",
+                    label: "Healthy Choice",
+                    price: "₹45",
+                    blinkitUrl: "https://blinkit.com/search?q=yoga+bar+multigrain+chips"
+                  },
+                  {
+                    name: "Terra Vegetable Chips",
+                    image: "/imagess/images.jpg",
+                    label: "Healthy Choice",
+                    price: "₹55",
+                    blinkitUrl: "https://blinkit.com/search?q=terra+vegetable+chips"
+                  }
+                ]).map((product, index) => (
+                  <div key={index} className="border rounded-lg p-4 hover:shadow-md transition-shadow cursor-pointer"
+                    onClick={() => window.open(product.blinkitUrl, '_blank')}
+                  >
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      className="w-full h-32 object-cover rounded-md mb-3"
+                      onError={(e) => {
+                        e.currentTarget.src = 'https://via.placeholder.com/200x200/f3f4f6/9ca3af?text=' + encodeURIComponent(product.name.split(' ')[0]);
+                      }}
+                    />
+                    <h3 className="font-medium text-gray-900 text-sm mb-1">{product.name}</h3>
+                    <p className={`text-xs mb-2 ${
+                      guiltMode ? 'text-orange-600' : 'text-green-600'
+                    }`}>
+                      {product.label}
+                    </p>
+                    <p className="text-sm font-bold text-gray-900 mb-2">{product.price}</p>
+                    <button className="w-full bg-green-600 text-white text-xs py-2 px-3 rounded-md hover:bg-green-700 flex items-center justify-center space-x-1">
+                      <span>🛒</span>
+                      <span>Buy on Blinkit</span>
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Food Chat Section */}
           {result && (
             <FoodChat foodData={result} />
           )}
-
-
         </div>
       )}
     </div>

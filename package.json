@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "concurrently --kill-others \"./start_backend.sh\" \"vite --host\"",
+    "dev": "concurrently --kill-others \"start_backend.bat\" \"vite --host\"",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "backend": "./start_backend.sh",
+    "backend": "start_backend.bat",
     "frontend": "vite --host"
   },
   "dependencies": {

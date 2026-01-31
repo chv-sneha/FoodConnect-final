@@ -16,47 +16,6 @@ from dotenv import load_dotenv
 # Load environment variables
 load_dotenv()
 
-# Configure Gemini AI
-try:
-    import google.generativeai as genai
-    gemini_api_key = os.getenv('GEMINI_API_KEY')
-    if gemini_api_key:
-        genai.configure(api_key=gemini_api_key)
-        
-        # List available models and pick the first one that supports generateContent
-        try:
-            models = genai.list_models()
-            available_model = None
-            for m in models:
-                if 'generateContent' in m.supported_generation_methods:
-                    available_model = m.name
-                    break
-            
-            if available_model:
-                model = genai.GenerativeModel(available_model)
-                print(f"Gemini AI configured with model: {available_model}")
-            else:
-                # Fallback to common model names
-                try:
-                    model = genai.GenerativeModel('gemini-1.5-pro')
-                    print("Using gemini-1.5-pro")
-                except:
-                    try:
-                        model = genai.GenerativeModel('gemini-pro')
-                        print("Using gemini-pro")
-                    except:
-                        model = None
-                        print("No compatible Gemini model found")
-        except Exception as e:
-            print(f"Error listing models: {e}")
-            model = None
-    else:
-        model = None
-        print("No Gemini API key found")
-except ImportError:
-    model = None
-    print("Google Generative AI not installed")
-
 def fix_decimal(value):
     """
     Fix OCR decimal issues like 5269 -> 52.69
@@ -383,6 +342,22 @@ def parse_with_validation(raw_text):
 app = Flask(__name__)
 CORS(app)
 
+# Configure Gemini AI securely
+try:
+    import google.generativeai as genai
+    api_key = os.getenv('GEMINI_API_KEY')
+    if api_key and api_key != 'your_actual_api_key_here':
+        genai.configure(api_key=api_key)
+        model = genai.GenerativeModel('gemini-pro')
+        GEMINI_AVAILABLE = True
+        print("[INFO] Gemini AI configured successfully")
+    else:
+        GEMINI_AVAILABLE = False
+        print("[WARNING] GEMINI_API_KEY not found in .env file. Using mock responses.")
+except Exception as e:
+    GEMINI_AVAILABLE = False
+    print(f"[WARNING] Gemini AI initialization failed: {e}. Using mock responses.")
+
 @app.route('/api/analyze/generic', methods=['POST'])
 @app.route('/api/generic/analyze', methods=['POST'])
 def analyze():
@@ -596,238 +571,65 @@ def generate_recommendations(result):
 
     return recs
 
-
-@app.route('/api/barcode/scan', methods=['POST'])
-def scan_barcode():
+@app.route('/api/chat', methods=['POST'])
+def chat_with_ai():
     try:
-        data = request.get_json()
-        barcode = data.get('barcode', '')
+        data = request.json
+        user_message = data.get('message', '').lower()
+        food_data = data.get('foodData', {})
         
-        # Hardcoded Budhani Wafers data matching the screenshots
-        if barcode == '8906159840004' or 'budhani' in barcode.lower():
-            product_data = {
-                'name': 'Wafers',
-                'brand': 'Budhani',
-                'barcode': '8906159840004',
-                'image': '/api/placeholder/150/200',
-                'ingredients': ['potatoes', 'edible pamolien oil', 'edible peanut oil', 'lodised salt'],
-                'nutrition_per_100g': {
-                    'energy_kcal': 520,
-                    'protein_g': 7.1,
-                    'carbohydrate_g': 52.0,
-                    'total_fat_g': 32.0,
-                    'saturated_fat_g': 8.7,
-                    'trans_fat_g': 0.0,
-                    'sodium_mg': 0.61,
-                    'sugar_g': 3.0,
-                    'fiber_g': 0.43,
-                    'salt_g': 0.0
-                },
-                'analysis': {
-                    'positives': [
-                        {
-                            'name': 'Protein',
-                            'value': '7.1 g',
-                            'description': 'Protein powerhouse!',
-                            'icon': '🥩',
-                            'color': 'green',
-                            'scale_position': 6.8,
-                            'scale_max': 14
-                        },
-                        {
-                            'name': 'Salt',
-                            'value': '0 g',
-                            'description': 'Low salt',
-                            'icon': '🧂',
-                            'color': 'green',
-                            'scale_position': 0.46,
-                            'scale_max': 2.3
-                        },
-                        {
-                            'name': 'Sodium',
-                            'value': '0.61 mg',
-                            'description': 'Heart-healthy, low sodium',
-                            'icon': '🧂',
-                            'color': 'green',
-                            'scale_position': 180,
-                            'scale_max': 900
-                        },
-                        {
-                            'name': 'Sugar',
-                            'value': '3 g',
-                            'description': 'Sweet, not sugary.',
-                            'icon': '🍯',
-                            'color': 'green'
-                        },
-                        {
-                            'name': 'No additives',
-                            'value': '✓',
-                            'description': 'No hazardous substances',
-                            'icon': '⚗️',
-                            'color': 'green'
-                        },
-                        {
-                            'name': 'Fiber',
-                            'value': '0.43 g',
-                            'description': 'Some fiber',
-                            'icon': '🌾',
-                            'color': 'green'
-                        }
-                    ],
-                    'negatives': [
-                        {
-                            'name': 'Saturated fat',
-                            'value': '8.7 g',
-                            'description': 'Fatty Overload, use with caution!',
-                            'icon': '🫒',
-                            'color': 'red',
-                            'scale_position': 7,
-                            'scale_max': 10
-                        }
-                    ]
-                }
+        if GEMINI_AVAILABLE:
+            # Use actual Gemini AI
+            context = f"""
+You are a food safety and nutrition expert AI assistant. Answer questions about this analyzed food product:
+
+Product: {food_data.get('productName', 'Food Product')}
+Safety Score: {food_data.get('nutrition', {}).get('healthScore', 'N/A')}/100
+Ingredients: {', '.join([ing.get('name', '') for ing in food_data.get('ingredientAnalysis', [])])}
+Nutrition per 100g:
+- Energy: {food_data.get('nutrition', {}).get('per100g', {}).get('energy_kcal', 'N/A')} kcal
+- Protein: {food_data.get('nutrition', {}).get('per100g', {}).get('protein_g', 'N/A')}g
+- Carbs: {food_data.get('nutrition', {}).get('per100g', {}).get('carbohydrate_g', 'N/A')}g
+- Total Fat: {food_data.get('nutrition', {}).get('per100g', {}).get('total_fat_g', 'N/A')}g
+- Sugar: {food_data.get('nutrition', {}).get('per100g', {}).get('total_sugar_g', 'N/A')}g
+- Sodium: {food_data.get('nutrition', {}).get('per100g', {}).get('sodium_mg', 'N/A')}mg
+
+Provide helpful, accurate, and conversational responses about food safety, ingredients, nutrition, and health impacts. Keep responses concise (2-3 sentences max).
+
+User question: {data.get('message', '')}
+"""
+            response = model.generate_content(context)
+            return jsonify({
+                'success': True,
+                'response': response.text
+            })
+        else:
+            # Use mock responses for demo
+            mock_responses = {
+                'palm oil': 'Palm oil is used to improve taste and shelf life. However, it is high in saturated fat, which may increase cholesterol if consumed frequently.',
+                'safety score': f"The safety score is {food_data.get('nutrition', {}).get('healthScore', 'N/A')}/100. This is mainly due to the processing level and ingredient quality of the product.",
+                'occasionally': 'Yes, it can be consumed occasionally, but it is not recommended for daily intake due to its processing level and ingredient composition.',
+                'sugar': 'This product contains sugar which can contribute to blood glucose spikes. Consider limiting portion sizes if you have diabetes or are watching your sugar intake.',
+                'ingredients': f"This product contains {len(food_data.get('ingredientAnalysis', []))} ingredients. The main ones are: {', '.join([ing.get('name', '') for ing in food_data.get('ingredientAnalysis', [])][:3])}."
             }
             
-            # Calculate personalized score (base 84 as shown in screenshot)
-            base_score = 84
-            alerts = []
-            
-            # Mock user profile check
-            user_profile = {
-                'allergies': [],  # No allergies for this demo
-                'conditions': [],
-                'goals': ['maintenance']
-            }
+            # Find best matching response
+            response_text = "I can help you understand this food product's ingredients, nutrition, and safety. Try asking about specific ingredients, the safety score, or consumption recommendations."
+            for key, response in mock_responses.items():
+                if key in user_message:
+                    response_text = response
+                    break
             
             return jsonify({
                 'success': True,
-                'barcode': barcode,
-                'product': product_data,
-                'personalizedScore': base_score,
-                'scoreColor': 'green',
-                'scoreLabel': 'Good',
-                'alerts': alerts,
-                'formatted_result': {
-                    'productName': f"{product_data['brand']} {product_data['name']}",
-                    'ingredientAnalysis': [{
-                        'ingredient': ing,
-                        'name': ing,
-                        'category': 'ingredient',
-                        'risk': 'low',
-                        'description': '',
-                        'toxicity_score': 20
-                    } for ing in product_data['ingredients']],
-                    'nutrition': {
-                        'healthScore': base_score,
-                        'safetyLevel': 'Good',
-                        'per100g': product_data['nutrition_per_100g'],
-                        'analysis': product_data['analysis']
-                    },
-                    'recommendations': [
-                        'Good protein content for snacking',
-                        'Low sodium - heart friendly',
-                        'Watch saturated fat intake - consume in moderation'
-                    ]
-                }
+                'response': response_text
             })
         
-        # Default response for other barcodes
+    except Exception as e:
         return jsonify({
             'success': False,
-            'error': 'Product not found. Please scan the Budhani Wafers barcode (8906159840004)'
-        })
-        
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
-
-
-@app.route('/api/blinkit/alternatives', methods=['POST'])
-def get_alternatives():
-    try:
-        data = request.get_json()
-        
-        # Mock alternatives (replace with Blinkit API)
-        alternatives = [
-            {
-                'id': '1',
-                'name': 'Healthy Alternative 1',
-                'brand': 'Health Brand',
-                'price': 120,
-                'originalPrice': 150,
-                'image': '/api/placeholder/64/64',
-                'score': 85,
-                'deliveryTime': '12 mins',
-                'blinkitUrl': 'https://blinkit.com/product/1'
-            },
-            {
-                'id': '2',
-                'name': 'Organic Option',
-                'brand': 'Organic Co',
-                'price': 180,
-                'image': '/api/placeholder/64/64',
-                'score': 92,
-                'deliveryTime': '15 mins',
-                'blinkitUrl': 'https://blinkit.com/product/2'
-            }
-        ]
-        
-        return jsonify({'alternatives': alternatives})
-        
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
-
-
-@app.route('/api/analytics/affiliate-click', methods=['POST'])
-def track_affiliate_click():
-    try:
-        data = request.get_json()
-        # Track affiliate clicks for revenue analytics
-        print(f"Affiliate click tracked: {data}")
-        return jsonify({'success': True})
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
-
-
-@app.route('/api/chat', methods=['POST'])
-def chat():
-    try:
-        if not model:
-            return jsonify({'response': 'AI chat is not available. Please check the Gemini API configuration.'})
-            
-        data = request.get_json()
-        user_message = data.get('message', '')
-        food_data = data.get('foodData', {})
-        
-        # Extract key information from food data
-        safety_score = food_data.get('nutrition', {}).get('healthScore', 'N/A')
-        ingredients = [ing.get('name', ing.get('ingredient', '')) for ing in food_data.get('ingredientAnalysis', [])]
-        nutrition = food_data.get('nutrition', {}).get('per100g', {})
-        recommendations = food_data.get('recommendations', [])
-        
-        # Create a simple context
-        context = f"""You are a food safety expert. Answer this question about a food product:
-
-Product Info:
-- Safety Score: {safety_score}/100
-- Ingredients: {', '.join(ingredients[:5])}  # First 5 ingredients
-- Key Nutrition: Energy {nutrition.get('energy_kcal', 'N/A')} kcal, Fat {nutrition.get('total_fat_g', 'N/A')}g, Sodium {nutrition.get('sodium_mg', 'N/A')}mg
-
-User Question: {user_message}
-
-Provide a helpful, concise answer (max 150 words)."""
-        
-        response = model.generate_content(context)
-        
-        return jsonify({
-            'response': response.text,
-            'success': True
-        })
-        
-    except Exception as e:
-        print(f"Chat error: {str(e)}")
-        return jsonify({
-            'response': f'Sorry, I encountered an error: {str(e)}. Please try again.',
-            'success': False
+            'error': f'Chat service unavailable: {str(e)}',
+            'response': 'I apologize, but I cannot answer your question right now. Please try again later.'
         }), 500
 
 
