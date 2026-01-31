@@ -8,6 +8,7 @@ import { Badge } from '@/components/ui/badge';
 import { useLocation } from 'wouter';
 import { ModernNavbar } from '@/components/ModernNavbar';
 import { BottomNavigation } from '@/components/navigation';
+import FoodChat from '@/components/FoodChat';
 
 interface HealthProfile {
   allergies: string[];
@@ -739,7 +740,7 @@ export default function CustomizedRiskReport() {
           </div>
 
           {/* Action Buttons */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
             <Button 
               onClick={() => setLocation('/generic')} 
               className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white px-8 py-4 rounded-xl text-lg font-semibold flex items-center justify-center gap-2"
@@ -755,6 +756,9 @@ export default function CustomizedRiskReport() {
               Safer Options
             </Button>
           </div>
+
+          {/* Food Chat Section */}
+          <FoodChat foodData={scannedData} />
         </div>
       </div>
       
