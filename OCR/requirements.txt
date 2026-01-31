@@ -1,11 +1,8 @@
+google-generativeai
+flask
+flask-cors
 opencv-python
 pytesseract
 numpy
-nltk
-pillow
-imutils
-dash
-dash-extensions
-matplotlib
-flask
-flask-cors
+python-dotenv
+Pillow

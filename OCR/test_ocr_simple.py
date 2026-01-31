@@ -11,6 +11,10 @@ import json
 import pytesseract
 import re
 import numpy as np
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
 
 def fix_decimal(value):
     """
@@ -338,6 +342,22 @@ def parse_with_validation(raw_text):
 app = Flask(__name__)
 CORS(app)
 
+# Configure Gemini AI securely
+try:
+    import google.generativeai as genai
+    api_key = os.getenv('GEMINI_API_KEY')
+    if api_key and api_key != 'your_actual_api_key_here':
+        genai.configure(api_key=api_key)
+        model = genai.GenerativeModel('gemini-pro')
+        GEMINI_AVAILABLE = True
+        print("[INFO] Gemini AI configured successfully")
+    else:
+        GEMINI_AVAILABLE = False
+        print("[WARNING] GEMINI_API_KEY not found in .env file. Using mock responses.")
+except Exception as e:
+    GEMINI_AVAILABLE = False
+    print(f"[WARNING] Gemini AI initialization failed: {e}. Using mock responses.")
+
 @app.route('/api/analyze/generic', methods=['POST'])
 @app.route('/api/generic/analyze', methods=['POST'])
 def analyze():
@@ -550,6 +570,67 @@ def generate_recommendations(result):
         recs.append('No major health risks detected when consumed in moderation.')
 
     return recs
+
+@app.route('/api/chat', methods=['POST'])
+def chat_with_ai():
+    try:
+        data = request.json
+        user_message = data.get('message', '').lower()
+        food_data = data.get('foodData', {})
+        
+        if GEMINI_AVAILABLE:
+            # Use actual Gemini AI
+            context = f"""
+You are a food safety and nutrition expert AI assistant. Answer questions about this analyzed food product:
+
+Product: {food_data.get('productName', 'Food Product')}
+Safety Score: {food_data.get('nutrition', {}).get('healthScore', 'N/A')}/100
+Ingredients: {', '.join([ing.get('name', '') for ing in food_data.get('ingredientAnalysis', [])])}
+Nutrition per 100g:
+- Energy: {food_data.get('nutrition', {}).get('per100g', {}).get('energy_kcal', 'N/A')} kcal
+- Protein: {food_data.get('nutrition', {}).get('per100g', {}).get('protein_g', 'N/A')}g
+- Carbs: {food_data.get('nutrition', {}).get('per100g', {}).get('carbohydrate_g', 'N/A')}g
+- Total Fat: {food_data.get('nutrition', {}).get('per100g', {}).get('total_fat_g', 'N/A')}g
+- Sugar: {food_data.get('nutrition', {}).get('per100g', {}).get('total_sugar_g', 'N/A')}g
+- Sodium: {food_data.get('nutrition', {}).get('per100g', {}).get('sodium_mg', 'N/A')}mg
+
+Provide helpful, accurate, and conversational responses about food safety, ingredients, nutrition, and health impacts. Keep responses concise (2-3 sentences max).
+
+User question: {data.get('message', '')}
+"""
+            response = model.generate_content(context)
+            return jsonify({
+                'success': True,
+                'response': response.text
+            })
+        else:
+            # Use mock responses for demo
+            mock_responses = {
+                'palm oil': 'Palm oil is used to improve taste and shelf life. However, it is high in saturated fat, which may increase cholesterol if consumed frequently.',
+                'safety score': f"The safety score is {food_data.get('nutrition', {}).get('healthScore', 'N/A')}/100. This is mainly due to the processing level and ingredient quality of the product.",
+                'occasionally': 'Yes, it can be consumed occasionally, but it is not recommended for daily intake due to its processing level and ingredient composition.',
+                'sugar': 'This product contains sugar which can contribute to blood glucose spikes. Consider limiting portion sizes if you have diabetes or are watching your sugar intake.',
+                'ingredients': f"This product contains {len(food_data.get('ingredientAnalysis', []))} ingredients. The main ones are: {', '.join([ing.get('name', '') for ing in food_data.get('ingredientAnalysis', [])][:3])}."
+            }
+            
+            # Find best matching response
+            response_text = "I can help you understand this food product's ingredients, nutrition, and safety. Try asking about specific ingredients, the safety score, or consumption recommendations."
+            for key, response in mock_responses.items():
+                if key in user_message:
+                    response_text = response
+                    break
+            
+            return jsonify({
+                'success': True,
+                'response': response_text
+            })
+        
+    except Exception as e:
+        return jsonify({
+            'success': False,
+            'error': f'Chat service unavailable: {str(e)}',
+            'response': 'I apologize, but I cannot answer your question right now. Please try again later.'
+        }), 500
 
 
 if __name__ == '__main__':

@@ -10,11 +10,11 @@ export default function Contact() {
       avatarColor: 'from-primary to-blue-500',
       bio: 'Passionate about AI/ML and building innovative solutions for real-world problems.',
       links: {
-        github: 'https://github.com/mkishore',
-        linkedin: 'https://linkedin.com/in/mkishore',
-        instagram: 'https://instagram.com/mkishore',
-        twitter: 'https://twitter.com/mkishore',
-        email: 'kishore@foodconnect.com'
+        github: 'https://github.com/KISHORE0709-LEO',
+        linkedin: 'https://www.linkedin.com/in/m-kishore-417b8b193/',
+        instagram: 'https://www.instagram.com/kishore_demur/',
+        twitter: 'https://x.com/kishore_0709',
+        email: 'kishoremurali0726@gmail.com'
       }
     },
     {
@@ -23,11 +23,11 @@ export default function Contact() {
       avatarColor: 'from-secondary to-green-500',
       bio: 'Creative developer focused on user experience and modern web technologies.',
       links: {
-        github: 'https://github.com/chvsneha',
-        linkedin: 'https://linkedin.com/in/chvsneha',
-        instagram: 'https://instagram.com/chvsneha',
-        twitter: 'https://twitter.com/chvsneha',
-        email: 'sneha@foodconnect.com'
+        github: 'https://github.com/chv-sneha',
+        linkedin: 'https://www.linkedin.com/in/ch-v-sneha-6ba7792a0/',
+        instagram: 'https://www.instagram.com/chv_sneha/',
+        twitter: 'https://x.com/chvsneha2310',
+        email: 'chvsneha2310@gmail.com'
       }
     }
   ];

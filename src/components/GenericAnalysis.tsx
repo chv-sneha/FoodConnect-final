@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { Camera, Upload, Loader2, AlertTriangle, CheckCircle, XCircle, UserCheck } from 'lucide-react';
 import { useLocation } from 'wouter';
+import FoodChat from '@/components/FoodChat';
 
 interface AnalysisResult {
   success: boolean;
@@ -464,9 +465,9 @@ export default function GenericAnalysis() {
 
           {/* Customized Risk Report Button - Only show after successful analysis */}
           {result && (
-            <div className="bg-gradient-to-r from-blue-50 to-green-50 rounded-lg shadow-md p-6 text-center">
+            <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-lg shadow-md p-6 text-center">
               <div className="flex items-center justify-center mb-4">
-                <UserCheck className="w-8 h-8 text-blue-600 mr-3" />
+                <UserCheck className="w-8 h-8 text-green-600 mr-3" />
                 <h2 className="text-xl font-bold text-gray-900">Get Personalized Analysis</h2>
               </div>
               <p className="text-gray-600 mb-4">
@@ -488,6 +489,11 @@ export default function GenericAnalysis() {
                 <span>View Customized Risk Report</span>
               </button>
             </div>
+          )}
+
+          {/* Food Chat Section - Only show after successful analysis */}
+          {result && (
+            <FoodChat foodData={result} />
           )}
 
 
