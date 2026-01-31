@@ -129,7 +129,11 @@ export default function GenericAnalysis() {
       const formData = new FormData();
       formData.append('image', selectedFile);
 
+<<<<<<< Updated upstream
       const response = await fetch('http://localhost:5002/api/generic/analyze', {
+=======
+      const response = await fetch('/api/ocr/analyze', {
+>>>>>>> Stashed changes
         method: 'POST',
         body: formData,
       });
@@ -160,6 +164,13 @@ export default function GenericAnalysis() {
     }
   };
 
+<<<<<<< Updated upstream
+=======
+  const handleCustomizeAnalysis = () => {
+    setLocation('/customized?from=generic');
+  };
+
+>>>>>>> Stashed changes
   const getRiskColor = (score: number) => {
     if (score >= 80) return 'text-green-600';
     if (score >= 60) return 'text-yellow-600';
@@ -458,6 +469,21 @@ export default function GenericAnalysis() {
                 );
               })}
             </div>
+          </div>
+
+          {/* Customized Risk Report Button */}
+          <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg shadow-md p-6 text-center">
+            <h2 className="text-xl font-bold text-gray-900 mb-2">Want Personalized Analysis?</h2>
+            <p className="text-gray-600 mb-4">
+              Get customized health recommendations based on your profile, allergies, and health conditions
+            </p>
+            <button
+              onClick={handleCustomizeAnalysis}
+              className="px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 font-medium flex items-center space-x-2 mx-auto transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
+            >
+              <UserCheck className="w-5 h-5" />
+              <span>View Customized Risk Report</span>
+            </button>
           </div>
 
 

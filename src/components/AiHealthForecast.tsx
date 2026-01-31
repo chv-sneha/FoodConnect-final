@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { TrendingUp, TrendingDown, AlertTriangle, CheckCircle, Heart, Activity, User, Calculator } from "lucide-react";
 import { BackButton } from "@/components/BackButton";
+<<<<<<< Updated upstream
 import { useAuth } from '@/context/AuthContext';
 import { useUserProfile } from '@/context/UserProfileContext';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area, BarChart, Bar } from 'recharts';
@@ -65,6 +66,12 @@ const MiniSparkline = ({ metricName }: { metricName: string }) => {
     </div>
   );
 };
+=======
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar } from 'recharts';
+import { useAuth } from '@/context/AuthContext';
+import { db } from '@/lib/firebase';
+import { collection, getDocs, query, where, orderBy, limit } from 'firebase/firestore';
+>>>>>>> Stashed changes
 
 interface HealthMetric {
   name: string;
@@ -75,6 +82,7 @@ interface HealthMetric {
   recommendation: string;
 }
 
+<<<<<<< Updated upstream
 interface UserData {
   age: number;
   height: number;
@@ -82,8 +90,12 @@ interface UserData {
   activity: string;
 }
 
+=======
+>>>>>>> Stashed changes
 const AiHealthForecast = () => {
+  const { user } = useAuth();
   const [selectedMetric, setSelectedMetric] = useState<HealthMetric | null>(null);
+<<<<<<< Updated upstream
   const [userData, setUserData] = useState<UserData>({
     age: 25,
     height: 170,
@@ -277,6 +289,217 @@ const AiHealthForecast = () => {
       nutrientBalance: Math.max(50, 60 + ((meal.nutrition?.fiberContent || 0) * 2)),
       inflammation: Math.max(30, 70 - ((meal.nutrition?.sugarContent || 0) / 3) + ((meal.nutrition?.fiberContent || 0) * 1.5))
     }));
+=======
+  const [mealLogs, setMealLogs] = useState<any[]>([]);
+  const [nutritionTrends, setNutritionTrends] = useState<any[]>([]);
+  const [healthMetrics, setHealthMetrics] = useState<HealthMetric[]>([]);
+  const [loading, setLoading] = useState(true);
+  const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884D8', '#82CA9D'];
+
+  useEffect(() => {
+    if (user) {
+      loadMealLogs();
+    }
+  }, [user]);
+
+  const loadMealLogs = async () => {
+    try {
+      const q = query(
+        collection(db, 'mealLogs'),
+        where('userId', '==', user?.uid),
+        orderBy('createdAt', 'desc'),
+        limit(30)
+      );
+      
+      const querySnapshot = await getDocs(q);
+      const logs = querySnapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }));
+      
+      setMealLogs(logs);
+      
+      // Generate nutrition trends from meal logs
+      const trends = logs.map((log: any) => ({
+        day: new Date(log.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
+        date: log.date,
+        calories: log.totalCalories || 0,
+        protein: calculateProteinFromMeals(log),
+        carbs: calculateCarbsFromMeals(log),
+        fat: calculateFatFromMeals(log),
+        sugar: calculateSugarFromMeals(log),
+        sodium: calculateSodiumFromMeals(log),
+        fiber: calculateFiberFromMeals(log)
+      })).reverse();
+      
+      setNutritionTrends(trends);
+      
+      // Calculate health metrics from real data
+      const metrics = calculateHealthMetrics(logs);
+      setHealthMetrics(metrics);
+    } catch (error) {
+      console.error('Error loading meal logs:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const calculateProteinFromMeals = (log: any) => {
+    let total = 0;
+    if (log.breakfast) total += getRecipeNutrition(log.breakfast).protein;
+    if (log.lunch) total += getRecipeNutrition(log.lunch).protein;
+    if (log.dinner) total += getRecipeNutrition(log.dinner).protein;
+    return total;
+  };
+
+  const calculateCarbsFromMeals = (log: any) => {
+    let total = 0;
+    if (log.breakfast) total += getRecipeNutrition(log.breakfast).carbs;
+    if (log.lunch) total += getRecipeNutrition(log.lunch).carbs;
+    if (log.dinner) total += getRecipeNutrition(log.dinner).carbs;
+    return total;
+  };
+
+  const calculateFatFromMeals = (log: any) => {
+    let total = 0;
+    if (log.breakfast) total += getRecipeNutrition(log.breakfast).fat;
+    if (log.lunch) total += getRecipeNutrition(log.lunch).fat;
+    if (log.dinner) total += getRecipeNutrition(log.dinner).fat;
+    return total;
+  };
+
+  const calculateSugarFromMeals = (log: any) => {
+    let total = 0;
+    if (log.breakfast) total += getRecipeNutrition(log.breakfast).sugar;
+    if (log.lunch) total += getRecipeNutrition(log.lunch).sugar;
+    if (log.dinner) total += getRecipeNutrition(log.dinner).sugar;
+    return total;
+  };
+
+  const calculateSodiumFromMeals = (log: any) => {
+    let total = 0;
+    if (log.breakfast) total += getRecipeNutrition(log.breakfast).sodium;
+    if (log.lunch) total += getRecipeNutrition(log.lunch).sodium;
+    if (log.dinner) total += getRecipeNutrition(log.dinner).sodium;
+    return total;
+  };
+
+  const calculateFiberFromMeals = (log: any) => {
+    let total = 0;
+    if (log.breakfast) total += getRecipeNutrition(log.breakfast).fiber;
+    if (log.lunch) total += getRecipeNutrition(log.lunch).fiber;
+    if (log.dinner) total += getRecipeNutrition(log.dinner).fiber;
+    return total;
+  };
+
+  const getRecipeNutrition = (mealName: string) => {
+    // Estimated nutrition values based on meal names
+    const nutritionDB: any = {
+      'Healthy Breakfast Bowl': { protein: 15, carbs: 45, fat: 12, sugar: 8, sodium: 200, fiber: 8 },
+      'Avocado Toast': { protein: 12, carbs: 35, fat: 18, sugar: 5, sodium: 300, fiber: 10 },
+      'Oatmeal': { protein: 8, carbs: 40, fat: 6, sugar: 12, sodium: 150, fiber: 12 },
+      'Nutritious Lunch Salad': { protein: 25, carbs: 35, fat: 18, sugar: 6, sodium: 300, fiber: 12 },
+      'Stuffed Bell Peppers': { protein: 20, carbs: 30, fat: 15, sugar: 8, sodium: 400, fiber: 8 },
+      'Grilled Chicken': { protein: 35, carbs: 5, fat: 12, sugar: 2, sodium: 350, fiber: 2 },
+      'Balanced Dinner Plate': { protein: 30, carbs: 40, fat: 20, sugar: 5, sodium: 400, fiber: 10 },
+      'Gourmet Pizza': { protein: 18, carbs: 55, fat: 25, sugar: 8, sodium: 800, fiber: 4 },
+      'Salmon Fillet': { protein: 40, carbs: 2, fat: 18, sugar: 0, sodium: 200, fiber: 0 }
+    };
+    
+    return nutritionDB[mealName] || { protein: 15, carbs: 30, fat: 10, sugar: 5, sodium: 300, fiber: 5 };
+  };
+
+  const calculateHealthMetrics = (logs: any[]): HealthMetric[] => {
+    if (logs.length === 0) {
+      return [
+        {
+          name: "Blood Sugar Risk",
+          current: 50,
+          trend: "stable",
+          risk: "low",
+          prediction: "No data available - start logging meals for analysis",
+          recommendation: "Log your daily meals to get personalized insights"
+        }
+      ];
+    }
+
+    const avgNutrition = logs.reduce((acc, log) => {
+      const nutrition = log.totalNutrition || {};
+      return {
+        calories: acc.calories + (nutrition.calories || 0),
+        sugar: acc.sugar + (nutrition.sugar || 0),
+        sodium: acc.sodium + (nutrition.sodium || 0),
+        fiber: acc.fiber + (nutrition.fiber || 0),
+        protein: acc.protein + (nutrition.protein || 0),
+        carbs: acc.carbs + (nutrition.carbs || 0)
+      };
+    }, { calories: 0, sugar: 0, sodium: 0, fiber: 0, protein: 0, carbs: 0 });
+
+    const avgDaily = {
+      calories: avgNutrition.calories / logs.length,
+      sugar: avgNutrition.sugar / logs.length,
+      sodium: avgNutrition.sodium / logs.length,
+      fiber: avgNutrition.fiber / logs.length,
+      protein: avgNutrition.protein / logs.length,
+      carbs: avgNutrition.carbs / logs.length
+    };
+
+    // Blood Sugar Risk Analysis
+    const avgSugar = avgDaily.sugar;
+    const avgCarbs = avgDaily.carbs;
+    const bloodSugarRisk = avgSugar > 40 ? 'high' : avgSugar > 25 ? 'medium' : 'low';
+    const bloodSugarScore = Math.max(20, Math.min(95, 90 - (avgSugar * 1.2) - (avgCarbs * 0.3)));
+    
+    // Heart Health Analysis
+    const avgSodium = avgDaily.sodium;
+    const avgFiber = avgDaily.fiber;
+    const heartRisk = avgSodium > 2000 ? 'high' : avgSodium > 1500 ? 'medium' : 'low';
+    const heartScore = Math.max(30, Math.min(95, 85 - (avgSodium / 50) + (avgFiber * 2)));
+    
+    // Nutrient Balance Analysis
+    const proteinRatio = avgDaily.protein / (avgDaily.carbs || 1);
+    const nutrientRisk = proteinRatio < 0.2 ? 'high' : proteinRatio < 0.4 ? 'medium' : 'low';
+    const nutrientScore = Math.max(40, Math.min(95, 50 + (proteinRatio * 100)));
+    
+    // Inflammation Analysis
+    const inflammationRisk = avgFiber < 20 ? 'high' : avgFiber < 25 ? 'medium' : 'low';
+    const inflammationScore = Math.max(35, Math.min(95, 40 + (avgFiber * 2) - (avgSodium / 100)));
+
+    return [
+      {
+        name: "Blood Sugar Impact",
+        current: Math.round(bloodSugarScore),
+        trend: avgSugar > 30 ? 'up' : 'stable',
+        risk: bloodSugarRisk,
+        prediction: `Daily sugar: ${Math.round(avgSugar)}g, carbs: ${Math.round(avgCarbs)}g. ${bloodSugarRisk === 'high' ? 'High diabetes risk' : 'Manageable levels'}`,
+        recommendation: avgSugar > 25 ? "Reduce sugary foods, choose complex carbs" : "Good blood sugar control"
+      },
+      {
+        name: "Heart Health Score",
+        current: Math.round(heartScore),
+        trend: avgSodium > 1800 ? 'down' : 'up',
+        risk: heartRisk,
+        prediction: `Daily sodium: ${Math.round(avgSodium)}mg, fiber: ${Math.round(avgFiber)}g. ${heartRisk === 'high' ? 'Cardiovascular risk' : 'Heart-healthy pattern'}`,
+        recommendation: avgSodium > 1500 ? "Lower sodium, increase vegetables" : "Excellent heart health habits"
+      },
+      {
+        name: "Nutrient Balance",
+        current: Math.round(nutrientScore),
+        trend: proteinRatio > 0.3 ? 'up' : 'down',
+        risk: nutrientRisk,
+        prediction: `Protein-carb ratio: ${proteinRatio.toFixed(2)}. ${nutrientRisk === 'low' ? 'Well balanced' : 'Needs protein boost'}`,
+        recommendation: proteinRatio < 0.3 ? "Add more protein sources" : "Great macro balance"
+      },
+      {
+        name: "Inflammation Risk",
+        current: Math.round(inflammationScore),
+        trend: avgFiber > 25 ? 'down' : 'up',
+        risk: inflammationRisk,
+        prediction: `Daily fiber: ${Math.round(avgFiber)}g. ${inflammationRisk === 'low' ? 'Anti-inflammatory diet' : 'Pro-inflammatory pattern'}`,
+        recommendation: avgFiber < 25 ? "Eat more fruits, vegetables, whole grains" : "Excellent anti-inflammatory choices"
+      }
+    ];
+>>>>>>> Stashed changes
   };
 
   const getRiskColor = (risk: string) => {
@@ -296,6 +519,7 @@ const AiHealthForecast = () => {
     }
   };
 
+<<<<<<< Updated upstream
   if (showUserForm) {
     return (
       <div className="min-h-screen bg-white">
@@ -379,6 +603,14 @@ const AiHealthForecast = () => {
               </CardContent>
             </Card>
           </div>
+=======
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+          <p className="text-gray-600">Analyzing your eating patterns...</p>
+>>>>>>> Stashed changes
         </div>
       </div>
     );
@@ -409,10 +641,19 @@ const AiHealthForecast = () => {
                     <div className={`font-medium ${bmiData.color}`}>{bmiData.category}</div>
                     <div className="text-gray-600">BMI</div>
                   </div>
+<<<<<<< Updated upstream
                   <div className="text-center">
                     <div className="text-2xl font-bold text-green-600">{calorieNeeds}</div>
                     <div className="font-medium text-green-800">Daily Calories</div>
                     <div className="text-gray-600">Recommended</div>
+=======
+                  <h4 className="font-medium mb-1">1. Analyze Your Data</h4>
+                  <p className="text-gray-600">We analyze your saved meal logs and eating patterns</p>
+                </div>
+                <div className="text-center">
+                  <div className="bg-blue-100 rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-2">
+                    <span className="text-xl">🧠</span>
+>>>>>>> Stashed changes
                   </div>
                   <div className="text-center">
                     <div className="text-2xl font-bold text-purple-600">{mealHistory.length}</div>
@@ -461,14 +702,18 @@ const AiHealthForecast = () => {
               <CardTitle className="flex items-center gap-2">
                 <Activity className="h-5 w-5" />
                 Your Current Health Forecast
+<<<<<<< Updated upstream
                 <Badge className="ml-2 bg-green-100 text-green-800">
                   {mealHistory.length > 0 ? `Based on ${mealHistory.length} meals` : 'Initial Assessment'}
                 </Badge>
+=======
+                <Badge className="ml-2 bg-green-100 text-green-800">Based on {mealLogs.length} days of data</Badge>
+>>>>>>> Stashed changes
               </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                {healthData.map((metric, index) => (
+                {healthMetrics.map((metric, index) => (
                   <Card 
                     key={index} 
                     className="bg-white shadow-md border hover:border-primary cursor-pointer hover:shadow-lg transition-all"
@@ -515,15 +760,15 @@ const AiHealthForecast = () => {
               <CardContent className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <h4 className="font-semibold mb-3 flex items-center gap-2">
-                      <AlertTriangle className="h-4 w-4 text-yellow-600" />
-                      AI Prediction
-                    </h4>
-                    <p className="text-muted-foreground bg-yellow-50 p-4 rounded-lg">
-                      {selectedMetric.prediction}
-                    </p>
+                    <h4 className="font-semibold mb-2">AI Prediction</h4>
+                    <p className="text-sm text-gray-600 mb-4">{selectedMetric.prediction}</p>
+                    
+                    <h4 className="font-semibold mb-2">Recommendation</h4>
+                    <p className="text-sm text-gray-700">{selectedMetric.recommendation}</p>
                   </div>
+                  
                   <div>
+<<<<<<< Updated upstream
                     <h4 className="font-semibold mb-3 flex items-center gap-2">
                       <CheckCircle className="h-4 w-4 text-green-600" />
                       Recommended Actions
@@ -543,22 +788,40 @@ const AiHealthForecast = () => {
                         <div className={`h-8 rounded ${i < mealHistory.length ? 'bg-green-200' : 'bg-gray-200'}`}></div>
                       </div>
                     ))}
+=======
+                    <h4 className="font-semibold mb-3">Nutrition Trends</h4>
+                    {nutritionTrends.length > 0 ? (
+                      <ResponsiveContainer width="100%" height={200}>
+                        <LineChart data={nutritionTrends}>
+                          <CartesianGrid strokeDasharray="3 3" />
+                          <XAxis dataKey="day" />
+                          <YAxis />
+                          <Tooltip />
+                          <Line type="monotone" dataKey="calories" stroke="#8884d8" strokeWidth={2} />
+                          <Line type="monotone" dataKey="sugar" stroke="#ff7300" strokeWidth={2} />
+                        </LineChart>
+                      </ResponsiveContainer>
+                    ) : (
+                      <p className="text-sm text-gray-500">No trend data available</p>
+                    )}
+>>>>>>> Stashed changes
                   </div>
                 </div>
               </CardContent>
             </Card>
           )}
-
-          {/* Key Insights */}
+          
+          {/* Health Impact Analysis */}
           <Card className="bg-gradient-to-br from-white to-gray-50 shadow-lg border-2">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <AlertTriangle className="h-5 w-5 text-yellow-600" />
-                Key Health Insights
+                <Heart className="h-5 w-5 text-red-500" />
+                Health Impact Analysis
               </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+<<<<<<< Updated upstream
                 <div className="bg-red-50 border border-red-200 rounded-lg p-4">
                   <h4 className="font-semibold text-red-800 mb-2">⚠️ Immediate Attention</h4>
                   <p className="text-sm text-red-700 mb-3">
@@ -634,10 +897,54 @@ const AiHealthForecast = () => {
                 </p>
                 <Button className="bg-yellow-600 hover:bg-yellow-700 text-white">
                   Go to Meal Planning
+=======
+                <div>
+                  <h3 className="font-semibold mb-3">Blood Sugar Trends</h3>
+                  <ResponsiveContainer width="100%" height={200}>
+                    <LineChart data={nutritionTrends}>
+                      <CartesianGrid strokeDasharray="3 3" />
+                      <XAxis dataKey="day" />
+                      <YAxis />
+                      <Tooltip />
+                      <Line type="monotone" dataKey="sugar" stroke="#ff4444" strokeWidth={3} name="Sugar (g)" />
+                      <Line type="monotone" dataKey="carbs" stroke="#ffaa00" strokeWidth={2} name="Carbs (g)" />
+                    </LineChart>
+                  </ResponsiveContainer>
+                </div>
+                
+                <div>
+                  <h3 className="font-semibold mb-3">Heart Health Indicators</h3>
+                  <ResponsiveContainer width="100%" height={200}>
+                    <LineChart data={nutritionTrends}>
+                      <CartesianGrid strokeDasharray="3 3" />
+                      <XAxis dataKey="day" />
+                      <YAxis />
+                      <Tooltip />
+                      <Line type="monotone" dataKey="sodium" stroke="#ff6b6b" strokeWidth={3} name="Sodium (mg)" />
+                      <Line type="monotone" dataKey="fiber" stroke="#51cf66" strokeWidth={2} name="Fiber (g)" />
+                    </LineChart>
+                  </ResponsiveContainer>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+          
+          {mealLogs.length === 0 && (
+            <Card className="bg-yellow-50 border-yellow-200">
+              <CardContent className="p-6 text-center">
+                <AlertTriangle className="h-12 w-12 mx-auto mb-4 text-yellow-600" />
+                <h3 className="text-lg font-semibold mb-2">No Meal Data Found</h3>
+                <p className="text-gray-600 mb-4">
+                  Start logging your daily meals to get personalized AI health insights and predictions.
+                </p>
+                <Button onClick={() => window.location.href = '/meal-logger'}>
+                  Start Logging Meals
+>>>>>>> Stashed changes
                 </Button>
               </CardContent>
             </Card>
           )}
+<<<<<<< Updated upstream
 
           <div className="text-center space-y-4">
             <Button size="lg" className="bg-gradient-to-r from-primary to-secondary text-white hover:from-green-600 hover:to-blue-600">
@@ -647,6 +954,8 @@ const AiHealthForecast = () => {
               Get a comprehensive report with personalized recommendations based on your meal history
             </p>
           </div>
+=======
+>>>>>>> Stashed changes
         </div>
       </div>
     </div>
